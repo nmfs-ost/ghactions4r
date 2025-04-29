@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ghactions4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
@@ -103,6 +103,7 @@
 <div class="page-header"><h1 id="ghactions4r-">ghactions4r <img src="reference/figures/logo.png" alt="arrows circling clapboard, symbol for the gh4actions package" align="right" width="250/"><a class="anchor" aria-label="anchor" href="#ghactions4r-"></a>
 </h1></div>
 <p><a href="https://github.com/nmfs-fish-tools/ghactions4r/actions/workflows/call-r-cmd-check.yml" class="external-link"><img src="https://github.com/nmfs-fish-tools/ghactions4r/actions/workflows/call-r-cmd-check.yml/badge.svg" alt="call-r-cmd-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle badge indicating this repository is stable"></a> <a href="https://www.fisheries.noaa.gov/resource/tool-app/noaa-fisheries-integrated-toolbox" class="external-link"><img src="https://img.shields.io/badge/NOAA_FIT-blue" alt="NOAA Fisheries Integrated Toolbox Badge"></a> <a href="https://codecov.io/github/nmfs-fish-tools/ghactions4r" class="external-link"><img src="https://codecov.io/github/nmfs-fish-tools/ghactions4r/graph/badge.svg?token=6INRIE2FG6" alt="codecov Badge"></a></p>
+<p><a href="https://github.com/nmfs-fish-tools/ghactions4r/tree/badges" class="external-link"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/nmfs-fish-tools/ghactions4r/refs/heads/badges/coverage-badge.json" alt="coverage"></a></p>
 <div class="section level2">
 <h2 id="what-is-in-ghactions4r">What is in <code>{ghactions4r}</code>?<a class="anchor" aria-label="anchor" href="#what-is-in-ghactions4r"></a>
 </h2>
@@ -134,30 +135,35 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_r_cmd_check.html">use_r_cmd_check</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>To calculate code coverage using <code>covr::codecov()</code> :</li>
+<li>To calculate code coverage using <a href="https://covr.r-lib.org/index.html" class="external-link">covr</a> and <a href="https://github.com/k1LoW/octocov" class="external-link">octocov</a> (so that all code coverage calculations data remains in your GitHub repository) and create summaries on pull request and on pushes to main:</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_calc_coverage.html">use_calc_coverage</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>(a codecov.io account is also necessary to view the coverage results)</p>
+<code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_calc_cov_summaries.html">use_calc_cov_summaries</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Note that a previous workflow to calculate code coverage and push it to codecov.io is deprecated</p></li>
+<li><p>To create a badge (stored on a branch in the repo called badges) for coverage that can be added to your R package’s readme:</p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_create_cov_badge.html">use_create_cov_badge</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>To update documentation, DESCRIPTION file, and code styling for an R package (with the option of running <code><a href="reference/rm_dollar_sign.html">ghactions4r::rm_dollar_sign()</a></code>):</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_doc_and_style_r.html">use_doc_and_style_r</a></span><span class="op">(</span>use_rm_dollar_sign <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>To automatically update pkgdown that has already been set up:</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_update_pkgdown.html">use_update_pkgdown</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>To check that a pkgdown site builds:</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_build_pkgdown.html">use_build_pkgdown</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>To spell check an R package:</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ghactions4r</span><span class="fu">::</span><span class="fu"><a href="reference/use_spell_check.html">use_spell_check</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Commit and push the files generated up to github, making the github actions available for the repository of the R package.</p>
 <p>The templates these functions generate can also be <a href="https://github.com/nmfs-fish-tools/ghactions4r/tree/main/inst/templates" class="external-link">viewed</a> for reference.</p>
@@ -209,7 +215,7 @@
 <h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
 </h2>
 <p>“The United States Department of Commerce (DOC) GitHub project code is provided on an”as is” basis and the user assumes responsibility for its use. DOC has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any claims against the Department of Commerce stemming from the use of its GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.”</p>
-<p><img src="https://raw.githubusercontent.com/nmfs-general-modeling-tools/nmfspalette/main/man/figures/noaa-fisheries-rgb-2line-horizontal-small.png" height="75" alt="NOAA Fisheries"></p>
+<p><img src="https://raw.githubusercontent.com/nmfs-ost/nmfspalette/main/man/figures/noaa-fisheries-rgb-2line-horizontal-small.png" width="200" style="height: 75px !important;" alt="NOAA Fisheries Logo"></p>
 <p><a href="https://www.commerce.gov/" class="external-link">U.S. Department of Commerce</a> | <a href="https://www.noaa.gov" class="external-link">National Oceanographic and Atmospheric Administration</a> | <a href="https://www.fisheries.noaa.gov/" class="external-link">NOAA Fisheries</a></p>
 </div>
 </div>
@@ -234,9 +240,9 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Kathryn Doering <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0396-7044" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Kelli Johnson <br><small class="roles"> Author </small>  </li>
-<li>Bai Li <br><small class="roles"> Author </small>  </li>
+<li>Kathryn Doering <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0396-7044" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Kelli Johnson <br><small class="roles"> Author </small>   </li>
+<li>Bai Li <br><small class="roles"> Author </small>   </li>
 </ul>
 </div>
 
@@ -253,7 +259,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>
