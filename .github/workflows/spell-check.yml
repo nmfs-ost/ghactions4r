@@ -30,4 +30,21 @@ jobs:
             "Need to ignore some words? Read up on using the WORDLIST file:\n",
             "https://docs.ropensci.org/spelling/reference/wordlist.html")
           }
+          code_files <- list.files(
+            c("R", "tests"),
+            recursive = TRUE,
+            full.names = TRUE,
+            pattern = "\\.md|\\.R$|\\.Rmd|\\.txt"
+          )
+          word_list <- spelling::get_wordlist()
+          results_spelling <- spelling::spell_check_files(
+            code_files,
+            ignore = word_list
+          )
+          if(nrow(results_spelling)>0) {
+            print(results_spelling)
+            warning("Spelling errors found in R/ and tests/.\n", 
+            "Need to ignore some words? Read up on using the WORDLIST file:\n",
+            "https://docs.ropensci.org/spelling/reference/wordlist.html")
+          }
         shell: Rscript {0}
