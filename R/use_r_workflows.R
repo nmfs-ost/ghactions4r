@@ -428,15 +428,59 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
 }
 
 #' use workflow to run spelling::spell_check_package()
+#' 
+#' This workflow will run the spell_check_package() function from the spelling package
+#' on the current package, and will fail if any spelling errors are found.
+#' It will also run the spell_check_files() on specified file types if use_full_spell_check is TRUE.
+#' 
+#' @param use_full_spell_check  Logical. Should the workflow run `spell_check_files()` on specified files 
+#' in the package? Defaults to FALSE.
+#' @param full_check_report_level Character. The level of the report to generate for the full spell check.
+#' Options are "warning" or "error". Defaults to "warning". If set to "warning", the 
+#' the workflow will pass even if spelling errors are found. If set to "error",
+#' the workflow will fail if any spelling errors are found. 
 #' @template workflow_name
 #' @export
-use_spell_check <- function(workflow_name = "call-spell-check.yml") {
+use_spell_check <- function(workflow_name = "call-spell-check.yml",
+                            use_full_spell_check = FALSE,
+                            full_check_report_level = c("warning", "error")) {
+
+  # Remind users that full_check_report_level is set to 'warning' by default if users 
+  # don't specify full_check_report_level
+  if (use_full_spell_check == TRUE & length(full_check_report_level) > 1) {
+    cli::cli_alert_info(
+      "{.code full_check_report_level} is set to 'warning' by default."
+    )
+  }
+
+  # Remind users that use_full_spell_check must be TRUE if full_check_report_level is set 
+  # to a specific value
+  if (use_full_spell_check == FALSE & length(full_check_report_level) == 1) {
+    cli::cli_abort(
+      "If {.code full_check_report_level} is set to {.val {full_check_report_level}}, 
+      then {.code use_full_spell_check} must be {.val TRUE}."
+    )
+  }
+
+  full_check_report_level <- rlang::arg_match(full_check_report_level)
   check_workflow_name(workflow_name)
   usethis::use_github_action("call-spell-check.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-spell-check.yml"
   )
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  cli::cli_alert_info("New to spelling::spell_check_package()? Learn more at {.url https://docs.ropensci.org/spelling/#spell-check-a-package}")
+  
+  # Add the use_full_spell_check option to the workflow if it is TRUE
+  if (use_full_spell_check == TRUE) {
+    path_to_yml <- file.path(".github", "workflows", workflow_name)
+    gha <- readLines(path_to_yml)
+    gha <- append(gha, "    with:")
+    gha <- append(gha, "      use_full_spell_check: true")
+    gha <- append(gha, paste0("      full_check_report_level: ", full_check_report_level))
+    writeLines(gha, path_to_yml)
+  }
+  cli::cli_alert_info(
+    "New to spelling::spell_check_package()? Learn more at 
+    {.url https://docs.ropensci.org/spelling/#spell-check-a-package}"
+  )
   invisible(workflow_name)
 }
