@@ -248,7 +248,7 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #'   build_trigger = "push_to_main"
 #' )
 #' }
-#' # Set up running doc and style on each pull request, commiting directly to
+#' # Set up running doc and style on each pull request, committing directly to
 #' # the pull request branch
 #' \dontrun{
 #' use_doc_and_style_r(
@@ -428,15 +428,59 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
 }
 
 #' use workflow to run spelling::spell_check_package()
+#' 
+#' This workflow will run the spell_check_package() function from the spelling package
+#' on the current package, and will fail if any spelling errors are found.
+#' It will also run the spell_check_files() on specified file types if spell_check_additional_files is TRUE.
+#' 
+#' @param spell_check_additional_files  Logical. Should the workflow run `spell_check_files()` on specified files 
+#' in the package? Defaults to FALSE.
+#' @param spell_check_report_level Character. The level of the report to generate for the additional spell check.
+#' Options are "warning" or "error". Defaults to "error". If set to "error",
+#' the workflow will fail if any spelling errors are found. If set to "warning", the 
+#' the workflow will pass even if spelling errors are found.
 #' @template workflow_name
 #' @export
-use_spell_check <- function(workflow_name = "call-spell-check.yml") {
+use_spell_check <- function(workflow_name = "call-spell-check.yml",
+                            spell_check_additional_files = FALSE,
+                            spell_check_report_level = c("error", "warning")) {
+
+  # Remind users that spell_check_report_level is set to 'error' by default if users 
+  # don't specify spell_check_report_level
+  if (spell_check_additional_files == TRUE & length(spell_check_report_level) > 1) {
+    cli::cli_alert_info(
+      "{.code spell_check_report_level} is set to 'error' by default."
+    )
+  }
+
+  # Remind users that spell_check_additional_files must be TRUE if spell_check_report_level is set 
+  # to a specific value
+  if (spell_check_additional_files == FALSE & length(spell_check_report_level) == 1) {
+    cli::cli_abort(
+      "If {.code spell_check_report_level} is set to {.val {spell_check_report_level}}, 
+      then {.code spell_check_additional_files} must be {.val TRUE}."
+    )
+  }
+
+  spell_check_report_level <- rlang::arg_match(spell_check_report_level)
   check_workflow_name(workflow_name)
   usethis::use_github_action("call-spell-check.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-spell-check.yml"
   )
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  cli::cli_alert_info("New to spelling::spell_check_package()? Learn more at {.url https://docs.ropensci.org/spelling/#spell-check-a-package}")
+  
+  # Add the spell_check_additional_files option to the workflow if it is TRUE
+  if (spell_check_additional_files == TRUE) {
+    path_to_yml <- file.path(".github", "workflows", workflow_name)
+    gha <- readLines(path_to_yml)
+    gha <- append(gha, "    with:")
+    gha <- append(gha, "      spell_check_additional_files: true")
+    gha <- append(gha, paste0("      spell_check_report_level: ", spell_check_report_level))
+    writeLines(gha, path_to_yml)
+  }
+  cli::cli_alert_info(
+    "New to spelling::spell_check_package()? Learn more at 
+    {.url https://docs.ropensci.org/spelling/#spell-check-a-package}"
+  )
   invisible(workflow_name)
 }

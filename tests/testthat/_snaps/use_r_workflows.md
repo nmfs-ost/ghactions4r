@@ -2189,3 +2189,63 @@
       [20] "  call-workflow:"                                                                                                                         
       [21] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
 
+---
+
+    Code
+      full_spell_check_content
+    Output
+       [1] "# run devtools::spell_check()"                                                                                                            
+       [2] "name: call-spell-check"                                                                                                                   
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "# this workflow runs on pushing to main, pull requests to main, and manually."                                                            
+       [6] "  push:"                                                                                                                                  
+       [7] "    branches:"                                                                                                                            
+       [8] "      - main"                                                                                                                             
+       [9] "  pull_request:"                                                                                                                          
+      [10] "    branches:"                                                                                                                            
+      [11] "      - main"                                                                                                                             
+      [12] "  workflow_dispatch:"                                                                                                                     
+      [13] ""                                                                                                                                         
+      [14] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [15] "# run, so don't pass any."                                                                                                                
+      [16] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [17] "permissions: {}"                                                                                                                          
+      [18] ""                                                                                                                                         
+      [19] "jobs:"                                                                                                                                    
+      [20] "  call-workflow:"                                                                                                                         
+      [21] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
+      [22] "    with:"                                                                                                                                
+      [23] "      spell_check_additional_files: true"                                                                                                 
+      [24] "      spell_check_report_level: warning"                                                                                                  
+
+---
+
+    Code
+      full_spell_check_content
+    Output
+       [1] "# run devtools::spell_check()"                                                                                                            
+       [2] "name: call-spell-check"                                                                                                                   
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "# this workflow runs on pushing to main, pull requests to main, and manually."                                                            
+       [6] "  push:"                                                                                                                                  
+       [7] "    branches:"                                                                                                                            
+       [8] "      - main"                                                                                                                             
+       [9] "  pull_request:"                                                                                                                          
+      [10] "    branches:"                                                                                                                            
+      [11] "      - main"                                                                                                                             
+      [12] "  workflow_dispatch:"                                                                                                                     
+      [13] ""                                                                                                                                         
+      [14] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [15] "# run, so don't pass any."                                                                                                                
+      [16] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [17] "permissions: {}"                                                                                                                          
+      [18] ""                                                                                                                                         
+      [19] "jobs:"                                                                                                                                    
+      [20] "  call-workflow:"                                                                                                                         
+      [21] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
+      [22] "    with:"                                                                                                                                
+      [23] "      spell_check_additional_files: true"                                                                                                 
+      [24] "      spell_check_report_level: error"                                                                                                    
+

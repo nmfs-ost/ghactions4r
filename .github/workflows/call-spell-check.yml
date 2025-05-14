@@ -19,3 +19,5 @@ permissions: {}
 jobs:
   call-workflow:
     uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main
+    with:
+      spell_check_additional_files: true
