@@ -17,6 +17,7 @@ License: CC0
 Imports:
     cli,
     lifecycle,
+    rlang,
     usethis
 Suggests: 
     dplyr,

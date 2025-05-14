@@ -346,8 +346,35 @@ test_that("use_build_pkgdown()) works with additional_args", {
 })
 
 test_that("use_spell_check() works", {
+  file_path <- ".github/workflows/call-spell-check.yml"
+  # Test that the function creates the workflow file
   use_spell_check()
-  expect_true(file.exists(".github/workflows/call-spell-check.yml"))
-  test <- readLines(".github/workflows/call-spell-check.yml")
+  expect_true(file.exists(file_path))
+  test <- readLines(file_path)
   expect_snapshot(test)
+  unlink(file_path)
+
+  # Test that the function creates the additional spell check workflow file
+  report_level <- c("warning", "error")
+  for (level in report_level) {
+    use_spell_check(spell_check_additional_files = TRUE, spell_check_report_level = level)
+    full_spell_check_content <- readLines(file_path)
+    expect_snapshot(full_spell_check_content)
+    unlink(file_path)
+  }
+
+  # Test that the function returns the correct error when spell_check_report_level is 
+  # not specified while spell_check_additional_files is TRUE
+  expect_message(
+    use_spell_check(spell_check_additional_files = TRUE),
+    "`spell_check_report_level` is set to 'error' by default"
+  )
+  unlink(file_path)
+
+  # Test that the function returns an error when spell_check_additional_files is FALSE and
+  # spell_check_report_level is set to "error"
+  expect_error(
+    use_spell_check(spell_check_additional_files = FALSE, spell_check_report_level = "error")
+  )
+  unlink(file_path)
 })

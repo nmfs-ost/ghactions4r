@@ -16,7 +16,7 @@ on:
     branches:
       - main
 
-# limits permisions to write, as the common use case is for pull requests;
+# limits permissions to write, as the common use case is for pull requests;
 # this means certain options may not work, but makes the workflow more secure
 permissions:
   pull-requests: write

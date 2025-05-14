@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-# limits permisions to write, which is the minimum permissions needed to create
+# limits permissions to write, which is the minimum permissions needed to create
 # the coverage badge.
 permissions:
   contents: write

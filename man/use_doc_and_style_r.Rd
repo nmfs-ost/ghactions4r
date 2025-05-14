@@ -71,7 +71,7 @@ use_doc_and_style_r(
   build_trigger = "push_to_main"
 )
 }
-# Set up running doc and style on each pull request, commiting directly to
+# Set up running doc and style on each pull request, committing directly to
 # the pull request branch
 \dontrun{
 use_doc_and_style_r(

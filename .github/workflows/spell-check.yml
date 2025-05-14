@@ -1,6 +1,19 @@
 # check spelling using spelling::spell_check_package()
 on:
  workflow_call:
+  inputs:
+    spell_check_additional_files:
+      description: 'If true, run an additional spell check on files with specific extensions (e.g., .cpp, .hpp, .md, .qmd, .R, .Rmd, .txt, .yml).'
+      required: false
+      type: boolean
+      default: false
+    spell_check_report_level:
+      description: 'The message level to report if spelling issues are found during the additional spell check.
+        Options: "warning" or "error". If "warning", the workflow will not fail.
+        If "error", the workflow will fail.'
+      required: false
+      type: string
+      default: 'error'
 
 name: run devtools::spell_check
 
@@ -26,13 +39,68 @@ jobs:
       - name: Install spelling
         run: Rscript -e 'install.packages("spelling")'
 
-      - name: spell check
+      - name: spell check using spelling::spell_check_package()
         run: |
           results <- spelling::spell_check_package()
           if(nrow(results)>0) {
             print(results)
-            stop("Spelling errors found.\n", 
-            "Need to ignore some words? Read up on using the WORDLIST file:\n",
-            "https://docs.ropensci.org/spelling/reference/wordlist.html")
+            stop(
+              "Spelling errors found.\n", 
+              "Need to ignore some words? Read up on using the WORDLIST file:\n",
+              "https://docs.ropensci.org/spelling/reference/wordlist.html"
+            )
           }
         shell: Rscript {0}
+      
+      - name: Run additional spell check using spelling::spell_check_files()
+        if: ${{ inputs.spell_check_additional_files }}
+        run: |
+          files <- list.files(
+            ".",
+            recursive = TRUE,
+            full.names = TRUE,
+            pattern = "\\.(cpp|hpp|md|qmd|R|Rmd|txt|yml)$",
+            ignore.case = TRUE,
+            all.files = TRUE
+          )
+          word_list <- spelling::get_wordlist(".")
+          spell_check_results <- spelling::spell_check_files(
+            files,
+            ignore = word_list
+          )
+
+          print(spell_check_results)
+          if (nrow(spell_check_results) > 0) {
+            message(
+              "Spelling errors found in additional files.\n",
+              "Need to ignore some words? Read up on using the WORDLIST file:\n",
+              "https://docs.ropensci.org/spelling/reference/wordlist.html.\n",
+              "Following R code can be used to add words to the WORDLIST file:\n",
+              "wordlist_path <- file.path('inst', 'WORDLIST')\n",
+              "all_words <- c(word_list, spell_check_results$word)\n",
+              "sorted_words <- sort(unique(all_words))\n",
+              "writeLines(sorted_words, wordlist_path)"
+            )
+          }
+          writeLines(
+            as.character(nrow(spell_check_results)),
+            "nrow_results.txt"
+          )
+        shell: Rscript {0}
+
+      - name: Save nrow_results to GITHUB_OUTPUT
+        id: set_output
+        run: |
+          tmp_nrow_results=$(awk '{print int($1)}' nrow_results.txt)
+          echo "nrow_results=$tmp_nrow_results" >> $GITHUB_OUTPUT
+      
+      - name: ⚠️ Report spelling issues as a warning
+        if: ${{ (steps.set_output.outputs.nrow_results > 0) && (inputs.spell_check_report_level == 'warning') }}
+        run: |
+          echo "::warning title=Spelling errors were found::Spelling errors were found in the Run additional spell check using spelling::spell_check_file() step. Need to ignore some words? Read up on using the WORDLIST file: https://docs.ropensci.org/spelling/reference/wordlist.html"
+
+      - name: ❌ Report spelling issues as an error
+        if: ${{ (steps.set_output.outputs.nrow_results > 0) && (inputs.spell_check_report_level == 'error') }}
+        run: |
+          echo "::error title=Spelling errors were found::Spelling errors were found in the Run additional spell check using spelling::spell_check_file() step. Need to ignore some words? Read up on using the WORDLIST file: https://docs.ropensci.org/spelling/reference/wordlist.html"
+          exit 1 # This will cause the workflow to fail      
