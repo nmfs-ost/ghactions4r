@@ -41,10 +41,15 @@ jobs:
             code_files,
             ignore = word_list
           )
-          if(nrow(results_spelling)>0) {
-            print(results_spelling)
-            warning("Spelling errors found in R/ and tests/.\n", 
-            "Need to ignore some words? Read up on using the WORDLIST file:\n",
-            "https://docs.ropensci.org/spelling/reference/wordlist.html")
-          }
+          cat("::set-output name=nrow_results_spelling::", nrow(results_spelling), sep = "")
         shell: Rscript {0}
+
+      - name: ⚠️ Write spell check notice
+        # If nrow(results_spelling)>0 then this will be run and print out a notice
+        # to the action log. This is useful for the user to know that they need to
+        # update the WORDLIST file in order to ignore certain words.
+        # This is a notice and not an error, so the workflow will not fail.
+        if: steps.spell-check.outputs.nrow_results_spelling > 0
+        run: |
+          echo "::notice title=Spelling errors found in R/ and tests/::Need to ignore some words? Read up on using the WORDLIST file: https://docs.ropensci.org/spelling/reference/wordlist.html"
+          
