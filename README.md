@@ -7,6 +7,9 @@
 
 [![coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/nmfs-ost/ghactions4r/refs/heads/badges/coverage-badge.json)](https://github.com/nmfs-ost/ghactions4r/tree/badges)
 
+> [!IMPORTANT]  
+> ghactions4r [recently moved](https://github.com/nmfs-ost/ghactions4r/issues/159) from the nmfs-fish-tools organization. Users will need to update their GitHub action workflow files to reference "nmfs-ost" rather than "nmfs-fish-tools" as the organization that ghactions4r lives in. Need help? Please [open an issue](https://github.com/nmfs-ost/ghactions4r/issues).
+
 
 ## What is in `{ghactions4r}`?
 
