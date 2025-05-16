@@ -33,6 +33,9 @@ install.packages("remotes")
 remotes::install_github("nmfs-ost/ghactions4r")
 ```
 
+Users who are part of the NOAA Fisheries GitHub Enterprise may run into an error installing the package. You may need to [authorize your token](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) or [use a dev version of remotes::install_github()](https://docs.google.com/document/d/1vPFWBK8TrGjdXrrAlXhcq5f1B7Ap3ppnitnDIUMaS6g/edit?tab=t.0#heading=h.qwg63jl7tkcv). Still need help? Open an issue on this repository.
+
+
 `use_*()` functions in the `{ghactions4r}` package work like [`use_*()` functions in the `usethis` package](https://github.com/r-lib/usethis#usage).
 
 Open the cloned repository of an R package and run the function of choice. These functions set up the files needed to use the reproducible workflows in `{ghactions4r}`. Below are a list of the basic 
