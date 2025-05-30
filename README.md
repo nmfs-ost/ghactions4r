@@ -3,8 +3,6 @@
 [![call-r-cmd-check](https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml/badge.svg)](https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml)
 [![Lifecycle badge indicating this repository is stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html) 
 [![NOAA Fisheries Integrated Toolbox Badge](https://img.shields.io/badge/NOAA_FIT-blue)](https://www.fisheries.noaa.gov/resource/tool-app/noaa-fisheries-integrated-toolbox)
-[![codecov Badge](https://codecov.io/github/nmfs-ost/ghactions4r/graph/badge.svg?token=6INRIE2FG6)](https://codecov.io/github/nmfs-ost/ghactions4r)
-
 [![coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/nmfs-ost/ghactions4r/refs/heads/badges/coverage-badge.json)](https://github.com/nmfs-ost/ghactions4r/tree/badges)
 
 > [!IMPORTANT]  
