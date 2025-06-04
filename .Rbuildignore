@@ -9,3 +9,5 @@
 ^\.devcontainer/devcontainer\.json$
 ^\.devcontainer/Dockerfile$
 ^\.devcontainer/library-scripts/common-debian\.sh$
+^\.octocov\.yml$
+^inst/templates/\.octocov\.yml$

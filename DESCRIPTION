@@ -13,7 +13,8 @@ Description: Provides functions to allow users to set up github action
 License: CC0
 Imports:
     cli,
-    usethis
+    usethis,
+    lifecycle
 Suggests: 
     dplyr,
     knitr,
