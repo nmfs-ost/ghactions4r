@@ -1,7 +1,7 @@
 # ghactions4r 0.3.0
 
 ## Major changes
-* Add option for additional args to build-pkgdown, r-cmd-check, and update-pkgdown workflows. See [r-cmd-check documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_r_cmd_check.html) for usage and an example. By @Bai-Li-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/147
+* Add option for additional arguments to build-pkgdown, r-cmd-check, and update-pkgdown workflows. See [r-cmd-check documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_r_cmd_check.html) for usage and an example. By @Bai-Li-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/147
 * Deprecate style only and doc only workflows. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/149
 * Add workflow to create a coverage badge for display on GitHub. See [use_create_cov_badge() documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_create_cov_badge.html) for usage. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/168
 * Add a workflow to calculate and create coverage summaries on pull requests. See [use_calc_cov_summaries() documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_calc_cov_summaries.html) for usage. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/170
