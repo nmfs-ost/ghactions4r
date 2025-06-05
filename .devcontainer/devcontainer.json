@@ -12,7 +12,7 @@
 		// more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/r-packages/README.md
 	  "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
 		//devtools, usethis, and pak contain utilities for r package development.
-           "packages": "devtools,usethis,visNetwork,rvest,dplyr,qpdf",
+           "packages": "devtools,usethis,visNetwork,rvest,dplyr,qpdf,spelling",
             "installSystemRequirements": true
         }
 	},
