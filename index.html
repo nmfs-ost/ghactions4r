@@ -102,8 +102,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="ghactions4r-">ghactions4r <img src="reference/figures/logo.png" alt="arrows circling clapboard, symbol for the gh4actions package" align="right" width="250/"><a class="anchor" aria-label="anchor" href="#ghactions4r-"></a>
 </h1></div>
-<p><a href="https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml" class="external-link"><img src="https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml/badge.svg" alt="call-r-cmd-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle badge indicating this repository is stable"></a> <a href="https://www.fisheries.noaa.gov/resource/tool-app/noaa-fisheries-integrated-toolbox" class="external-link"><img src="https://img.shields.io/badge/NOAA_FIT-blue" alt="NOAA Fisheries Integrated Toolbox Badge"></a> <a href="https://codecov.io/github/nmfs-ost/ghactions4r" class="external-link"><img src="https://codecov.io/github/nmfs-ost/ghactions4r/graph/badge.svg?token=6INRIE2FG6" alt="codecov Badge"></a></p>
-<p><a href="https://github.com/nmfs-ost/ghactions4r/tree/badges" class="external-link"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/nmfs-ost/ghactions4r/refs/heads/badges/coverage-badge.json" alt="coverage"></a></p>
+<p><a href="https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml" class="external-link"><img src="https://github.com/nmfs-ost/ghactions4r/actions/workflows/call-r-cmd-check.yml/badge.svg" alt="call-r-cmd-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle badge indicating this repository is stable"></a> <a href="https://www.fisheries.noaa.gov/resource/tool-app/noaa-fisheries-integrated-toolbox" class="external-link"><img src="https://img.shields.io/badge/NOAA_FIT-blue" alt="NOAA Fisheries Integrated Toolbox Badge"></a> <a href="https://github.com/nmfs-ost/ghactions4r/tree/badges" class="external-link"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/nmfs-ost/ghactions4r/refs/heads/badges/coverage-badge.json" alt="coverage"></a></p>
 <blockquote>
 <p>[!IMPORTANT]<br>
 ghactions4r <a href="https://github.com/nmfs-ost/ghactions4r/issues/159" class="external-link">recently moved</a> from the nmfs-fish-tools organization. Users will need to update their GitHub action workflow files to reference “nmfs-ost” rather than “nmfs-fish-tools” as the organization that ghactions4r lives in. Need help? Please <a href="https://github.com/nmfs-ost/ghactions4r/issues" class="external-link">open an issue</a>.</p>
@@ -127,10 +126,10 @@ ghactions4r <a href="https://github.com/nmfs-ost/ghactions4r/issues/159" class="
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ghactions4r"</span>, </span>
 <span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://noaa-fisheries-integrated-toolbox.r-universe.dev"</span>, </span>
 <span>          <span class="st">"https://cran.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code>:</p>
+<p>or <code>remotes::install_github()</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"nmfs-ost/ghactions4r"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"nmfs-ost/ghactions4r"</span><span class="op">)</span></span></code></pre></div>
 <p>Users who are part of the NOAA Fisheries GitHub Enterprise may run into an error installing the package. You may need to <a href="https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on" class="external-link">authorize your token</a> or <a href="https://docs.google.com/document/d/1vPFWBK8TrGjdXrrAlXhcq5f1B7Ap3ppnitnDIUMaS6g/edit?tab=t.0#heading=h.qwg63jl7tkcv" class="external-link">use a development version of remotes::install_github()</a>. Still need help? Open an issue on this repository.</p>
 <p><code>use_*()</code> functions in the <code>{ghactions4r}</code> package work like <a href="https://github.com/r-lib/usethis#usage" class="external-link"><code>use_*()</code> functions in the <code>usethis</code> package</a>.</p>
 <p>Open the cloned repository of an R package and run the function of choice. These functions set up the files needed to use the reproducible workflows in <code>{ghactions4r}</code>. Below are a list of the basic functions, for complete options, see <a href="https://nmfs-fish-tools.github.io/ghactions4r/reference/index.html" class="external-link">the pkgdown reference documentation</a>.</p>
@@ -246,8 +245,9 @@ ghactions4r <a href="https://github.com/nmfs-ost/ghactions4r/issues/159" class="
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Kathryn Doering <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0396-7044" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Kelli Johnson <br><small class="roles"> Author </small>   </li>
-<li>Bai Li <br><small class="roles"> Author </small>   </li>
+<li>Kelli Johnson <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5149-451X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Bai Li <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8249-1442" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Elizabeth Perl <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-1608-8628" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -259,12 +259,12 @@ ghactions4r <a href="https://github.com/nmfs-ost/ghactions4r/issues/159" class="
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Kathryn Doering, Kelli Johnson, Bai Li.</p>
+<p>Developed by Kathryn Doering, Kelli Johnson, Bai Li, Elizabeth Perl.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

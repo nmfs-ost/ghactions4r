@@ -78,6 +78,33 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0" id="ghactions4r-030">ghactions4r 0.3.0<a class="anchor" aria-label="anchor" href="#ghactions4r-030"></a></h2>
+<div class="section level3">
+<h3 id="major-changes-0-3-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-3-0"></a></h3>
+<ul><li>Add option for additional arguments to build-pkgdown, r-cmd-check, and update-pkgdown workflows. See <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_r_cmd_check.html" class="external-link">r-cmd-check documentation</a> for usage and an example. By @Bai-Li-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/147" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/147</a>
+</li>
+<li>Deprecate style only and doc only workflows. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/149" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/149</a>
+</li>
+<li>Add workflow to create a coverage badge for display on GitHub. See <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_create_cov_badge.html" class="external-link">use_create_cov_badge() documentation</a> for usage. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/168" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/168</a>
+</li>
+<li>Add a workflow to calculate and create coverage summaries on pull requests. See <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_calc_cov_summaries.html" class="external-link">use_calc_cov_summaries() documentation</a> for usage. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/170" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/170</a>
+</li>
+<li>Soft deprecate <code><a href="../reference/use_calc_coverage.html">use_calc_coverage()</a></code>. by @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/170" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/170</a>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-0-3-0">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-0-3-0"></a></h3>
+<ul><li>Fix: update <code><a href="../reference/rm_dollar_sign.html">rm_dollar_sign()</a></code> to handle parentheses and quotations by @Bai-Li-NOAA and @e-perl-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/142" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/142</a> and <a href="https://github.com/nmfs-ost/ghactions4r/pull/151" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/151</a>
+</li>
+<li>Reduce GitHub Token Permissions by @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/163" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/163</a>
+</li>
+<li>Add option to install Quarto for r cmd check and coverage workflows by @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/161" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/161</a> and <a href="https://github.com/nmfs-ost/ghactions4r/pull/182" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/182</a>
+</li>
+<li>The {ghactions4r} repository moved from the nmfs-fish-tools organization to the nmfs-ost organization.</li>
+</ul><p><strong>Full Changelog</strong>: <a href="https://github.com/nmfs-ost/ghactions4r/compare/v0.2.0" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/compare/v0.2.0</a>…v0.3.0</p>
+</div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="ghactions4r-020">ghactions4r 0.2.0<a class="anchor" aria-label="anchor" href="#ghactions4r-020"></a></h2>
 <div class="section level3">
 <h3 id="major-changes-0-2-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-0"></a></h3>
@@ -94,7 +121,8 @@
 <li>Add <a href="https://github.com/nmfs-ost/ghactions4r/pull/113" class="external-link">option so users can set use-public-rspm to FALSE in the calc-coverage workflow</a>
 </li>
 <li><a href="https://github.com/nmfs-ost/ghactions4r/pull/138" class="external-link">Add examples for use_doc_and_style_r()</a></li>
-</ul></div>
+</ul><p><strong>Full Changelog</strong>: <a href="https://github.com/nmfs-ost/ghactions4r/compare/v0.1.0" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/compare/v0.1.0</a>…v0.2.0</p>
+</div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="ghactions4r-010">ghactions4r 0.1.0<a class="anchor" aria-label="anchor" href="#ghactions4r-010"></a></h2>
@@ -110,11 +138,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Kathryn Doering, Kelli Johnson, Bai Li.</p>
+  <p></p><p>Developed by Kathryn Doering, Kelli Johnson, Bai Li, Elizabeth Perl.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
