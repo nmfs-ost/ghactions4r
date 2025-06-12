@@ -1,7 +1,7 @@
 # document and style  using reusable workflow
 on:
   workflow_dispatch:
-  push:
+  pull_request:
 name: call-doc-and-style-r
 jobs:
   call-workflow:
