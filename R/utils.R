@@ -5,6 +5,7 @@
 #'   automatically. Default is NULL.
 #' @param prev_line An integer specifying the line number in txt where the arguments
 #'   should be added. If NULL, the function determines this value automatically. Default is NULL.
+#' @noRd
 add_args <- function(workflow_name, additional_args, txt = NULL, prev_line = NULL) {
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   if (is.null(txt) | is.null(prev_line)) {
@@ -37,6 +38,7 @@ add_args <- function(workflow_name, additional_args, txt = NULL, prev_line = NUL
 #' @param uses_line text that includes "uses: "
 #' @param gha The workflow file that has been read in using readLines
 #' @return The modified workflow file
+#' @noRd
 add_public_rspm_false <- function(uses_line, gha) {
   uses_line <- grep(
     uses_line,
@@ -54,6 +56,7 @@ add_public_rspm_false <- function(uses_line, gha) {
 #' @param uses_line text that includes "uses: "
 #' @param gha The workflow file that has been read in using readLines
 #' @return The modified workflow file
+#' @noRd
 add_quarto_true <- function(uses_line, gha) {
   uses_line <- grep(
     uses_line,
