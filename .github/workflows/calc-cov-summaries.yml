@@ -21,6 +21,10 @@ on:
 permissions:
   pull-requests: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   calc-cov-summaries:
     runs-on: ubuntu-latest
