@@ -1,13 +1,19 @@
-on.exit(ifelse(
-  file.exists("test_rm_dollar_sign.txt"),
-  file.remove("test_rm_dollar_sign.txt"),
-  ""
-), add = TRUE)
-on.exit(ifelse(
-  file.exists("out_rm_dollar_sign.txt"),
-  file.remove("out_rm_dollar_sign.txt"),
-  ""
-), add = TRUE)
+on.exit(
+  ifelse(
+    file.exists("test_rm_dollar_sign.txt"),
+    file.remove("test_rm_dollar_sign.txt"),
+    ""
+  ),
+  add = TRUE
+)
+on.exit(
+  ifelse(
+    file.exists("out_rm_dollar_sign.txt"),
+    file.remove("out_rm_dollar_sign.txt"),
+    ""
+  ),
+  add = TRUE
+)
 test_that("rm dollar sign works", {
   test_text <- c(
     "x$my_name <- y$test",

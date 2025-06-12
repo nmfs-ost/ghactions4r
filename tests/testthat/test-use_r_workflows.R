@@ -146,7 +146,11 @@ test_that("use_calc_cov_summaries() works with use_public_rspm = FALSE", {
 
 test_that("use_calc_cov_summaries() works with use-public-rspm = FALSE and depends_on_quarto = TRUE", {
   workflow_name <- "call-calc-cov-summaries-rspm-false-quarto-true.yml"
-  use_calc_cov_summaries(workflow_name = workflow_name, use_public_rspm = FALSE, depends_on_quarto = TRUE)
+  use_calc_cov_summaries(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -154,7 +158,11 @@ test_that("use_calc_cov_summaries() works with use-public-rspm = FALSE and depen
 
 test_that("use_calc_cov_summaries() works with use-public-rspm = TRUE and depends_on_quarto = TRUE", {
   workflow_name <- "call-calc-cov-summaries-rspm-true-quarto-true.yml"
-  use_calc_cov_summaries(workflow_name = workflow_name, use_public_rspm = TRUE, depends_on_quarto = TRUE)
+  use_calc_cov_summaries(
+    workflow_name = workflow_name,
+    use_public_rspm = TRUE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -169,7 +177,10 @@ test_that("use_calc_coverage() works", {
 
 test_that("use_calc_coverage() works with use-public-rspm = FALSE", {
   workflow_name <- "call-calc-cov-false.yml"
-  expect_warning(use_calc_coverage(workflow_name = workflow_name, use_public_rspm = FALSE))
+  expect_warning(use_calc_coverage(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE
+  ))
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -192,7 +203,11 @@ test_that("use_create_cov_badge() works with use-public-rspm = FALSE", {
 
 test_that("use_create_cov_badge() works with use-public-rspm = FALSE and depends_on_quarto = TRUE", {
   workflow_name <- "call-create-cov-badge-rspm-false-quarto-true.yml"
-  use_create_cov_badge(workflow_name = workflow_name, use_public_rspm = FALSE, depends_on_quarto = TRUE)
+  use_create_cov_badge(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -200,7 +215,11 @@ test_that("use_create_cov_badge() works with use-public-rspm = FALSE and depends
 
 test_that("use_create_cov_badge() works with use-public-rspm = TRUE and depends-on-quarto = TRUE", {
   workflow_name <- "call-create-cov-badge-rspm-true-quarto-true.yml"
-  use_create_cov_badge(workflow_name = workflow_name, use_public_rspm = TRUE, depends_on_quarto = TRUE)
+  use_create_cov_badge(
+    workflow_name = workflow_name,
+    use_public_rspm = TRUE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -209,7 +228,8 @@ test_that("use_create_cov_badge() works with use-public-rspm = TRUE and depends-
 
 test_that("use_doc_and_style_r() works", {
   use_doc_and_style_r(
-    use_rm_dollar_sign = TRUE, how_to_commit = "directly",
+    use_rm_dollar_sign = TRUE,
+    how_to_commit = "directly",
     build_trigger = "pull_request"
   )
   expect_true(file.exists(".github/workflows/call-doc-and-style-r.yml"))
@@ -223,7 +243,8 @@ test_that("use_doc_and_style_r() works", {
 test_that("use_doc_and_style_r() works with other options", {
   use_doc_and_style_r(
     workflow_name = "doc_style_cron.yml",
-    use_rm_dollar_sign = FALSE, how_to_commit = "pull_request",
+    use_rm_dollar_sign = FALSE,
+    how_to_commit = "pull_request",
     build_trigger = "weekly"
   )
   expect_true(file.exists(".github/workflows/doc_style_cron.yml"))
@@ -238,7 +259,8 @@ test_that("use_doc_and_style_r() works with other options", {
 test_that("use_doc_and_style_r() works with push to main", {
   use_doc_and_style_r(
     workflow_name = "doc_style_main.yml",
-    use_rm_dollar_sign = FALSE, how_to_commit = "pull_request",
+    use_rm_dollar_sign = FALSE,
+    how_to_commit = "pull_request",
     build_trigger = "push_to_main"
   )
   expect_true(file.exists(".github/workflows/doc_style_main.yml"))
@@ -253,7 +275,8 @@ test_that("use_doc_and_style_r() works with push to main", {
 test_that("use_doc_and_style_r() works with manual trigger", {
   use_doc_and_style_r(
     workflow_name = "doc_style_manual.yml",
-    use_rm_dollar_sign = FALSE, how_to_commit = "pull_request",
+    use_rm_dollar_sign = FALSE,
+    how_to_commit = "pull_request",
     build_trigger = "manual"
   )
   expect_true(file.exists(".github/workflows/doc_style_manual.yml"))
@@ -267,8 +290,10 @@ test_that("use_doc_and_style_r() works with manual trigger", {
 test_that("use_doc_and_style_r() works with pat option", {
   use_doc_and_style_r(
     workflow_name = "doc_style_pat.yml",
-    use_rm_dollar_sign = FALSE, how_to_commit = "pull_request",
-    use_pat = TRUE, pat_name = "MYPAT"
+    use_rm_dollar_sign = FALSE,
+    how_to_commit = "pull_request",
+    use_pat = TRUE,
+    pat_name = "MYPAT"
   )
   expect_true(file.exists(".github/workflows/doc_style_pat.yml"))
   test <- readLines(".github/workflows/doc_style_pat.yml")
@@ -278,11 +303,14 @@ test_that("use_doc_and_style_r() works with pat option", {
 })
 
 test_that("use_doc_and_style_r() errors when a bad combo", {
-  expect_error(use_doc_and_style_r(
-    workflow_name = "doc_style_bad.yml",
-    how_to_commit = "directly",
-    use_pat = TRUE
-  ), "recursive")
+  expect_error(
+    use_doc_and_style_r(
+      workflow_name = "doc_style_bad.yml",
+      how_to_commit = "directly",
+      use_pat = TRUE
+    ),
+    "recursive"
+  )
 })
 
 test_that("use_update_pkgdown()) works", {

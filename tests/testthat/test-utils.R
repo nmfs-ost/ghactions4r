@@ -48,7 +48,9 @@ test_that("add_args() works with txt and prev_line", {
   )
   add_args(
     workflow_name = workflow_name,
-    additional_args = list(ubuntu = "sudo apt-get install --only-upgrade libstdc++6"),
+    additional_args = list(
+      ubuntu = "sudo apt-get install --only-upgrade libstdc++6"
+    ),
     txt = txt,
     prev_line = prev_line
   )

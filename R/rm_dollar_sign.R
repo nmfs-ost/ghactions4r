@@ -38,10 +38,12 @@
 #' )
 #' new_text
 #' file.remove("test_rm_dollar_sign.txt")
-rm_dollar_sign <- function(file,
-                           out_file = file,
-                           allow_recursive = TRUE,
-                           max_loops = 5) {
+rm_dollar_sign <- function(
+  file,
+  out_file = file,
+  allow_recursive = TRUE,
+  max_loops = 5
+) {
   # read in the file
   lines <- readLines(file)
   # warn if there are any names like test$`text$moretext`
@@ -55,7 +57,10 @@ rm_dollar_sign <- function(file,
     stop(
       "The following lines may not have convert correctly because of ",
       "names in back ticks containing dollar signs.\n",
-      paste0(paste0("Line ", difficult_lines, " ", difficult_txt), collapse = "\n")
+      paste0(
+        paste0("Line ", difficult_lines, " ", difficult_txt),
+        collapse = "\n"
+      )
     )
   }
   # get rid of names in back ticks first:
@@ -77,7 +82,9 @@ rm_dollar_sign <- function(file,
   if (allow_recursive) {
     mod_lines <- recursive_replace(
       pattern = pattern_no_backtick_in_quotes,
-      replace = replace_no_backtick_in_quotes, lines = mod_lines, max_loops = max_loops
+      replace = replace_no_backtick_in_quotes,
+      lines = mod_lines,
+      max_loops = max_loops
     )
   } else {
     if (length(grep(pattern_no_backtick_in_quotes, x = mod_lines)) > 0) {
@@ -99,7 +106,9 @@ rm_dollar_sign <- function(file,
   if (allow_recursive) {
     mod_lines <- recursive_replace(
       pattern = pattern_no_backtick,
-      replace = replace_no_backtick, lines = mod_lines, max_loops = max_loops
+      replace = replace_no_backtick,
+      lines = mod_lines,
+      max_loops = max_loops
     )
   } else {
     if (length(grep(pattern_no_backtick, x = mod_lines)) > 0) {

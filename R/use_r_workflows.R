@@ -27,11 +27,13 @@
 #' )
 #' }
 #' @export
-use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
-                            use_full_build_matrix = FALSE,
-                            depends_on_tmb = FALSE,
-                            depends_on_quarto = FALSE,
-                            additional_args = NULL) {
+use_r_cmd_check <- function(
+  workflow_name = "call-r-cmd-check.yml",
+  use_full_build_matrix = FALSE,
+  depends_on_tmb = FALSE,
+  depends_on_quarto = FALSE,
+  additional_args = NULL
+) {
   validate_additional_args(additional_args)
 
   check_workflow_name(workflow_name)
@@ -40,7 +42,8 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
   } else {
     url_name <- "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check.yml"
   }
-  usethis::use_github_action("call-r-cmd-check.yml",
+  usethis::use_github_action(
+    "call-r-cmd-check.yml",
     save_as = workflow_name,
     url = url_name
   )
@@ -92,11 +95,13 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template depends_on_quarto
 #' @export
 use_calc_cov_summaries <- function(
-    workflow_name = "call-calc-cov-summaries.yml",
-    use_public_rspm = TRUE,
-    depends_on_quarto = FALSE) {
+  workflow_name = "call-calc-cov-summaries.yml",
+  use_public_rspm = TRUE,
+  depends_on_quarto = FALSE
+) {
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-calc-cov-summaries.yml",
+  usethis::use_github_action(
+    "call-calc-cov-summaries.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-calc-cov-summaries.yml"
   )
@@ -136,10 +141,18 @@ use_calc_cov_summaries <- function(
 #' @template use_public_rspm
 #' @keywords internal
 #' @export
-use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_public_rspm = TRUE) {
-  lifecycle::deprecate_warn("0.3.0", "use_calc_coverage()", "use_calc_cov_summaries()")
+use_calc_coverage <- function(
+  workflow_name = "call-calc-coverage.yml",
+  use_public_rspm = TRUE
+) {
+  lifecycle::deprecate_warn(
+    "0.3.0",
+    "use_calc_coverage()",
+    "use_calc_cov_summaries()"
+  )
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-calc-coverage.yml",
+  usethis::use_github_action(
+    "call-calc-coverage.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-calc-coverage.yml"
   )
@@ -165,9 +178,14 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template use_public_rspm
 #' @template depends_on_quarto
 #' @export
-use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", use_public_rspm = TRUE, depends_on_quarto = FALSE) {
+use_create_cov_badge <- function(
+  workflow_name = "call-create-cov-badge.yml",
+  use_public_rspm = TRUE,
+  depends_on_quarto = FALSE
+) {
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-create-cov-badge.yml",
+  usethis::use_github_action(
+    "call-create-cov-badge.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-create-cov-badge.yml"
   )
@@ -189,10 +207,14 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
     }
     writeLines(gha, path_to_yml)
   }
-  cli::cli_alert_info("Once pushed up to GitHub, a GitHub action will run that will create the badge on a branch called badges.")
+  cli::cli_alert_info(
+    "Once pushed up to GitHub, a GitHub action will run that will create the badge on a branch called badges."
+  )
 
   badge_code <- "[![coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/<OWNER>/<REPO>/refs/heads/badges/coverage-badge.json)](https://github.com/<OWNER>/<REPO>/tree/badges)"
-  cli::cli_alert_info("Copy and paste the following into your readme for a badge, replacing <OWNER> and <REPO> for your GitHub repository location:")
+  cli::cli_alert_info(
+    "Copy and paste the following into your readme for a badge, replacing <OWNER> and <REPO> for your GitHub repository location:"
+  )
   cli::cli_alert_info("{.code {badge_code}}")
 
   return(workflow_name)
@@ -258,43 +280,56 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #' use_doc_and_style_r(use_pat = TRUE, pat_name = "PAT")
 #' }
 #' @export
-use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
-                                use_rm_dollar_sign = FALSE,
-                                how_to_commit = c("pull_request", "directly"),
-                                build_trigger = c(
-                                  "push_to_main",
-                                  "pull_request",
-                                  "manually",
-                                  "weekly"
-                                ),
-                                use_pat = FALSE,
-                                pat_name = "PAT") {
+use_doc_and_style_r <- function(
+  workflow_name = "call-doc-and-style-r.yml",
+  use_rm_dollar_sign = FALSE,
+  how_to_commit = c("pull_request", "directly"),
+  build_trigger = c(
+    "push_to_main",
+    "pull_request",
+    "manually",
+    "weekly"
+  ),
+  use_pat = FALSE,
+  pat_name = "PAT"
+) {
   # input checks
   check_workflow_name(workflow_name)
-  how_to_commit <- match.arg(arg = how_to_commit, choices = c("pull_request", "directly"))
+  how_to_commit <- match.arg(
+    arg = how_to_commit,
+    choices = c("pull_request", "directly")
+  )
   build_trigger <- match.arg(
     arg = build_trigger,
     choices = c(
-      "push_to_main", "pull_request", "manually",
+      "push_to_main",
+      "pull_request",
+      "manually",
       "weekly"
     )
   )
   if (how_to_commit == "directly" & use_pat == TRUE) {
-    stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
+    stop(
+      "Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs."
+    )
   }
 
   if (how_to_commit == "pull_request" & build_trigger == "pull_request") {
-    stop("Currently it is not possible to use how_to_commit == 'pull_request' and build_trigger = 'pull_request' in ghactions4r. Instead, create your own workflow and follow this example: https://github.com/peter-evans/create-pull-request/blob/main/docs/examples.md#use-case-create-a-pull-request-to-modifyfix-pull-requests")
+    stop(
+      "Currently it is not possible to use how_to_commit == 'pull_request' and build_trigger = 'pull_request' in ghactions4r. Instead, create your own workflow and follow this example: https://github.com/peter-evans/create-pull-request/blob/main/docs/examples.md#use-case-create-a-pull-request-to-modifyfix-pull-requests"
+    )
   }
   # get the template github action
-  usethis::use_github_action("call-doc-and-style-r.yml",
+  usethis::use_github_action(
+    "call-doc-and-style-r.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-doc-and-style-r.yml"
   )
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   gha <- readLines(path_to_yml)
   # modify the build trigger as needed
-  build_trigger_lines <- switch(build_trigger,
+  build_trigger_lines <- switch(
+    build_trigger,
     push_to_main = c("  push:", "    branches: [main]"),
     pull_request = "  pull_request:",
     manually = "  workflow_dispatch:",
@@ -324,7 +359,11 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
       gha <- append(gha, "      commit-directly: true", after = uses_line + 1)
     }
     if (use_rm_dollar_sign == TRUE) {
-      gha <- append(gha, "      run-rm_dollar_sign: true", after = uses_line + 1)
+      gha <- append(
+        gha,
+        "      run-rm_dollar_sign: true",
+        after = uses_line + 1
+      )
     }
   }
   if (use_pat == TRUE) {
@@ -362,12 +401,15 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 #' )
 #' }
 #' @export
-use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
-                               additional_args = NULL) {
+use_update_pkgdown <- function(
+  workflow_name = "call-update-pkgdown.yml",
+  additional_args = NULL
+) {
   validate_additional_args(additional_args)
 
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-update-pkgdown.yml",
+  usethis::use_github_action(
+    "call-update-pkgdown.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-update-pkgdown.yml"
   )
@@ -375,7 +417,9 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   if (!is.null(additional_args)) {
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
-  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+  cli::cli_alert_info(
+    "New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}."
+  )
 }
 
 #' use workflow in current pkg to check pkgdown site builds.
@@ -403,11 +447,15 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' )
 #' }
 #' @export
-use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", additional_args = NULL) {
+use_build_pkgdown <- function(
+  workflow_name = "call-build-pkgdown.yml",
+  additional_args = NULL
+) {
   validate_additional_args(additional_args)
 
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-build-pkgdown.yml",
+  usethis::use_github_action(
+    "call-build-pkgdown.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-build-pkgdown.yml"
   )
@@ -415,7 +463,9 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
   if (!is.null(additional_args)) {
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
-  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+  cli::cli_alert_info(
+    "New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}."
+  )
 }
 
 #' use workflow to run spelling::spell_check_package()
@@ -424,11 +474,14 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml") {
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-spell-check.yml",
+  usethis::use_github_action(
+    "call-spell-check.yml",
     save_as = workflow_name,
     url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-spell-check.yml"
   )
   path_to_yml <- file.path(".github", "workflows", workflow_name)
-  cli::cli_alert_info("New to spelling::spell_check_package()? Learn more at {.url https://docs.ropensci.org/spelling/#spell-check-a-package}")
+  cli::cli_alert_info(
+    "New to spelling::spell_check_package()? Learn more at {.url https://docs.ropensci.org/spelling/#spell-check-a-package}"
+  )
   return(path_to_yml)
 }
