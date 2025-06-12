@@ -15,6 +15,12 @@ on:
       - opened
     branches:
       - main
+      
+# limits permisions to write, as the common use case is for pull requests;
+# this means certain options may not work, but makes the workflow more secure
+permissions:
+  pull-requests: write
+
 jobs:
   call-workflow:
     uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main
