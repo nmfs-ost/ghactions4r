@@ -2,7 +2,7 @@
 
 #' Check the workflow name is formatted correctly
 #'
-#' Basically check that it is a filename that ends in .yml
+#' Basically check that it is a filename that ends in .yml.
 #' @template workflow_name
 check_workflow_name <- function(workflow_name) {
   stopifnot(is.character(workflow_name))
