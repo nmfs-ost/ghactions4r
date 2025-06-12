@@ -10,7 +10,7 @@ check_workflow_name <- function(workflow_name) {
   stopifnot(length(workflow_name) == 1)
   get_ext <- grep("\\.yml$", workflow_name)
   stopifnot(isTRUE(length(get_ext) == 1))
-  return(invisible(workflow_name))
+  invisible(workflow_name)
 }
 
 #' Validate additional arguments for R functions
@@ -31,4 +31,5 @@ validate_additional_args <- function(additional_args) {
       cli::cli_abort("All values in {.var additional_args} must be character vectors.")
     }
   }
+  invisible(additional_args)
 }
