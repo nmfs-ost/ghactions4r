@@ -37,6 +37,11 @@ permissions:
   contents: write
   pull-requests: write
 
+# Cancel runs happening simultaneously on the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 name: style r code with styler
 
 jobs:

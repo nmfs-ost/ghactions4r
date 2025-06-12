@@ -23,6 +23,11 @@ name: update-pkgdown
 permissions:
   contents: write
 
+# Cancel runs happening simultaneously on the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
