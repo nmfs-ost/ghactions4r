@@ -32,6 +32,7 @@ add_args <- function(workflow_name, additional_args, txt = NULL, prev_line = NUL
     }
   }
   writeLines(txt, path_to_yml)
+  invisible(workflow_name)
 }
 
 #' Add public rspm is false option to workflows.
