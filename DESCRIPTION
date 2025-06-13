@@ -4,17 +4,20 @@ Version: 0.3.1
 Authors@R: c(
     person("Kathryn", "Doering", , "kathryn.doering@noaa.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0396-7044")),
-    person("Kelli", "Johnson", , "kelli.johnson@noaa.gov", role = "aut", comment = c(ORCID ="0000-0002-5149-451X")),
-    person("Bai", "Li", role = "aut", comment = c(ORCID ="0000-0002-8249-1442")),
-    person("Elizabeth", "Perl", role = "aut", comment = c(ORCID ="0000-0003-1608-8628"))
+    person("Kelli", "Johnson", , "kelli.johnson@noaa.gov", role = "aut",
+           comment = c(ORCID = "0000-0002-5149-451X")),
+    person("Bai", "Li", role = "aut",
+           comment = c(ORCID = "0000-0002-8249-1442")),
+    person("Elizabeth", "Perl", role = "aut",
+           comment = c(ORCID = "0000-0003-1608-8628"))
   )
 Description: Provides functions to allow users to set up github action
     workflows related to R packages.
 License: CC0
 Imports:
     cli,
-    usethis,
-    lifecycle
+    lifecycle,
+    usethis
 Suggests: 
     dplyr,
     knitr,

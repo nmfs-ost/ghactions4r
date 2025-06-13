@@ -325,7 +325,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     if (use_rm_dollar_sign == TRUE) {
       gha <- append(gha, "      run-rm_dollar_sign: true", after = uses_line + 1)
     }
-    if(use_air == TRUE) {
+    if (use_air == TRUE) {
       gha <- append(gha, "      use-air: true", after = uses_line + 1)
     }
   }
@@ -340,8 +340,6 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   }
   writeLines(gha, path_to_yml)
   usethis::use_git_ignore(ignores = "*.rds", directory = file.path(".github"))
-
-
 }
 
 #' Creates a workflow in current R package to update an existing pkgdown GitHub pages site
