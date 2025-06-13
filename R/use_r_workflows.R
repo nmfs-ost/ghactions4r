@@ -123,6 +123,7 @@ use_calc_cov_summaries <- function(
     "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/.octocov.yml",
     save_as = ".octocov.yml"
   )
+  invisible(workflow_name)
 }
 
 
@@ -152,6 +153,7 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
     )
     writeLines(gha, path_to_yml)
   }
+  invisible(workflow_name)
 }
 
 
@@ -195,7 +197,7 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
   cli::cli_alert_info("Copy and paste the following into your readme for a badge, replacing <OWNER> and <REPO> for your GitHub repository location:")
   cli::cli_alert_info("{.code {badge_code}}")
 
-  return(workflow_name)
+  invisible(workflow_name)
 }
 
 
@@ -340,6 +342,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   }
   writeLines(gha, path_to_yml)
   usethis::use_git_ignore(ignores = "*.rds", directory = file.path(".github"))
+  
+  invisible(workflow_name)
 }
 
 #' Creates a workflow in current R package to update an existing pkgdown GitHub pages site
@@ -378,6 +382,8 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
   cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+
+  invisible(workflow_name)
 }
 
 #' use workflow in current pkg to check pkgdown site builds.
@@ -418,11 +424,11 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
   cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+  invisible(workflow_name)
 }
 
 #' use workflow to run spelling::spell_check_package()
 #' @template workflow_name
-#' @return The path to the new github action file.
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml") {
   check_workflow_name(workflow_name)
@@ -432,5 +438,5 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml") {
   )
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   cli::cli_alert_info("New to spelling::spell_check_package()? Learn more at {.url https://docs.ropensci.org/spelling/#spell-check-a-package}")
-  return(path_to_yml)
+  invisible(workflow_name)
 }
