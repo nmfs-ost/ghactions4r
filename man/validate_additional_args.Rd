@@ -2,7 +2,7 @@
 % Please edit documentation in R/input_checks.R
 \name{validate_additional_args}
 \alias{validate_additional_args}
-\title{Validate additional arguments for R functions..}
+\title{Validate additional arguments for R functions}
 \usage{
 validate_additional_args(additional_args)
 }
@@ -14,5 +14,5 @@ These additional arguments are executed after the step that checks out the
 repository and before the step that sets up R.}
 }
 \description{
-Validate additional arguments for R functions..
+Validate additional arguments for R functions
 }
