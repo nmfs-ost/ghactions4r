@@ -98,11 +98,11 @@ jobs:
         if: inputs.run-rm_dollar_sign == true 
         run: Rscript -e 'remotes::install_github("nmfs-ost/ghactions4r", upgrade = "always")'
 
-      - name: Format
+      - name: Style using Air
         if: inputs.use-air == true
         run: air format .
 
-      - name: Style
+      - name: Style using styler
         if: inputs.use-air == false
         run: |
           results <- styler::style_pkg()
@@ -125,7 +125,7 @@ jobs:
           out <- lapply(files_to_change, function(x) ghactions4r::rm_dollar_sign(x))
         shell: Rscript {0}
 
-      - name: Style again, just in case
+      - name: Style again using Styler
         if: inputs.use-air == false
         run: | 
           results <- styler::style_pkg()
@@ -134,7 +134,7 @@ jobs:
           }
         shell: Rscript {0}
       
-      - name: Format again, just in case
+      - name: Style again using Air
         if: inputs.use-air == true
         run: air format .
 
