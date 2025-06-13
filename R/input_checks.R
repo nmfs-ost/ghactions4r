@@ -12,7 +12,7 @@ check_workflow_name <- function(workflow_name) {
   return(invisible(workflow_name))
 }
 
-#' Validate additional arguments for R functions.
+#' Validate additional arguments for R functions..
 #'
 #' @inheritParams use_r_cmd_check
 validate_additional_args <- function(additional_args) {
