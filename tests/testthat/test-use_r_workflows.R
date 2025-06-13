@@ -218,12 +218,13 @@ test_that("use_doc_and_style_r() works", {
                                   "weekly"
                                 ),
     use_air = c(TRUE, FALSE),
-    use_pat = c(TRUE, FALSE)
+    use_pat = c(TRUE, FALSE),
+    stringsAsFactors = FALSE
   )
   # remove bad options (to test later)
   test_grid <- test_grid[-which(test_grid$how_to_commit == "directly" & test_grid$use_pat == TRUE), ]
 
-    for (i in 1:nrow(test_grid)) {
+  for (i in 1:nrow(test_grid)) {
     name <- paste0("call-doc-and-style-r-", i, ".yml")
     path <- file.path(".github", "workflows", name)
     use_doc_and_style_r(

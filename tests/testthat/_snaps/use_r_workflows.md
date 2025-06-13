@@ -698,6 +698,721 @@
        [2] "name: call-doc-and-style-r"                                                                                                               
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    secrets:"                                                                                                                             
+      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [12] "    with:"                                                                                                                                
+      [13] "      use-air: true"                                                                                                                      
+      [14] "      run-rm_dollar_sign: true"                                                                                                           
+      [15] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    secrets:"                                                                                                                             
+      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [12] "    with:"                                                                                                                                
+      [13] "      use-air: true"                                                                                                                      
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "      run-rm_dollar_sign: true"                                                                                                           
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "      run-rm_dollar_sign: true"                                                                                                           
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    secrets:"                                                                                                                             
+      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [13] "    with:"                                                                                                                                
+      [14] "      use-air: true"                                                                                                                      
+      [15] "      run-rm_dollar_sign: true"                                                                                                           
+      [16] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    secrets:"                                                                                                                             
+      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [13] "    with:"                                                                                                                                
+      [14] "      use-air: true"                                                                                                                      
+      [15] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    secrets:"                                                                                                                             
+      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [12] "    with:"                                                                                                                                
+      [13] "      run-rm_dollar_sign: true"                                                                                                           
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    secrets:"                                                                                                                             
+      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "    with:"                                                                                                                                
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    secrets:"                                                                                                                             
+      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    secrets:"                                                                                                                             
+      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [13] "    with:"                                                                                                                                
+      [14] "      run-rm_dollar_sign: true"                                                                                                           
+      [15] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    secrets:"                                                                                                                             
+      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      use-air: true"                                                                                                                      
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      use-air: true"                                                                                                                      
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      use-air: true"                                                                                                                      
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "      commit-directly: true"                                                                                                              
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      use-air: true"                                                                                                                      
+      [12] "      commit-directly: true"                                                                                                              
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "      commit-directly: true"                                                                                                              
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      commit-directly: true"                                                                                                              
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "      commit-directly: true"                                                                                                              
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      use-air: true"                                                                                                                      
+      [11] "      commit-directly: true"                                                                                                              
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "      run-rm_dollar_sign: true"                                                                                                           
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "      run-rm_dollar_sign: true"                                                                                                           
+      [14] "      commit-directly: true"                                                                                                              
+      [15] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      use-air: true"                                                                                                                      
+      [13] "      commit-directly: true"                                                                                                              
+      [14] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      run-rm_dollar_sign: true"                                                                                                           
+      [12] "      commit-directly: true"                                                                                                              
+      [13] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] "jobs:"                                                                                                                                    
+       [8] "  call-workflow:"                                                                                                                         
+       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [10] "    with:"                                                                                                                                
+      [11] "      commit-directly: true"                                                                                                              
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      run-rm_dollar_sign: true"                                                                                                           
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+      [1] "# document and style R code using a reusable workflow"                                                                                    
+      [2] "name: call-doc-and-style-r"                                                                                                               
+      [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+      [4] "on:"                                                                                                                                      
+      [5] "  pull_request:"                                                                                                                          
+      [6] "jobs:"                                                                                                                                    
+      [7] "  call-workflow:"                                                                                                                         
+      [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [9] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
        [5] "  pull_request:"                                                                                                                          
        [6] "jobs:"                                                                                                                                    
        [7] "  call-workflow:"                                                                                                                         
@@ -707,7 +1422,110 @@
       [11] "      commit-directly: true"                                                                                                              
       [12] "  "                                                                                                                                       
 
-# use_doc_and_style_r() works with other options
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      commit-directly: true"                                                                                                              
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      run-rm_dollar_sign: true"                                                                                                           
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+      [1] "# document and style R code using a reusable workflow"                                                                                    
+      [2] "name: call-doc-and-style-r"                                                                                                               
+      [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+      [4] "on:"                                                                                                                                      
+      [5] "  workflow_dispatch:"                                                                                                                     
+      [6] "jobs:"                                                                                                                                    
+      [7] "  call-workflow:"                                                                                                                         
+      [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [9] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      run-rm_dollar_sign: true"                                                                                                           
+      [11] "      commit-directly: true"                                                                                                              
+      [12] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] "jobs:"                                                                                                                                    
+       [7] "  call-workflow:"                                                                                                                         
+       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+       [9] "    with:"                                                                                                                                
+      [10] "      commit-directly: true"                                                                                                              
+      [11] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "  "                                                                                                                                       
+
+---
 
     Code
       test
@@ -724,7 +1542,7 @@
       [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
       [11] "  "                                                                                                                                       
 
-# use_doc_and_style_r() works with push to main
+---
 
     Code
       test
@@ -733,29 +1551,18 @@
        [2] "name: call-doc-and-style-r"                                                                                                               
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "  "                                                                                                                                       
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      run-rm_dollar_sign: true"                                                                                                           
+      [13] "      commit-directly: true"                                                                                                              
+      [14] "  "                                                                                                                                       
 
-# use_doc_and_style_r() works with manual trigger
-
-    Code
-      test
-    Output
-      [1] "# document and style R code using a reusable workflow"                                                                                    
-      [2] "name: call-doc-and-style-r"                                                                                                               
-      [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-      [4] "on:"                                                                                                                                      
-      [5] "  workflow_dispatch:"                                                                                                                     
-      [6] "jobs:"                                                                                                                                    
-      [7] "  call-workflow:"                                                                                                                         
-      [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [9] "  "                                                                                                                                       
-
-# use_doc_and_style_r() works with pat option
+---
 
     Code
       test
@@ -764,14 +1571,15 @@
        [2] "name: call-doc-and-style-r"                                                                                                               
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    secrets:"                                                                                                                             
-      [11] "      PAT: ${{ secrets.MYPAT }}"                                                                                                          
-      [12] "  "                                                                                                                                       
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] "jobs:"                                                                                                                                    
+       [9] "  call-workflow:"                                                                                                                         
+      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [11] "    with:"                                                                                                                                
+      [12] "      commit-directly: true"                                                                                                              
+      [13] "  "                                                                                                                                       
 
 # use_update_pkgdown()) works
 
