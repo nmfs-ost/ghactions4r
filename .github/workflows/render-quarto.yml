@@ -39,7 +39,7 @@ jobs:
           path: ${{ inputs.folder-path }}
 
       - name: save artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: quarto-output
           path: ${{ inputs.folder-path }}
