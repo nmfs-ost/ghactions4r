@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: quarto-output
-          path: ${{ inputs.folder-path }}/$QUARTO_OUTPUT
+          path: ${{ inputs.folder-path }}/${{ QUARTO_OUTPUT }}
