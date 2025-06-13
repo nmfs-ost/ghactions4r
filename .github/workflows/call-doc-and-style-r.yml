@@ -2,12 +2,9 @@
 on:
   workflow_dispatch:
   push:
-    branches: [main]
-    paths: 
-      - 'R/**'
-      - 'tests/**'
-      - 'vignettes/**'
 name: call-doc-and-style-r
 jobs:
   call-workflow:
-    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main
+    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@add-air
+    with:
+      use-air: true
