@@ -13,13 +13,19 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      use_full_build_matrix: true"                                                                                                        
-      [16] "      depends_on_tmb: true"                                                                                                               
-      [17] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      use_full_build_matrix: true"                                                                                                        
+      [22] "      depends_on_tmb: true"                                                                                                               
+      [23] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -36,12 +42,18 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      depends_on_tmb: true"                                                                                                               
-      [16] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      depends_on_tmb: true"                                                                                                               
+      [22] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -58,12 +70,18 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      use_full_build_matrix: true"                                                                                                        
-      [16] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      use_full_build_matrix: true"                                                                                                        
+      [22] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -80,11 +98,17 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -101,12 +125,18 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      use_full_build_matrix: true"                                                                                                        
-      [16] "      depends_on_tmb: true"                                                                                                               
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      use_full_build_matrix: true"                                                                                                        
+      [22] "      depends_on_tmb: true"                                                                                                               
 
 ---
 
@@ -123,11 +153,17 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      depends_on_tmb: true"                                                                                                               
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      depends_on_tmb: true"                                                                                                               
 
 ---
 
@@ -144,11 +180,17 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      use_full_build_matrix: true"                                                                                                        
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      use_full_build_matrix: true"                                                                                                        
 
 ---
 
@@ -165,9 +207,15 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
 
 # all use_r_cmd_check() options work with additional args
 
@@ -184,22 +232,28 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      use_full_build_matrix: true"                                                                                                        
-      [25] "      depends_on_tmb: true"                                                                                                               
-      [26] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      use_full_build_matrix: true"                                                                                                        
+      [31] "      depends_on_tmb: true"                                                                                                               
+      [32] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -216,21 +270,27 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      depends_on_tmb: true"                                                                                                               
-      [25] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      depends_on_tmb: true"                                                                                                               
+      [31] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -247,21 +307,27 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      use_full_build_matrix: true"                                                                                                        
-      [25] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      use_full_build_matrix: true"                                                                                                        
+      [31] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -278,20 +344,26 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      depends_on_quarto: true"                                                                                                            
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      depends_on_quarto: true"                                                                                                            
 
 ---
 
@@ -308,21 +380,27 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      use_full_build_matrix: true"                                                                                                        
-      [25] "      depends_on_tmb: true"                                                                                                               
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      use_full_build_matrix: true"                                                                                                        
+      [31] "      depends_on_tmb: true"                                                                                                               
 
 ---
 
@@ -339,20 +417,26 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      depends_on_tmb: true"                                                                                                               
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      depends_on_tmb: true"                                                                                                               
 
 ---
 
@@ -369,20 +453,26 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
-      [24] "      use_full_build_matrix: true"                                                                                                        
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
+      [30] "      use_full_build_matrix: true"                                                                                                        
 
 ---
 
@@ -399,19 +489,25 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_ubuntu: |"                                                                                                          
-      [16] "        sudo apt-get update"                                                                                                              
-      [17] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [18] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [19] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [20] "      additional_args_macos: |"                                                                                                           
-      [21] "        brew install curl"                                                                                                                
-      [22] "      additional_args_windows: |"                                                                                                         
-      [23] "        tree"                                                                                                                             
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_ubuntu: |"                                                                                                          
+      [22] "        sudo apt-get update"                                                                                                              
+      [23] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [24] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [25] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [26] "      additional_args_macos: |"                                                                                                           
+      [27] "        brew install curl"                                                                                                                
+      [28] "      additional_args_windows: |"                                                                                                         
+      [29] "        tree"                                                                                                                             
 
 # use_r_cmd_check() works with additional_args mac only
 
@@ -428,13 +524,19 @@
        [8] "  # To run the default repository branch weekly on sunday, uncomment the following 2 lines"                                               
        [9] "  #schedule:"                                                                                                                             
       [10] "    #- cron: '0 0 * * 0'"                                                                                                                 
-      [11] "jobs:"                                                                                                                                    
-      [12] "  call-workflow:"                                                                                                                         
-      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [14] "    with:"                                                                                                                                
-      [15] "      additional_args_macos: |"                                                                                                           
-      [16] "        brew install curl"                                                                                                                
-      [17] "      use_full_build_matrix: true"                                                                                                        
+      [11] ""                                                                                                                                         
+      [12] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [13] "# run, so don't pass any."                                                                                                                
+      [14] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [15] "permissions: {}"                                                                                                                          
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [20] "    with:"                                                                                                                                
+      [21] "      additional_args_macos: |"                                                                                                           
+      [22] "        brew install curl"                                                                                                                
+      [23] "      use_full_build_matrix: true"                                                                                                        
 
 # use_calc_cov_summaries() works
 
@@ -458,9 +560,15 @@
       [15] "      - opened"                                                                                                                           
       [16] "    branches:"                                                                                                                            
       [17] "      - main"                                                                                                                             
-      [18] "jobs:"                                                                                                                                    
-      [19] "  call-workflow:"                                                                                                                         
-      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
+      [18] "      "                                                                                                                                   
+      [19] "# limits permisions to write, as the common use case is for pull requests;"                                                               
+      [20] "# this means certain options may not work, but makes the workflow more secure"                                                            
+      [21] "permissions:"                                                                                                                             
+      [22] "  pull-requests: write"                                                                                                                   
+      [23] ""                                                                                                                                         
+      [24] "jobs:"                                                                                                                                    
+      [25] "  call-workflow:"                                                                                                                         
+      [26] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
 
 ---
 
@@ -505,11 +613,17 @@
       [15] "      - opened"                                                                                                                           
       [16] "    branches:"                                                                                                                            
       [17] "      - main"                                                                                                                             
-      [18] "jobs:"                                                                                                                                    
-      [19] "  call-workflow:"                                                                                                                         
-      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
-      [21] "    with:"                                                                                                                                
-      [22] "      use-public-rspm: false"                                                                                                             
+      [18] "      "                                                                                                                                   
+      [19] "# limits permisions to write, as the common use case is for pull requests;"                                                               
+      [20] "# this means certain options may not work, but makes the workflow more secure"                                                            
+      [21] "permissions:"                                                                                                                             
+      [22] "  pull-requests: write"                                                                                                                   
+      [23] ""                                                                                                                                         
+      [24] "jobs:"                                                                                                                                    
+      [25] "  call-workflow:"                                                                                                                         
+      [26] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
+      [27] "    with:"                                                                                                                                
+      [28] "      use-public-rspm: false"                                                                                                             
 
 # use_calc_cov_summaries() works with use-public-rspm = FALSE and depends_on_quarto = TRUE
 
@@ -533,12 +647,18 @@
       [15] "      - opened"                                                                                                                           
       [16] "    branches:"                                                                                                                            
       [17] "      - main"                                                                                                                             
-      [18] "jobs:"                                                                                                                                    
-      [19] "  call-workflow:"                                                                                                                         
-      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
-      [21] "    with:"                                                                                                                                
-      [22] "      depends_on_quarto: true"                                                                                                            
-      [23] "      use-public-rspm: false"                                                                                                             
+      [18] "      "                                                                                                                                   
+      [19] "# limits permisions to write, as the common use case is for pull requests;"                                                               
+      [20] "# this means certain options may not work, but makes the workflow more secure"                                                            
+      [21] "permissions:"                                                                                                                             
+      [22] "  pull-requests: write"                                                                                                                   
+      [23] ""                                                                                                                                         
+      [24] "jobs:"                                                                                                                                    
+      [25] "  call-workflow:"                                                                                                                         
+      [26] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
+      [27] "    with:"                                                                                                                                
+      [28] "      depends_on_quarto: true"                                                                                                            
+      [29] "      use-public-rspm: false"                                                                                                             
 
 # use_calc_cov_summaries() works with use-public-rspm = TRUE and depends_on_quarto = TRUE
 
@@ -562,11 +682,17 @@
       [15] "      - opened"                                                                                                                           
       [16] "    branches:"                                                                                                                            
       [17] "      - main"                                                                                                                             
-      [18] "jobs:"                                                                                                                                    
-      [19] "  call-workflow:"                                                                                                                         
-      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
-      [21] "    with:"                                                                                                                                
-      [22] "      depends_on_quarto: true"                                                                                                            
+      [18] "      "                                                                                                                                   
+      [19] "# limits permisions to write, as the common use case is for pull requests;"                                                               
+      [20] "# this means certain options may not work, but makes the workflow more secure"                                                            
+      [21] "permissions:"                                                                                                                             
+      [22] "  pull-requests: write"                                                                                                                   
+      [23] ""                                                                                                                                         
+      [24] "jobs:"                                                                                                                                    
+      [25] "  call-workflow:"                                                                                                                         
+      [26] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
+      [27] "    with:"                                                                                                                                
+      [28] "      depends_on_quarto: true"                                                                                                            
 
 # use_calc_coverage() works
 
@@ -618,9 +744,15 @@
        [9] "  push:"                                                                                                                                  
       [10] "    branches:"                                                                                                                            
       [11] "      - main"                                                                                                                             
-      [12] "jobs:"                                                                                                                                    
-      [13] "  call-workflow:"                                                                                                                         
-      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
+      [12] ""                                                                                                                                         
+      [13] "# limits permisions to write, which is the minimum permissions needed to create"                                                          
+      [14] "# the coverage badge."                                                                                                                    
+      [15] "permissions:"                                                                                                                             
+      [16] "  contents: write"                                                                                                                        
+      [17] ""                                                                                                                                         
+      [18] "jobs:"                                                                                                                                    
+      [19] "  call-workflow:"                                                                                                                         
+      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
 
 # use_create_cov_badge() works with use-public-rspm = FALSE
 
@@ -638,11 +770,17 @@
        [9] "  push:"                                                                                                                                  
       [10] "    branches:"                                                                                                                            
       [11] "      - main"                                                                                                                             
-      [12] "jobs:"                                                                                                                                    
-      [13] "  call-workflow:"                                                                                                                         
-      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
-      [15] "    with:"                                                                                                                                
-      [16] "      use-public-rspm: false"                                                                                                             
+      [12] ""                                                                                                                                         
+      [13] "# limits permisions to write, which is the minimum permissions needed to create"                                                          
+      [14] "# the coverage badge."                                                                                                                    
+      [15] "permissions:"                                                                                                                             
+      [16] "  contents: write"                                                                                                                        
+      [17] ""                                                                                                                                         
+      [18] "jobs:"                                                                                                                                    
+      [19] "  call-workflow:"                                                                                                                         
+      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
+      [21] "    with:"                                                                                                                                
+      [22] "      use-public-rspm: false"                                                                                                             
 
 # use_create_cov_badge() works with use-public-rspm = FALSE and depends_on_quarto = TRUE
 
@@ -660,12 +798,18 @@
        [9] "  push:"                                                                                                                                  
       [10] "    branches:"                                                                                                                            
       [11] "      - main"                                                                                                                             
-      [12] "jobs:"                                                                                                                                    
-      [13] "  call-workflow:"                                                                                                                         
-      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
-      [15] "    with:"                                                                                                                                
-      [16] "      depends_on_quarto: true"                                                                                                            
-      [17] "      use-public-rspm: false"                                                                                                             
+      [12] ""                                                                                                                                         
+      [13] "# limits permisions to write, which is the minimum permissions needed to create"                                                          
+      [14] "# the coverage badge."                                                                                                                    
+      [15] "permissions:"                                                                                                                             
+      [16] "  contents: write"                                                                                                                        
+      [17] ""                                                                                                                                         
+      [18] "jobs:"                                                                                                                                    
+      [19] "  call-workflow:"                                                                                                                         
+      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
+      [21] "    with:"                                                                                                                                
+      [22] "      depends_on_quarto: true"                                                                                                            
+      [23] "      use-public-rspm: false"                                                                                                             
 
 # use_create_cov_badge() works with use-public-rspm = TRUE and depends-on-quarto = TRUE
 
@@ -683,11 +827,17 @@
        [9] "  push:"                                                                                                                                  
       [10] "    branches:"                                                                                                                            
       [11] "      - main"                                                                                                                             
-      [12] "jobs:"                                                                                                                                    
-      [13] "  call-workflow:"                                                                                                                         
-      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
-      [15] "    with:"                                                                                                                                
-      [16] "      depends_on_quarto: true"                                                                                                            
+      [12] ""                                                                                                                                         
+      [13] "# limits permisions to write, which is the minimum permissions needed to create"                                                          
+      [14] "# the coverage badge."                                                                                                                    
+      [15] "permissions:"                                                                                                                             
+      [16] "  contents: write"                                                                                                                        
+      [17] ""                                                                                                                                         
+      [18] "jobs:"                                                                                                                                    
+      [19] "  call-workflow:"                                                                                                                         
+      [20] "    uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml@main"                                                               
+      [21] "    with:"                                                                                                                                
+      [22] "      depends_on_quarto: true"                                                                                                            
 
 # use_doc_and_style_r() works
 
@@ -700,15 +850,22 @@
        [4] "on:"                                                                                                                                      
        [5] "  push:"                                                                                                                                  
        [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    secrets:"                                                                                                                             
-      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [12] "    with:"                                                                                                                                
-      [13] "      use-air: true"                                                                                                                      
-      [14] "      run-rm_dollar_sign: true"                                                                                                           
-      [15] "  "                                                                                                                                       
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    secrets:"                                                                                                                             
+      [18] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [19] "    with:"                                                                                                                                
+      [20] "      use-air: true"                                                                                                                      
+      [21] "      run-rm_dollar_sign: true"                                                                                                           
+      [22] "  "                                                                                                                                       
 
 ---
 
@@ -721,14 +878,21 @@
        [4] "on:"                                                                                                                                      
        [5] "  push:"                                                                                                                                  
        [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    secrets:"                                                                                                                             
-      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [12] "    with:"                                                                                                                                
-      [13] "      use-air: true"                                                                                                                      
-      [14] "  "                                                                                                                                       
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    secrets:"                                                                                                                             
+      [18] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [19] "    with:"                                                                                                                                
+      [20] "      use-air: true"                                                                                                                      
+      [21] "  "                                                                                                                                       
 
 ---
 
@@ -740,15 +904,22 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "      run-rm_dollar_sign: true"                                                                                                           
-      [14] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "      run-rm_dollar_sign: true"                                                                                                           
+      [21] "  "                                                                                                                                       
 
 ---
 
@@ -760,14 +931,21 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "  "                                                                                                                                       
 
 ---
 
@@ -779,15 +957,22 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "      run-rm_dollar_sign: true"                                                                                                           
-      [14] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "      run-rm_dollar_sign: true"                                                                                                           
+      [21] "  "                                                                                                                                       
 
 ---
 
@@ -799,14 +984,21 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "  "                                                                                                                                       
 
 ---
 
@@ -820,14 +1012,812 @@
        [5] "  schedule:"                                                                                                                              
        [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
        [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    secrets:"                                                                                                                             
-      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [13] "    with:"                                                                                                                                
-      [14] "      use-air: true"                                                                                                                      
-      [15] "      run-rm_dollar_sign: true"                                                                                                           
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    secrets:"                                                                                                                             
+      [19] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "      run-rm_dollar_sign: true"                                                                                                           
+      [23] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    secrets:"                                                                                                                             
+      [19] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    secrets:"                                                                                                                             
+      [18] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [19] "    with:"                                                                                                                                
+      [20] "      run-rm_dollar_sign: true"                                                                                                           
+      [21] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    secrets:"                                                                                                                             
+      [18] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "    with:"                                                                                                                                
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    secrets:"                                                                                                                             
+      [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    secrets:"                                                                                                                             
+      [19] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [20] "    with:"                                                                                                                                
+      [21] "      run-rm_dollar_sign: true"                                                                                                           
+      [22] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    secrets:"                                                                                                                             
+      [19] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      use-air: true"                                                                                                                      
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      use-air: true"                                                                                                                      
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      use-air: true"                                                                                                                      
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "      commit-directly: true"                                                                                                              
+      [21] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      use-air: true"                                                                                                                      
+      [19] "      commit-directly: true"                                                                                                              
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "      commit-directly: true"                                                                                                              
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      commit-directly: true"                                                                                                              
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "      commit-directly: true"                                                                                                              
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      use-air: true"                                                                                                                      
+      [18] "      commit-directly: true"                                                                                                              
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "      run-rm_dollar_sign: true"                                                                                                           
+      [21] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "      run-rm_dollar_sign: true"                                                                                                           
+      [21] "      commit-directly: true"                                                                                                              
+      [22] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  schedule:"                                                                                                                              
+       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
+       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      use-air: true"                                                                                                                      
+      [20] "      commit-directly: true"                                                                                                              
+      [21] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      run-rm_dollar_sign: true"                                                                                                           
+      [19] "      commit-directly: true"                                                                                                              
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [17] "    with:"                                                                                                                                
+      [18] "      commit-directly: true"                                                                                                              
+      [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      run-rm_dollar_sign: true"                                                                                                           
+      [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
       [16] "  "                                                                                                                                       
 
 ---
@@ -839,55 +1829,21 @@
        [2] "name: call-doc-and-style-r"                                                                                                               
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    secrets:"                                                                                                                             
-      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [13] "    with:"                                                                                                                                
-      [14] "      use-air: true"                                                                                                                      
-      [15] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    secrets:"                                                                                                                             
-      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [12] "    with:"                                                                                                                                
-      [13] "      run-rm_dollar_sign: true"                                                                                                           
-      [14] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    secrets:"                                                                                                                             
-      [11] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [12] "  "                                                                                                                                       
+       [5] "  pull_request:"                                                                                                                          
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      run-rm_dollar_sign: true"                                                                                                           
+      [18] "      commit-directly: true"                                                                                                              
+      [19] "  "                                                                                                                                       
 
 ---
 
@@ -899,31 +1855,19 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      commit-directly: true"                                                                                                              
+      [18] "  "                                                                                                                                       
 
 ---
 
@@ -935,14 +1879,19 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "    with:"                                                                                                                                
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      run-rm_dollar_sign: true"                                                                                                           
+      [18] "  "                                                                                                                                       
 
 ---
 
@@ -954,200 +1903,17 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    secrets:"                                                                                                                             
-      [10] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    secrets:"                                                                                                                             
-      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [13] "    with:"                                                                                                                                
-      [14] "      run-rm_dollar_sign: true"                                                                                                           
-      [15] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    secrets:"                                                                                                                             
-      [12] "      PAT: ${{ secrets.PAT }}"                                                                                                            
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      use-air: true"                                                                                                                      
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      use-air: true"                                                                                                                      
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      use-air: true"                                                                                                                      
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "      commit-directly: true"                                                                                                              
-      [14] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      use-air: true"                                                                                                                      
-      [12] "      commit-directly: true"                                                                                                              
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "      commit-directly: true"                                                                                                              
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      commit-directly: true"                                                                                                              
-      [12] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "  "                                                                                                                                       
 
 ---
 
@@ -1159,13 +1925,20 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      run-rm_dollar_sign: true"                                                                                                           
+      [18] "      commit-directly: true"                                                                                                              
+      [19] "  "                                                                                                                                       
 
 ---
 
@@ -1177,49 +1950,19 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "      commit-directly: true"                                                                                                              
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      use-air: true"                                                                                                                      
-      [11] "      commit-directly: true"                                                                                                              
-      [12] "  "                                                                                                                                       
+       [6] ""                                                                                                                                         
+       [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions:"                                                                                                                             
+      [10] "  contents: write"                                                                                                                        
+      [11] "  pull-requests: write"                                                                                                                   
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [16] "    with:"                                                                                                                                
+      [17] "      commit-directly: true"                                                                                                              
+      [18] "  "                                                                                                                                       
 
 ---
 
@@ -1233,13 +1976,19 @@
        [5] "  schedule:"                                                                                                                              
        [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
        [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "      run-rm_dollar_sign: true"                                                                                                           
-      [14] "  "                                                                                                                                       
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "  "                                                                                                                                       
 
 ---
 
@@ -1253,12 +2002,17 @@
        [5] "  schedule:"                                                                                                                              
        [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
        [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "  "                                                                                                                                       
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "  "                                                                                                                                       
 
 ---
 
@@ -1272,14 +2026,20 @@
        [5] "  schedule:"                                                                                                                              
        [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
        [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "      run-rm_dollar_sign: true"                                                                                                           
-      [14] "      commit-directly: true"                                                                                                              
-      [15] "  "                                                                                                                                       
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      run-rm_dollar_sign: true"                                                                                                           
+      [20] "      commit-directly: true"                                                                                                              
+      [21] "  "                                                                                                                                       
 
 ---
 
@@ -1293,293 +2053,19 @@
        [5] "  schedule:"                                                                                                                              
        [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
        [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      use-air: true"                                                                                                                      
-      [13] "      commit-directly: true"                                                                                                              
-      [14] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      run-rm_dollar_sign: true"                                                                                                           
-      [12] "      commit-directly: true"                                                                                                              
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] "jobs:"                                                                                                                                    
-       [8] "  call-workflow:"                                                                                                                         
-       [9] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [10] "    with:"                                                                                                                                
-      [11] "      commit-directly: true"                                                                                                              
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      run-rm_dollar_sign: true"                                                                                                           
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-      [1] "# document and style R code using a reusable workflow"                                                                                    
-      [2] "name: call-doc-and-style-r"                                                                                                               
-      [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-      [4] "on:"                                                                                                                                      
-      [5] "  pull_request:"                                                                                                                          
-      [6] "jobs:"                                                                                                                                    
-      [7] "  call-workflow:"                                                                                                                         
-      [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [9] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      run-rm_dollar_sign: true"                                                                                                           
-      [11] "      commit-directly: true"                                                                                                              
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  pull_request:"                                                                                                                          
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      commit-directly: true"                                                                                                              
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      run-rm_dollar_sign: true"                                                                                                           
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-      [1] "# document and style R code using a reusable workflow"                                                                                    
-      [2] "name: call-doc-and-style-r"                                                                                                               
-      [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-      [4] "on:"                                                                                                                                      
-      [5] "  workflow_dispatch:"                                                                                                                     
-      [6] "jobs:"                                                                                                                                    
-      [7] "  call-workflow:"                                                                                                                         
-      [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [9] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      run-rm_dollar_sign: true"                                                                                                           
-      [11] "      commit-directly: true"                                                                                                              
-      [12] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  workflow_dispatch:"                                                                                                                     
-       [6] "jobs:"                                                                                                                                    
-       [7] "  call-workflow:"                                                                                                                         
-       [8] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-       [9] "    with:"                                                                                                                                
-      [10] "      commit-directly: true"                                                                                                              
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      run-rm_dollar_sign: true"                                                                                                           
-      [13] "      commit-directly: true"                                                                                                              
-      [14] "  "                                                                                                                                       
-
----
-
-    Code
-      test
-    Output
-       [1] "# document and style R code using a reusable workflow"                                                                                    
-       [2] "name: call-doc-and-style-r"                                                                                                               
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "  schedule:"                                                                                                                              
-       [6] "# Use https://crontab.guru/ to edit the time"                                                                                             
-       [7] "    - cron:  '15 02 * * 0'"                                                                                                               
-       [8] "jobs:"                                                                                                                                    
-       [9] "  call-workflow:"                                                                                                                         
-      [10] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
-      [11] "    with:"                                                                                                                                
-      [12] "      commit-directly: true"                                                                                                              
-      [13] "  "                                                                                                                                       
+       [8] ""                                                                                                                                         
+       [9] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions:"                                                                                                                             
+      [12] "  contents: write"                                                                                                                        
+      [13] "  pull-requests: write"                                                                                                                   
+      [14] ""                                                                                                                                         
+      [15] "jobs:"                                                                                                                                    
+      [16] "  call-workflow:"                                                                                                                         
+      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [18] "    with:"                                                                                                                                
+      [19] "      commit-directly: true"                                                                                                              
+      [20] "  "                                                                                                                                       
 
 # use_update_pkgdown()) works
 
@@ -1595,9 +2081,15 @@
        [7] "  push:"                                                                                                                                  
        [8] "    branches: [main, master]"                                                                                                             
        [9] "    tags: ['*']"                                                                                                                          
-      [10] "jobs:"                                                                                                                                    
-      [11] "  call-workflow:"                                                                                                                         
-      [12] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main"                                                                 
+      [10] ""                                                                                                                                         
+      [11] "# Give the fewest permissions possible. content is necessary."                                                                            
+      [12] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [13] "permissions:"                                                                                                                             
+      [14] "  contents: write"                                                                                                                        
+      [15] ""                                                                                                                                         
+      [16] "jobs:"                                                                                                                                    
+      [17] "  call-workflow:"                                                                                                                         
+      [18] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main"                                                                 
 
 # use_update_pkgdown()) works with additional_args
 
@@ -1613,19 +2105,25 @@
        [7] "  push:"                                                                                                                                  
        [8] "    branches: [main, master]"                                                                                                             
        [9] "    tags: ['*']"                                                                                                                          
-      [10] "jobs:"                                                                                                                                    
-      [11] "  call-workflow:"                                                                                                                         
-      [12] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main"                                                                 
-      [13] "    with:"                                                                                                                                
-      [14] "      additional_args_ubuntu: |"                                                                                                          
-      [15] "        sudo apt-get update"                                                                                                              
-      [16] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [17] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [18] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [19] "      additional_args_macos: |"                                                                                                           
-      [20] "        brew install curl"                                                                                                                
-      [21] "      additional_args_windows: |"                                                                                                         
-      [22] "        tree"                                                                                                                             
+      [10] ""                                                                                                                                         
+      [11] "# Give the fewest permissions possible. content is necessary."                                                                            
+      [12] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [13] "permissions:"                                                                                                                             
+      [14] "  contents: write"                                                                                                                        
+      [15] ""                                                                                                                                         
+      [16] "jobs:"                                                                                                                                    
+      [17] "  call-workflow:"                                                                                                                         
+      [18] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main"                                                                 
+      [19] "    with:"                                                                                                                                
+      [20] "      additional_args_ubuntu: |"                                                                                                          
+      [21] "        sudo apt-get update"                                                                                                              
+      [22] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [23] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [24] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [25] "      additional_args_macos: |"                                                                                                           
+      [26] "        brew install curl"                                                                                                                
+      [27] "      additional_args_windows: |"                                                                                                         
+      [28] "        tree"                                                                                                                             
 
 # use_build_pkgdown()) works with additional_args
 
@@ -1644,19 +2142,25 @@
       [10] "    tags: ['*']"                                                                                                                          
       [11] "  pull_request:"                                                                                                                          
       [12] "    branches: [main, master]"                                                                                                             
-      [13] "jobs:"                                                                                                                                    
-      [14] "  call-workflow:"                                                                                                                         
-      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/build-pkgdown.yml@main"                                                                  
-      [16] "    with:"                                                                                                                                
-      [17] "      additional_args_ubuntu: |"                                                                                                          
-      [18] "        sudo apt-get update"                                                                                                              
-      [19] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
-      [20] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
-      [21] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
-      [22] "      additional_args_macos: |"                                                                                                           
-      [23] "        brew install curl"                                                                                                                
-      [24] "      additional_args_windows: |"                                                                                                         
-      [25] "        tree"                                                                                                                             
+      [13] ""                                                                                                                                         
+      [14] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [15] "# run, so don't pass any."                                                                                                                
+      [16] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [17] "permissions: {}"                                                                                                                          
+      [18] ""                                                                                                                                         
+      [19] "jobs:"                                                                                                                                    
+      [20] "  call-workflow:"                                                                                                                         
+      [21] "    uses: nmfs-ost/ghactions4r/.github/workflows/build-pkgdown.yml@main"                                                                  
+      [22] "    with:"                                                                                                                                
+      [23] "      additional_args_ubuntu: |"                                                                                                          
+      [24] "        sudo apt-get update"                                                                                                              
+      [25] "        sudo apt-get install -y libcurl4-openssl-dev"                                                                                     
+      [26] "        sudo add-apt-repository ppa:ubuntu-toolchain-r/test"                                                                              
+      [27] "        sudo apt-get install --only-upgrade libstdc++6"                                                                                   
+      [28] "      additional_args_macos: |"                                                                                                           
+      [29] "        brew install curl"                                                                                                                
+      [30] "      additional_args_windows: |"                                                                                                         
+      [31] "        tree"                                                                                                                             
 
 # use_spell_check() works
 
@@ -1675,7 +2179,13 @@
       [10] "    branches:"                                                                                                                            
       [11] "      - main"                                                                                                                             
       [12] "  workflow_dispatch:"                                                                                                                     
-      [13] "jobs:"                                                                                                                                    
-      [14] "  call-workflow:"                                                                                                                         
-      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
+      [13] ""                                                                                                                                         
+      [14] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [15] "# run, so don't pass any."                                                                                                                
+      [16] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [17] "permissions: {}"                                                                                                                          
+      [18] ""                                                                                                                                         
+      [19] "jobs:"                                                                                                                                    
+      [20] "  call-workflow:"                                                                                                                         
+      [21] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
 
