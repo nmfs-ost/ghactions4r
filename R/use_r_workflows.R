@@ -342,7 +342,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   }
   writeLines(gha, path_to_yml)
   usethis::use_git_ignore(ignores = "*.rds", directory = file.path(".github"))
-  
+
   invisible(workflow_name)
 }
 

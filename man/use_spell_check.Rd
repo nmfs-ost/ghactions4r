@@ -10,9 +10,6 @@ use_spell_check(workflow_name = "call-spell-check.yml")
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
 }
-\value{
-The path to the new github action file.
-}
 \description{
 use workflow to run spelling::spell_check_package()
 }
