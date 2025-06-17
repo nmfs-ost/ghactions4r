@@ -4,12 +4,26 @@
 \alias{use_spell_check}
 \title{use workflow to run spelling::spell_check_package()}
 \usage{
-use_spell_check(workflow_name = "call-spell-check.yml")
+use_spell_check(
+  workflow_name = "call-spell-check.yml",
+  use_full_spell_check = FALSE,
+  full_check_report_level = c("warning", "error")
+)
 }
 \arguments{
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
+
+\item{use_full_spell_check}{Logical. Should the workflow run \code{spell_check_files()} on specified files
+in the package? Defaults to FALSE.}
+
+\item{full_check_report_level}{Character. The level of the report to generate for the full spell check.
+Options are "warning" or "error". Defaults to "warning". If set to "warning", the
+the workflow will pass even if spelling errors are found. If set to "error",
+the workflow will fail if any spelling errors are found.}
 }
 \description{
-use workflow to run spelling::spell_check_package()
+This workflow will run the spell_check_package() function from the spelling package
+on the current package, and will fail if any spelling errors are found.
+It will also run the spell_check_files() on specified file types if use_full_spell_check is TRUE.
 }
