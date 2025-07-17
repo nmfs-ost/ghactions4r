@@ -56,14 +56,26 @@ jobs:
         run: echo "GITHUB_PAT=${{ secrets.GITHUB_TOKEN}}" >> "$GITHUB_ENV"
 
       - name: checkout, make changes and submit as pr on new branch
-        if: inputs.commit-directly == false
+        if: inputs.commit-directly == false && github.event_name != 'issue_comment'
         uses: actions/checkout@v4
         
-      - name: checkout, make changes directly
-        if: inputs.commit-directly == true
+      - name: Checkout 1: Get original PR branch name for issue comments
+        id: get_branch
+        if: github.event_name == 'issue_comment'
+        run: |
+          PR_URL="${{ github.event.issue.pull_request.url }}"
+          PR_NUM=$(basename "$PR_URL")
+          BRANCH_NAME=$(gh pr view $PR_NUM --json headRefName -q .headRefName)
+          echo "The original PR branch is: $BRANCH_NAME"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Checkout 2: Checkout the PR branch for issue comments
+        if: github.event_name == 'issue_comment'
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ steps.get_branch.outputs.branch_name }}
       
       - name: Install curl dependency
         run: |
@@ -171,8 +183,10 @@ jobs:
             echo "base=${{github.head_ref}}" >> "$GITHUB_OUTPUT"
           elif [ -n ${{ github.ref_name }} ]; then
             echo "base=${{github.ref_name}}" >> "$GITHUB_OUTPUT"
+          elif [ -n ${{steps.get_branch.outputs.branch_name }} ]; then
+            echo "base=${{steps.get_branch.outputs.branch_name}}" > "$GITHUB_OUTPUT"
           else
-            echo "both github.head_ref and github.ref_name do not exist" >&2
+            echo "both github.head_ref and github.ref_name do not exist, nor does branch_name" >&2
             exit 1
           fi  
       
