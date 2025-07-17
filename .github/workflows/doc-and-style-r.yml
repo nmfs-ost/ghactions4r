@@ -56,9 +56,15 @@ jobs:
         run: echo "GITHUB_PAT=${{ secrets.GITHUB_TOKEN}}" >> "$GITHUB_ENV"
 
       - name: checkout, make changes and submit as pr on new branch
-        if: inputs.commit-directly == false && github.event_name != 'issue_comment'
+        if: inputs.commit-directly == false
         uses: actions/checkout@v4
-        
+
+      - name: checkout, make changes directly
+        if: inputs.commit-directly == true
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
       - name: Checkout 1, Get original PR branch name for issue comments
         id: get_branch
         if: github.event_name == 'issue_comment'
