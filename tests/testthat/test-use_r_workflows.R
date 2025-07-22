@@ -363,7 +363,7 @@ test_that("use_spell_check() works", {
     unlink(file_path)
   }
 
-  # Test that the function returns the correct error when spell_check_report_level is 
+  # Test that the function returns the correct error when spell_check_report_level is
   # not specified while spell_check_additional_files is TRUE
   expect_message(
     use_spell_check(spell_check_additional_files = TRUE),
