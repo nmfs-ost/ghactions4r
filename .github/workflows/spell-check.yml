@@ -90,6 +90,7 @@ jobs:
 
       - name: Save nrow_results to GITHUB_OUTPUT
         id: set_output
+        if: ${{ inputs.spell_check_additional_files }}
         run: |
           tmp_nrow_results=$(awk '{print int($1)}' nrow_results.txt)
           echo "nrow_results=$tmp_nrow_results" >> $GITHUB_OUTPUT
