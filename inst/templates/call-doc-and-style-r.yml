@@ -2,8 +2,7 @@
 name: call-doc-and-style-r
 # on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
-  push:
-    branches: [main, master]
+# [build-trigger-goes-here]
 
 # Give the fewest permissions possible. content and pull-requests are necessary.
 # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token
