@@ -288,12 +288,11 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   }
 
   # get the template github action
-  usethis::use_github_action("call-doc-and-style-r.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-doc-and-style-r.yml"
-  )
+  template_path <- system.file("templates", "call-doc-and-style-r.yml", package = "ghactions4r", mustWork = TRUE)
   path_to_yml <- file.path(".github", "workflows", workflow_name)
+  file.copy(from = template_path, to = path_to_yml)
   gha <- readLines(path_to_yml)
+
   # modify the build trigger as needed
   build_trigger_lines <- switch(build_trigger,
     push_to_main = c("  push:", "    branches: [main]"),
