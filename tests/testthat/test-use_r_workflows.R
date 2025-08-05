@@ -146,7 +146,11 @@ test_that("use_calc_cov_summaries() works with use_public_rspm = FALSE", {
 
 test_that("use_calc_cov_summaries() works with use-public-rspm = FALSE and depends_on_quarto = TRUE", {
   workflow_name <- "call-calc-cov-summaries-rspm-false-quarto-true.yml"
-  use_calc_cov_summaries(workflow_name = workflow_name, use_public_rspm = FALSE, depends_on_quarto = TRUE)
+  use_calc_cov_summaries(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -154,7 +158,11 @@ test_that("use_calc_cov_summaries() works with use-public-rspm = FALSE and depen
 
 test_that("use_calc_cov_summaries() works with use-public-rspm = TRUE and depends_on_quarto = TRUE", {
   workflow_name <- "call-calc-cov-summaries-rspm-true-quarto-true.yml"
-  use_calc_cov_summaries(workflow_name = workflow_name, use_public_rspm = TRUE, depends_on_quarto = TRUE)
+  use_calc_cov_summaries(
+    workflow_name = workflow_name,
+    use_public_rspm = TRUE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -169,7 +177,10 @@ test_that("use_calc_coverage() works", {
 
 test_that("use_calc_coverage() works with use-public-rspm = FALSE", {
   workflow_name <- "call-calc-cov-false.yml"
-  expect_warning(use_calc_coverage(workflow_name = workflow_name, use_public_rspm = FALSE))
+  expect_warning(use_calc_coverage(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE
+  ))
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -192,7 +203,11 @@ test_that("use_create_cov_badge() works with use-public-rspm = FALSE", {
 
 test_that("use_create_cov_badge() works with use-public-rspm = FALSE and depends_on_quarto = TRUE", {
   workflow_name <- "call-create-cov-badge-rspm-false-quarto-true.yml"
-  use_create_cov_badge(workflow_name = workflow_name, use_public_rspm = FALSE, depends_on_quarto = TRUE)
+  use_create_cov_badge(
+    workflow_name = workflow_name,
+    use_public_rspm = FALSE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -200,7 +215,11 @@ test_that("use_create_cov_badge() works with use-public-rspm = FALSE and depends
 
 test_that("use_create_cov_badge() works with use-public-rspm = TRUE and depends-on-quarto = TRUE", {
   workflow_name <- "call-create-cov-badge-rspm-true-quarto-true.yml"
-  use_create_cov_badge(workflow_name = workflow_name, use_public_rspm = TRUE, depends_on_quarto = TRUE)
+  use_create_cov_badge(
+    workflow_name = workflow_name,
+    use_public_rspm = TRUE,
+    depends_on_quarto = TRUE
+  )
   expect_true(file.exists(file.path(".github", "workflows", workflow_name)))
   test <- readLines(file.path(".github", "workflows", workflow_name))
   expect_snapshot(test)
@@ -222,7 +241,9 @@ test_that("use_doc_and_style_r() works", {
     stringsAsFactors = FALSE
   )
   # remove bad options (to test later)
-  test_grid <- test_grid[-which(test_grid$how_to_commit == "directly" & test_grid$use_pat == TRUE), ]
+  test_grid <- test_grid[
+    -which(test_grid$how_to_commit == "directly" & test_grid$use_pat == TRUE),
+  ]
 
   for (i in 1:nrow(test_grid)) {
     name <- paste0("call-doc-and-style-r-", i, ".yml")
@@ -293,11 +314,14 @@ test_that("use_doc_and_style_r() works", {
 })
 
 test_that("use_doc_and_style_r() errors when a bad combo", {
-  expect_error(use_doc_and_style_r(
-    workflow_name = "doc_style_bad.yml",
-    how_to_commit = "directly",
-    use_pat = TRUE
-  ), "recursive")
+  expect_error(
+    use_doc_and_style_r(
+      workflow_name = "doc_style_bad.yml",
+      how_to_commit = "directly",
+      use_pat = TRUE
+    ),
+    "recursive"
+  )
 })
 
 test_that("use_update_pkgdown()) works", {
@@ -357,7 +381,10 @@ test_that("use_spell_check() works", {
   # Test that the function creates the additional spell check workflow file
   report_level <- c("warning", "error")
   for (level in report_level) {
-    use_spell_check(spell_check_additional_files = TRUE, spell_check_report_level = level)
+    use_spell_check(
+      spell_check_additional_files = TRUE,
+      spell_check_report_level = level
+    )
     full_spell_check_content <- readLines(file_path)
     expect_snapshot(full_spell_check_content)
     unlink(file_path)
@@ -374,7 +401,10 @@ test_that("use_spell_check() works", {
   # Test that the function returns an error when spell_check_additional_files is FALSE and
   # spell_check_report_level is set to "error"
   expect_error(
-    use_spell_check(spell_check_additional_files = FALSE, spell_check_report_level = "error")
+    use_spell_check(
+      spell_check_additional_files = FALSE,
+      spell_check_report_level = "error"
+    )
   )
   unlink(file_path)
 })
