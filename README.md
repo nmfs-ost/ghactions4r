@@ -98,7 +98,7 @@ If still running into failing actions, please submit an [issue](https://github.c
 
 ## Code of Conduct
 
-`{ghactions4r}` uses the [NOAA FIT Code of Conduct](https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/FIT-code-of-conduct/).
+`{ghactions4r}` uses the [NOAA FIT Code of Conduct](https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/FIT-code-of-conduct/).
 
 ## Contributing
 
@@ -109,7 +109,7 @@ Contributions are welcome! Contributions can be code, but are not just code, but
 - Correcting or adding documentation (including editing the readme)
 - Answering questions on the [discussions page](https://github.com/nmfs-ost/ghactions4r/discussions)
 
-Additional details are available in the [NOAA FIT Contributing Guide](https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20fit/contributing/).
+Additional details are available in the [NOAA FIT Contributing Guide](https://nmfs-ost.github.io/noaa-fit-resources/noaa%20fit/contributing/).
 
 ### Checklist for adding a new workflow
 - [ ] Make sure the workflow is in scope by opening an issue to ask.
