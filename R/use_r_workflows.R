@@ -372,10 +372,14 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   validate_additional_args(additional_args)
 
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-update-pkgdown.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-update-pkgdown.yml"
-  )
+  # get the template github action
+  template_path <- system.file("templates", "call-update-pkgdown.yml", package = "ghactions4r", mustWork = TRUE)
+  
+  path_to_yml <- file.path(".github", "workflows", workflow_name)
+  dir.create(".github", showWarnings = FALSE)
+  dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
+  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE, recursive = TRUE)
+
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
   writeLines(gha, path_to_yml)
@@ -411,7 +415,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #'   )
 #' )
 #' }
-#' @export
+#' @export  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
 use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", additional_args = NULL) {
   validate_additional_args(additional_args)
 

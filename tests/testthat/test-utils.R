@@ -10,8 +10,8 @@ pkg <- usethis::create_package(".")
 usethis::proj_set(".")
 
 test_that("add_args() works with additional_args", {
-  use_update_pkgdown()
-  workflow_name <- "call-update-pkgdown.yml"
+  workflow_name <- "call-update-pkgdown-add-args.yml"
+  use_update_pkgdown(workflow_name = workflow_name)
   additional_args <- list(
     ubuntu = c(
       "sudo apt-get update",
@@ -32,17 +32,12 @@ test_that("add_args() works with additional_args", {
 })
 
 test_that("add_args() works with txt and prev_line", {
-  use_update_pkgdown()
-  workflow_name <- "call-update-pkgdown.yml"
+  workflow_name <- "call-update-pkgdown-text-prev_line.yml"
+  use_update_pkgdown(workflow_name = workflow_name)
   path <- file.path(".github", "workflows", workflow_name)
 
   txt <- readLines(path)
-  prev_line <- grep(
-    paste0(
-      "uses: nmfs-ost/ghactions4r/.github/workflows/",
-      gsub("call-", "", workflow_name),
-      "@main"
-    ),
+  prev_line <- grep("uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main",
     txt,
     fixed = TRUE
   )
