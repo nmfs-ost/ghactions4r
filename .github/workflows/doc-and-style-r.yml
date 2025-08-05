@@ -83,21 +83,15 @@ jobs:
         with:
           extra-packages: |
             remotes
-            rcmdcheck
             styler
             roxygen2
-            pkgbuild
-            usethis
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         if: inputs.use-air == true
         with:
           extra-packages: |
             remotes
-            rcmdcheck
             roxygen2
-            pkgbuild
-            usethis
 
       - name: add ghactions4r, if using ghactions4r::rm_dollar_sign
         if: inputs.run-rm_dollar_sign == true 
