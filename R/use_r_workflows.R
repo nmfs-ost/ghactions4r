@@ -36,8 +36,8 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 
   check_workflow_name(workflow_name)
   if (use_full_build_matrix) {
-    url_name <- "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check-full.yml"
-  } else {
+    url_name <-     "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check-full.yml"
+  } else  {
     url_name <- "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check.yml"
   }
   usethis::use_github_action("call-r-cmd-check.yml",
