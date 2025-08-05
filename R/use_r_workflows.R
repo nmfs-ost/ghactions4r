@@ -293,23 +293,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   file.copy(from = template_path, to = path_to_yml)
   gha <- readLines(path_to_yml)
 
-  # modify the build trigger as needed
-  build_trigger_lines <- switch(build_trigger,
-    push_to_main = c("  push:", "    branches: [main]"),
-    pull_request = "  pull_request:",
-    manually = "  workflow_dispatch:",
-    weekly = c(
-      "  schedule:",
-      "# Use https://crontab.guru/ to edit the time",
-      "    - cron:  '15 02 * * 0'"
-    )
-  )
-  # remove existing build trigger
-  build_trigger_rm_lines <- grep("(push)|(branches)", gha)
-  insert_line <- build_trigger_rm_lines[1] - 1
-  gha <- gha[-build_trigger_rm_lines]
-  # add new build trigger
-  gha <- append(gha, build_trigger_lines, after = insert_line)
+  gha <- add_build_trigger(build_trigger, gha)
   # additional options
   if (use_rm_dollar_sign == TRUE | how_to_commit == "directly" | use_air == TRUE) {
     uses_line <- grep(
