@@ -15,7 +15,7 @@ Some workflows in `{ghactions4r}` take additional setup steps besides running th
 
 ## Setting up pkgdown
 
-Follow the [steps to create a NOAA themed pkgdown](https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/). Note that dependencies needed for a website can be included in the [`Config/Needs/website` section](https://r-pkgs.org/dependencies-in-practice.html#sec-dependencies-nonstandard-config-needs) of the `DESCRIPTION` file.
+Follow the [steps to create a NOAA themed pkgdown](https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/NOAA-pkgdown/). Note that dependencies needed for a website can be included in the [`Config/Needs/website` section](https://r-pkgs.org/dependencies-in-practice.html#sec-dependencies-nonstandard-config-needs) of the `DESCRIPTION` file.
 
 ## Setting up code coverage
 

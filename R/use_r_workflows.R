@@ -381,7 +381,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   if (!is.null(additional_args)) {
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
-  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/NOAA-pkgdown/}.")
 
   invisible(workflow_name)
 }
@@ -423,7 +423,7 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
   if (!is.null(additional_args)) {
     add_args(workflow_name = workflow_name, additional_args = additional_args)
   }
-  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://noaa-fisheries-integrated-toolbox.github.io/resources/noaa%20resources/NOAA-pkgdown/}.")
+  cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/NOAA-pkgdown/}.")
   invisible(workflow_name)
 }
 
