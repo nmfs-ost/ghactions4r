@@ -293,6 +293,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   # get the template github action
   template_path <- system.file("templates", "call-doc-and-style-r.yml", package = "ghactions4r", mustWork = TRUE)
   path_to_yml <- file.path(".github", "workflows", workflow_name)
+  dir.create(".github", showWarnings = FALSE)
+  dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
   file.copy(from = template_path, to = path_to_yml)
   gha <- readLines(path_to_yml)
 
@@ -378,7 +380,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   dir.create(".github", showWarnings = FALSE)
   dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
-  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE, recursive = TRUE)
+  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
 
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
