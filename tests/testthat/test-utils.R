@@ -32,15 +32,18 @@ test_that("add_args() works with additional_args", {
 })
 
 test_that("add_args() works with txt and prev_line", {
-  workflow_name <- "call-update-pkgdown-text-prev_line.yml"
-  use_update_pkgdown(workflow_name = workflow_name)
-  path <- file.path(".github", "workflows", workflow_name)
+  workflow_name <- "call-update-pkgdown-add-args-txt.yml"
+  additional_args <- list(
+    windows = c("tree"),
+    macos = c("brew install curl")
+    )
 
+  use_update_pkgdown(workflow_name = workflow_name, additional_args = additional_args)
+  path <- file.path(".github", "workflows", workflow_name)
   txt <- readLines(path)
   prev_line <- grep("uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main",
     txt,
-    fixed = TRUE
-  )
+    fixed = TRUE) + 1 # add one because should be on the line with "with"
   add_args(
     workflow_name = workflow_name,
     additional_args = list(ubuntu = "sudo apt-get install --only-upgrade libstdc++6"),
