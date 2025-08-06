@@ -70,3 +70,29 @@ add_quarto_true <- function(uses_line, gha) {
   gha <- append(gha, "      depends_on_quarto: true", after = uses_line + 1)
   gha
 }
+
+#' Add the appropriate build trigger to workflows.
+#' @param build_trigger Text of the build trigger option to add
+#' @param gha The workflow file that has been read in using readLines
+#' @return The modified workflow file
+#' @noRd
+add_build_trigger <- function(build_trigger, gha) {
+  build_trigger_lines <- switch(build_trigger,
+    push_to_main = c("  push:", "    branches: [main]"),
+    push_to_all_branches = c("  push:"),
+    pull_request = "  pull_request:",
+    manually = "  workflow_dispatch:",
+    weekly = c(
+      "  schedule:",
+      "# Use https://crontab.guru/ to edit the time",
+      "    - cron:  '15 02 * * 0'"
+    )
+  )
+  # remove existing build trigger
+  build_trigger_rm_line <- grep("# [build-trigger-goes-here]", gha, fixed = TRUE)
+  gha <- gha[-build_trigger_rm_line]
+  insert_line <- grep("on:", gha, fixed = TRUE)
+  # add new build trigger
+  gha <- append(gha, build_trigger_lines, after = insert_line)
+  gha
+}
