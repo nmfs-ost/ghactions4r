@@ -2,6 +2,19 @@ name: doc-and-style-r-cmds
 
 on:
   workflow_call:
+    inputs:
+      run-rm_dollar_sign:
+        required: false
+        type: boolean
+        default: false
+      commit-directly:
+        required: false
+        type: boolean
+        default: false
+      use-air:
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -9,17 +22,15 @@ permissions:
 
 jobs:
   doc-and-style-r-cmds:
-    name: style
+    name: Doc and Style commands
     runs-on: ubuntu-latest
     steps:
 
-# added if statement to show how to run this if it only is on issue comment. This could be useful to incorporate into style and doc.
       - name: Checkout the PR branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Get original PR branch name
         id: get_branch
-        # if: github.event_name == 'issue_comment'
         run: |
           PR_URL="${{ github.event.issue.pull_request.url }}"
           PR_NUM=$(basename "$PR_URL")
@@ -30,28 +41,104 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout the PR branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ steps.get_branch.outputs.branch_name }}
-  
-      - name: setup air 
+            - name: Install curl dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+
+      - name: Install Air
+        if: inputs.use-air == true
         uses: posit-dev/setup-air@v1
 
-      - name: run air to make changes
-        run: air format .
+            - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        if: inputs.use-air == false
+        with:
+          extra-packages: |
+            remotes
+            styler
+            roxygen2
+            usethis
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        if: inputs.use-air == true
+        with:
+          extra-packages: |
+            remotes
+            roxygen2
+            usethis
+
+      - name: add ghactions4r, if using ghactions4r::rm_dollar_sign
+        if: inputs.run-rm_dollar_sign == true 
+        run: Rscript -e 'remotes::install_github("nmfs-ost/ghactions4r", upgrade = "always")'
+
       
-      # - name: specify base branch
-      #   id: specify-base
-      #   if: ${{ inputs.commit-directly == false }}
-      #   run: |
-      #     if [ -n ${{ github.head_ref }} ]; then
-      #       echo "base=${{github.head_ref}}" >> "$GITHUB_OUTPUT"
-      #     elif [ -n ${{ github.ref_name }} ]; then
-      #       echo "base=${{github.ref_name}}" >> "$GITHUB_OUTPUT"
-      #     else
-      #       echo "both github.head_ref and github.ref_name do not exist" >&2
-      #       exit 1
-      #     fi  
+            - name: Style using Air
+        if: inputs.use-air == true
+        run: air format .
+
+      - name: Style using styler
+        if: inputs.use-air == false
+        run: |
+          results <- styler::style_pkg()
+          if (any(is.na(results[["changed"]]))) {
+            stop("styler threw an error")
+          }
+        shell: Rscript {0}
+
+      - name: Document
+        run: Rscript -e 'roxygen2::roxygenise()'
+
+      - name: Run run-rm_dollar_sign
+        if: inputs.run-rm_dollar_sign == true
+        run: |
+          files_to_change <- list.files("R", full.names = TRUE)
+          to_rm <- grep("rm_dollar_sign", files_to_change)
+          if(isTRUE(length(to_rm)>0)) {
+            files_to_change <- files_to_change[-to_rm]
+          }
+          out <- lapply(files_to_change, function(x) ghactions4r::rm_dollar_sign(x))
+        shell: Rscript {0}
+
+      - name: Style again using Styler
+        if: inputs.use-air == false
+        run: | 
+          results <- styler::style_pkg()
+          if (any(is.na(results[["changed"]]))) {
+            stop("styler threw an error")
+          }
+        shell: Rscript {0}
+      
+      - name: Style again using Air
+        if: inputs.use-air == true
+        run: air format .
+
+      - name: Document again, just in case
+        run: |
+          Rscript -e 'roxygen2::roxygenise()'
+        
+      - name: Style description file
+        run: Rscript -e 'usethis::use_tidy_description()'
+      
+      - name: Remove any rds in .github
+        run: cd .github && rm -f *.rds
+      - name: Remove any .Rds in .github
+        run: cd .github && rm -f *.Rds
+      - name: Remove any R-version file in .github
+        run: cd .github && rm -f R-version
+        
+      - name: commit if using commit directly
+        if: inputs.commit-directly == true
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: 'style and docs: run devtools::document() and styler::style_pkg()'
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -60,7 +147,7 @@ jobs:
           base: ${{ steps.get_branch.outputs.branch_name }}
           title: 'Style code and document'
           body: |
-           Auto-generated by [doc-and-style-r.yml][1]
+           Auto-generated by [doc-and-style-r-cmds.yml][1]
 
 
-             [1]: https://github.com/nmfs-ost/ghactions4r/tree/main/.github/workflows/doc-and-style-r.yml
+             [1]: https://github.com/nmfs-ost/ghactions4r/tree/main/.github/workflows/doc-and-style-r-cmds.yml
