@@ -300,6 +300,31 @@ test_that("use_doc_and_style_r() errors when a bad combo", {
   ), "recursive")
 })
 
+
+test_that("use_doc_and_style_r_cmd() works", {
+  test_grid <- expand.grid(
+    use_rm_dollar_sign = c(TRUE, FALSE),
+    how_to_commit = c("pull_request", "directly"),
+    use_air = c(TRUE, FALSE),
+    stringsAsFactors = FALSE
+  )
+
+  for (i in 1:nrow(test_grid)) {
+    name <- paste0("call-doc-and-style-r-cmd", i, ".yml")
+    path <- file.path(".github", "workflows", name)
+    use_doc_and_style_r_cmd(
+      workflow_name = name,
+      use_rm_dollar_sign = test_grid[i, "use_rm_dollar_sign"],
+      how_to_commit = test_grid[i, "how_to_commit"],
+      use_air = test_grid[i, "use_air"]
+    )
+    expect_true(file.exists(path))
+    test <- readLines(path)
+    expect_snapshot(test)
+  }
+)
+
+
 test_that("use_update_pkgdown()) works", {
   use_update_pkgdown()
   expect_true(file.exists(".github/workflows/call-update-pkgdown.yml"))
