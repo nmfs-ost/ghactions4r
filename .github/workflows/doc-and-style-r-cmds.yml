@@ -24,6 +24,8 @@ jobs:
   doc-and-style-r-cmds:
     name: Doc and Style commands
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
 
       - name: Checkout the PR branch
