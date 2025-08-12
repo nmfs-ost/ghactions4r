@@ -1,13 +1,12 @@
 # Doc and style pull requests so that member and owners of the repo can use the command /doc-and-style (or other command of your choosing)
 # Note: This file has to be in the default branch of the repository for calling the workflow to work, and
 # the default branch version of the file will be the one that is called.
-name: call-doc-and-style-r-cmds
+name: call-doc-and-style-r-cmd
 
 on:
   issue_comment:
     types: [created]
 
-# write contents and pull-requests are necessary.
 permissions:
   contents: write
   pull-requests: write
@@ -19,5 +18,5 @@ jobs:
             (startsWith(github.event.comment.body, '/doc-and-style')) }}
     # Note: can modify /doc-and-style to be a different keyword, if desired.
     name: Document and Style
-    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r-cmds.yml@main
+    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r-cmd.yml@main
       
