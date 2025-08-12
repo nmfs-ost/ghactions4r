@@ -139,13 +139,13 @@ jobs:
         if: inputs.commit-directly == true
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
-          commit_message: 'style and docs: run devtools::document() and styler::style_pkg()'
+          commit_message: 'style and docs: run devtools::document() and style with styler or air'
 
       - name: Create Pull Request
         if: ${{inputs.commit-directly == false}}
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: 'style and docs: run devtools::document() and styler::style_pkg()'
+          commit-message: 'style and docs: run devtools::document() and style with styler or air'
           branch: "style-${{ github.run_id }}"
           base: ${{ steps.get_branch.outputs.branch_name }}
           title: 'Style code and document'
