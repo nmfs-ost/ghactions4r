@@ -224,7 +224,6 @@ test_that("use_doc_and_style_r() works", {
   )
   # remove bad options (to test later)
   test_grid <- test_grid[-which(test_grid$how_to_commit == "directly" & test_grid$use_pat == TRUE), ]
-
   for (i in 1:nrow(test_grid)) {
     name <- paste0("call-doc-and-style-r-", i, ".yml")
     path <- file.path(".github", "workflows", name)
@@ -241,57 +240,70 @@ test_that("use_doc_and_style_r() works", {
     expect_snapshot(test)
   }
 
+
   # for reference, the test grid:
-  # (need to update this)
-  #      use_rm_dollar_sign how_to_commit build_trigger use_air use_pat
+  #   test_grid
+  #    use_rm_dollar_sign how_to_commit build_trigger use_air use_pat
   # 1                TRUE  pull_request  push_to_main    TRUE    TRUE
   # 2               FALSE  pull_request  push_to_main    TRUE    TRUE
   # 5                TRUE  pull_request  pull_request    TRUE    TRUE
   # 6               FALSE  pull_request  pull_request    TRUE    TRUE
-  # 9                TRUE  pull_request      manually    TRUE    TRUE
-  # 10              FALSE  pull_request      manually    TRUE    TRUE
-  # 13               TRUE  pull_request        weekly    TRUE    TRUE
-  # 14              FALSE  pull_request        weekly    TRUE    TRUE
-  # 17               TRUE  pull_request  push_to_main   FALSE    TRUE
-  # 18              FALSE  pull_request  push_to_main   FALSE    TRUE
-  # 21               TRUE  pull_request  pull_request   FALSE    TRUE
-  # 22              FALSE  pull_request  pull_request   FALSE    TRUE
-  # 25               TRUE  pull_request      manually   FALSE    TRUE
-  # 26              FALSE  pull_request      manually   FALSE    TRUE
-  # 29               TRUE  pull_request        weekly   FALSE    TRUE
-  # 30              FALSE  pull_request        weekly   FALSE    TRUE
-  # 33               TRUE  pull_request  push_to_main    TRUE   FALSE
-  # 34              FALSE  pull_request  push_to_main    TRUE   FALSE
-  # 35               TRUE      directly  push_to_main    TRUE   FALSE
-  # 36              FALSE      directly  push_to_main    TRUE   FALSE
-  # 37               TRUE  pull_request  pull_request    TRUE   FALSE
-  # 38              FALSE  pull_request  pull_request    TRUE   FALSE
-  # 39               TRUE      directly  pull_request    TRUE   FALSE
-  # 40              FALSE      directly  pull_request    TRUE   FALSE
-  # 41               TRUE  pull_request      manually    TRUE   FALSE
-  # 42              FALSE  pull_request      manually    TRUE   FALSE
-  # 43               TRUE      directly      manually    TRUE   FALSE
-  # 44              FALSE      directly      manually    TRUE   FALSE
-  # 45               TRUE  pull_request        weekly    TRUE   FALSE
-  # 46              FALSE  pull_request        weekly    TRUE   FALSE
-  # 47               TRUE      directly        weekly    TRUE   FALSE
-  # 48              FALSE      directly        weekly    TRUE   FALSE
-  # 49               TRUE  pull_request  push_to_main   FALSE   FALSE
-  # 50              FALSE  pull_request  push_to_main   FALSE   FALSE
-  # 51               TRUE      directly  push_to_main   FALSE   FALSE
-  # 52              FALSE      directly  push_to_main   FALSE   FALSE
-  # 53               TRUE  pull_request  pull_request   FALSE   FALSE
-  # 54              FALSE  pull_request  pull_request   FALSE   FALSE
-  # 55               TRUE      directly  pull_request   FALSE   FALSE
-  # 56              FALSE      directly  pull_request   FALSE   FALSE
-  # 57               TRUE  pull_request      manually   FALSE   FALSE
-  # 58              FALSE  pull_request      manually   FALSE   FALSE
-  # 59               TRUE      directly      manually   FALSE   FALSE
-  # 60              FALSE      directly      manually   FALSE   FALSE
-  # 61               TRUE  pull_request        weekly   FALSE   FALSE
-  # 62              FALSE  pull_request        weekly   FALSE   FALSE
-  # 63               TRUE      directly        weekly   FALSE   FALSE
-  # 64              FALSE      directly        weekly   FALSE   FALSE
+  # 9                TRUE  pull_request    pr_comment    TRUE    TRUE
+  # 10              FALSE  pull_request    pr_comment    TRUE    TRUE
+  # 13               TRUE  pull_request      manually    TRUE    TRUE
+  # 14              FALSE  pull_request      manually    TRUE    TRUE
+  # 17               TRUE  pull_request        weekly    TRUE    TRUE
+  # 18              FALSE  pull_request        weekly    TRUE    TRUE
+  # 21               TRUE  pull_request  push_to_main   FALSE    TRUE
+  # 22              FALSE  pull_request  push_to_main   FALSE    TRUE
+  # 25               TRUE  pull_request  pull_request   FALSE    TRUE
+  # 26              FALSE  pull_request  pull_request   FALSE    TRUE
+  # 29               TRUE  pull_request    pr_comment   FALSE    TRUE
+  # 30              FALSE  pull_request    pr_comment   FALSE    TRUE
+  # 33               TRUE  pull_request      manually   FALSE    TRUE
+  # 34              FALSE  pull_request      manually   FALSE    TRUE
+  # 37               TRUE  pull_request        weekly   FALSE    TRUE
+  # 38              FALSE  pull_request        weekly   FALSE    TRUE
+  # 41               TRUE  pull_request  push_to_main    TRUE   FALSE
+  # 42              FALSE  pull_request  push_to_main    TRUE   FALSE
+  # 43               TRUE      directly  push_to_main    TRUE   FALSE
+  # 44              FALSE      directly  push_to_main    TRUE   FALSE
+  # 45               TRUE  pull_request  pull_request    TRUE   FALSE
+  # 46              FALSE  pull_request  pull_request    TRUE   FALSE
+  # 47               TRUE      directly  pull_request    TRUE   FALSE
+  # 48              FALSE      directly  pull_request    TRUE   FALSE
+  # 49               TRUE  pull_request    pr_comment    TRUE   FALSE
+  # 50              FALSE  pull_request    pr_comment    TRUE   FALSE
+  # 51               TRUE      directly    pr_comment    TRUE   FALSE
+  # 52              FALSE      directly    pr_comment    TRUE   FALSE
+  # 53               TRUE  pull_request      manually    TRUE   FALSE
+  # 54              FALSE  pull_request      manually    TRUE   FALSE
+  # 55               TRUE      directly      manually    TRUE   FALSE
+  # 56              FALSE      directly      manually    TRUE   FALSE
+  # 57               TRUE  pull_request        weekly    TRUE   FALSE
+  # 58              FALSE  pull_request        weekly    TRUE   FALSE
+  # 59               TRUE      directly        weekly    TRUE   FALSE
+  # 60              FALSE      directly        weekly    TRUE   FALSE
+  # 61               TRUE  pull_request  push_to_main   FALSE   FALSE
+  # 62              FALSE  pull_request  push_to_main   FALSE   FALSE
+  # 63               TRUE      directly  push_to_main   FALSE   FALSE
+  # 64              FALSE      directly  push_to_main   FALSE   FALSE
+  # 65               TRUE  pull_request  pull_request   FALSE   FALSE
+  # 66              FALSE  pull_request  pull_request   FALSE   FALSE
+  # 67               TRUE      directly  pull_request   FALSE   FALSE
+  # 68              FALSE      directly  pull_request   FALSE   FALSE
+  # 69               TRUE  pull_request    pr_comment   FALSE   FALSE
+  # 70              FALSE  pull_request    pr_comment   FALSE   FALSE
+  # 71               TRUE      directly    pr_comment   FALSE   FALSE
+  # 72              FALSE      directly    pr_comment   FALSE   FALSE
+  # 73               TRUE  pull_request      manually   FALSE   FALSE
+  # 74              FALSE  pull_request      manually   FALSE   FALSE
+  # 75               TRUE      directly      manually   FALSE   FALSE
+  # 76              FALSE      directly      manually   FALSE   FALSE
+  # 77               TRUE  pull_request        weekly   FALSE   FALSE
+  # 78              FALSE  pull_request        weekly   FALSE   FALSE
+  # 79               TRUE      directly        weekly   FALSE   FALSE
+  # 80              FALSE      directly        weekly   FALSE   FALSE
 })
 
 test_that("use_doc_and_style_r() errors when a bad combo", {
