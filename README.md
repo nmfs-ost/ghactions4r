@@ -67,11 +67,6 @@ ghactions4r::use_create_cov_badge()
 ghactions4r::use_doc_and_style_r(use_rm_dollar_sign = FALSE)
 ```
 
-- To update documantation, DESCRIPTION file, and code styling for an R package using a command on a pull request:
-```r
-ghactions4r::use_doc_and_style_r_cmd()
-```
-
 - To automatically update pkgdown that has already been set up:
 ```r
 ghactions4r::use_update_pkgdown()

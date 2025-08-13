@@ -18,5 +18,5 @@ jobs:
             (startsWith(github.event.comment.body, '/doc-and-style')) }}
     # Note: can modify /doc-and-style to be a different keyword, if desired.
     name: Document and Style
-    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r-cmd.yml@main
+    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main
       
