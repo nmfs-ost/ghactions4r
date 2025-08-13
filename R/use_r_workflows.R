@@ -276,7 +276,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 build_trigger = c(
                                   "push_to_main",
                                   "pull_request",
-                                  "pr_comment"
+                                  "pr_comment",
                                   "manually",
                                   "weekly"
                                 ),
