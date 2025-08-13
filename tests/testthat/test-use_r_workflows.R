@@ -214,6 +214,7 @@ test_that("use_doc_and_style_r() works", {
     build_trigger = c(
       "push_to_main",
       "pull_request",
+      "pr_comment",
       "manually",
       "weekly"
     ),
@@ -241,6 +242,7 @@ test_that("use_doc_and_style_r() works", {
   }
 
   # for reference, the test grid:
+  # (need to update this)
   #      use_rm_dollar_sign how_to_commit build_trigger use_air use_pat
   # 1                TRUE  pull_request  push_to_main    TRUE    TRUE
   # 2               FALSE  pull_request  push_to_main    TRUE    TRUE
@@ -299,30 +301,6 @@ test_that("use_doc_and_style_r() errors when a bad combo", {
     use_pat = TRUE
   ), "recursive")
 })
-
-
-test_that("use_doc_and_style_r_cmd() works", {
-  test_grid <- expand.grid(
-    use_rm_dollar_sign = c(TRUE, FALSE),
-    how_to_commit = c("pull_request", "directly"),
-    use_air = c(TRUE, FALSE),
-    stringsAsFactors = FALSE
-  )
-
-  for (i in 1:nrow(test_grid)) {
-    name <- paste0("call-doc-and-style-r-cmd", i, ".yml")
-    path <- file.path(".github", "workflows", name)
-    use_doc_and_style_r_cmd(
-      workflow_name = name,
-      use_rm_dollar_sign = test_grid[i, "use_rm_dollar_sign"],
-      how_to_commit = test_grid[i, "how_to_commit"],
-      use_air = test_grid[i, "use_air"]
-    )
-    expect_true(file.exists(path))
-    test <- readLines(path)
-    expect_snapshot(test)
-  }
-)
 
 
 test_that("use_update_pkgdown()) works", {

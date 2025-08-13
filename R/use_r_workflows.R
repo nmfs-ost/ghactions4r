@@ -224,7 +224,9 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #'  the workflow started.
 #' @param build_trigger Select the build trigger. Options are to run on pushing
 #'  commits to main ("push_to_main", the default); run when a pull request is
-#'  opened, reopened, or updated ("pull_request"); run manually with the
+#'  opened, reopened, or updated ("pull_request"); run when a comment containing
+#'  the command `\doc-and-style` is made on a pull request by people with write permissions
+#'  on the repository ("pr_comment"); run manually with the
 #'  workflow_dispatch trigger ("manually"); run on the default branch (usually
 #'  main) once a week ("weekly").
 #' @param use_air Use [air](https://posit-dev.github.io/air/) instead of [styler](https://styler.r-lib.org/) to style files? Defaults to FALSE.
@@ -260,6 +262,13 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #' \dontrun{
 #' use_doc_and_style_r(use_pat = TRUE, pat_name = "PAT")
 #' }
+#' 
+#' # set up to run doc and style on a pull request, where an owner or member of 
+#' # The repository adds a commend on the pull request with the command \doc-and-style
+#' \dontrun{
+#'   use_doc_and_style_r(build_trigger = "pr_comment")
+#' }
+#'
 #' @export
 use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 use_rm_dollar_sign = FALSE,
@@ -267,6 +276,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 build_trigger = c(
                                   "push_to_main",
                                   "pull_request",
+                                  "pr_comment"
                                   "manually",
                                   "weekly"
                                 ),
@@ -279,7 +289,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   build_trigger <- match.arg(
     arg = build_trigger,
     choices = c(
-      "push_to_main", "pull_request", "manually",
+      "push_to_main", "pull_request", "pr_comment", "manually",
       "weekly"
     )
   )
@@ -298,6 +308,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   build_trigger_lines <- switch(build_trigger,
     push_to_main = c("  push:", "    branches: [main]"),
     pull_request = "  pull_request:",
+    pr_comment = c("  issue_comment:",
+     "    types: [created] "),
     manually = "  workflow_dispatch:",
     weekly = c(
       "  schedule:",
@@ -311,6 +323,14 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   gha <- gha[-build_trigger_rm_lines]
   # add new build trigger
   gha <- append(gha, build_trigger_lines, after = insert_line)
+
+  if (build_trigger == "pr_comment" ) {
+    job_name_line <- grep("call-workflow:", gha, fixed = TRUE)
+    if_statement <- c("    if: ${{ github.event.issue.pull_request && ", 
+    "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&", 
+    "            (startsWith(github.event.comment.body, '/doc-and-style')) }}")
+    gha <- append(gha, if_statement, after = job_name_line)
+  }
   # additional options
   if (use_rm_dollar_sign == TRUE | how_to_commit == "directly" | use_air == TRUE) {
     uses_line <- grep(
@@ -345,80 +365,6 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 
   invisible(workflow_name)
 }
-
-#' Setup github action to document and style pull requests using a command.
-#'
-#' Style your R package components by running devtools::document(),
-#' styler::style_pkg() or Air, and usethis::use_tidy_description().
-#' @template workflow_name
-#' @param use_rm_dollar_sign in addition to devtools::document and
-#'  styler::style_pkg, should ghactions4r::rm_dollar_sign be run? Defaults to FALSE.
-#' @param how_to_commit Where should changes made to style and documentation be
-#'  committed? Options are 1) in a pull request to the branch ("pull_request")
-#'  where the workflow started; or 2) directly to the branch ("directly") where
-#'  the workflow started.
-#' @param use_air Use [air](https://posit-dev.github.io/air/) instead of [styler](https://styler.r-lib.org/) to style files? Defaults to FALSE.
-#' @examples
-#' # set up running the doc and style workflow when running a command in a pull request comment, opening a
-#' # pull request to the current pull request's branch when changes are found.
-#' \dontrun{
-#' use_doc_and_style_r_cmd()
-#' }
-#' # the same as
-#' \dontrun{
-#' use_doc_and_style_r_cmd(
-#'   how_to_commit = "pull_request"
-#' )
-#' }
-#' # set up running the doc and style workflow when running a command in a pull request comment, commiting changes
-#' to the current pull request's branch when changes are found.
-#' \dontrun{
-#' use_doc_and_style_r_cmd(
-#'   how_to_commit = "directly",
-#' )
-#' }
-#' @export
-use_doc_and_style_r_cmd <- function(workflow_name = "call-doc-and-style-r.yml",
-                                use_rm_dollar_sign = FALSE,
-                                how_to_commit = c("pull_request", "directly"),
-                                use_air = FALSE") {
-  # input checks
-
-  check_workflow_name(workflow_name)
-  how_to_commit <- match.arg(arg = how_to_commit, choices = c("pull_request", "directly"))
-
-  # get the template github action
-  usethis::use_github_action("call-doc-and-style-r-cmd.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-doc-and-style-r-cmd.yml"
-  )
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  gha <- readLines(path_to_yml)
-  # additional options
-  if (use_rm_dollar_sign == TRUE | how_to_commit == "directly" | use_air == TRUE) {
-    uses_line <- grep(
-      "uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r-cmd.yml",
-      gha
-    )
-    with_line <- grep("with:", gha[uses_line + 1])
-    if (length(with_line) == 0) {
-      gha <- append(gha, "    with:", after = uses_line)
-    }
-    if (how_to_commit == "directly") {
-      gha <- append(gha, "      commit-directly: true", after = uses_line + 1)
-    }
-    if (use_rm_dollar_sign == TRUE) {
-      gha <- append(gha, "      run-rm_dollar_sign: true", after = uses_line + 1)
-    }
-    if (use_air == TRUE) {
-      gha <- append(gha, "      use-air: true", after = uses_line + 1)
-    }
-  }
-  writeLines(gha, path_to_yml)
-  usethis::use_git_ignore(ignores = "*.rds", directory = file.path(".github"))
-  invisible(workflow_name)
-}
-
 
 #' Creates a workflow in current R package to update an existing pkgdown GitHub pages site
 #'
