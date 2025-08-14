@@ -956,6 +956,67 @@
        [2] "name: call-doc-and-style-r"                                                                                                               
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    secrets:"                                                                                                                             
+      [21] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [22] "    with:"                                                                                                                                
+      [23] "      use-air: true"                                                                                                                      
+      [24] "      run-rm_dollar_sign: true"                                                                                                           
+      [25] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    secrets:"                                                                                                                             
+      [21] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [22] "    with:"                                                                                                                                
+      [23] "      use-air: true"                                                                                                                      
+      [24] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
        [5] "  workflow_dispatch:"                                                                                                                     
        [6] ""                                                                                                                                         
        [7] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
@@ -1158,6 +1219,64 @@
       [16] "    secrets:"                                                                                                                             
       [17] "      PAT: ${{ secrets.PAT }}"                                                                                                            
       [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    secrets:"                                                                                                                             
+      [21] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [22] "    with:"                                                                                                                                
+      [23] "      run-rm_dollar_sign: true"                                                                                                           
+      [24] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    secrets:"                                                                                                                             
+      [21] "      PAT: ${{ secrets.PAT }}"                                                                                                            
+      [22] "  "                                                                                                                                       
 
 ---
 
@@ -1466,6 +1585,122 @@
       [17] "      use-air: true"                                                                                                                      
       [18] "      commit-directly: true"                                                                                                              
       [19] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "      run-rm_dollar_sign: true"                                                                                                           
+      [23] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "      run-rm_dollar_sign: true"                                                                                                           
+      [23] "      commit-directly: true"                                                                                                              
+      [24] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      use-air: true"                                                                                                                      
+      [22] "      commit-directly: true"                                                                                                              
+      [23] "  "                                                                                                                                       
 
 ---
 
@@ -1868,6 +2103,117 @@
       [16] "    with:"                                                                                                                                
       [17] "      commit-directly: true"                                                                                                              
       [18] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      run-rm_dollar_sign: true"                                                                                                           
+      [22] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      run-rm_dollar_sign: true"                                                                                                           
+      [22] "      commit-directly: true"                                                                                                              
+      [23] "  "                                                                                                                                       
+
+---
+
+    Code
+      test
+    Output
+       [1] "# document and style R code using a reusable workflow"                                                                                    
+       [2] "name: call-doc-and-style-r"                                                                                                               
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  issue_comment:"                                                                                                                         
+       [6] "    types: [created] "                                                                                                                    
+       [7] ""                                                                                                                                         
+       [8] "# Give the fewest permissions possible. content and pull-requests are necessary."                                                         
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions:"                                                                                                                             
+      [11] "  contents: write"                                                                                                                        
+      [12] "  pull-requests: write"                                                                                                                   
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    if: ${{ github.event.issue.pull_request && "                                                                                          
+      [17] "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&"               
+      [18] "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"                                                                 
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/doc-and-style-r.yml@main"                                                                
+      [20] "    with:"                                                                                                                                
+      [21] "      commit-directly: true"                                                                                                              
+      [22] "  "                                                                                                                                       
 
 ---
 

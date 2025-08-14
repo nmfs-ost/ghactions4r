@@ -53,6 +53,7 @@ github
 githubusercontent
 grepl
 gsub
+headRefName
 hexSticker
 hpp
 href
@@ -92,6 +93,7 @@ noreply
 normalizePath
 notvalid
 nrow
+NUM
 octocov
 octoyml
 openssl
@@ -135,6 +137,7 @@ schemaVersion
 setdiff
 setwd
 somename
+startsWith
 stefanzweifel
 stopifnot
 stringsAsFactors

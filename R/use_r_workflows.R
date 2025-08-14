@@ -224,7 +224,9 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #'  the workflow started.
 #' @param build_trigger Select the build trigger. Options are to run on pushing
 #'  commits to main ("push_to_main", the default); run when a pull request is
-#'  opened, reopened, or updated ("pull_request"); run manually with the
+#'  opened, reopened, or updated ("pull_request"); run when a comment containing
+#'  the command `\doc-and-style` is made on a pull request by people with write permissions
+#'  on the repository ("pr_comment"); run manually with the
 #'  workflow_dispatch trigger ("manually"); run on the default branch (usually
 #'  main) once a week ("weekly").
 #' @param use_air Use [air](https://posit-dev.github.io/air/) instead of [styler](https://styler.r-lib.org/) to style files? Defaults to FALSE.
@@ -260,6 +262,13 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #' \dontrun{
 #' use_doc_and_style_r(use_pat = TRUE, pat_name = "PAT")
 #' }
+#' 
+#' # set up to run doc and style on a pull request, where an owner or member of 
+#' # The repository adds a commend on the pull request with the command \doc-and-style
+#' \dontrun{
+#'   use_doc_and_style_r(build_trigger = "pr_comment")
+#' }
+#'
 #' @export
 use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 use_rm_dollar_sign = FALSE,
@@ -267,6 +276,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 build_trigger = c(
                                   "push_to_main",
                                   "pull_request",
+                                  "pr_comment",
                                   "manually",
                                   "weekly"
                                 ),
@@ -279,7 +289,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   build_trigger <- match.arg(
     arg = build_trigger,
     choices = c(
-      "push_to_main", "pull_request", "manually",
+      "push_to_main", "pull_request", "pr_comment", "manually",
       "weekly"
     )
   )
@@ -298,6 +308,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   build_trigger_lines <- switch(build_trigger,
     push_to_main = c("  push:", "    branches: [main]"),
     pull_request = "  pull_request:",
+    pr_comment = c("  issue_comment:",
+     "    types: [created] "),
     manually = "  workflow_dispatch:",
     weekly = c(
       "  schedule:",
@@ -311,6 +323,14 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   gha <- gha[-build_trigger_rm_lines]
   # add new build trigger
   gha <- append(gha, build_trigger_lines, after = insert_line)
+
+  if (build_trigger == "pr_comment" ) {
+    job_name_line <- grep("call-workflow:", gha, fixed = TRUE)
+    if_statement <- c("    if: ${{ github.event.issue.pull_request && ", 
+    "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&", 
+    "            (startsWith(github.event.comment.body, '/doc-and-style')) }}")
+    gha <- append(gha, if_statement, after = job_name_line)
+  }
   # additional options
   if (use_rm_dollar_sign == TRUE | how_to_commit == "directly" | use_air == TRUE) {
     uses_line <- grep(
