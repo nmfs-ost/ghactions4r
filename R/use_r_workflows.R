@@ -206,9 +206,9 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #' Style your R package components automatically by running devtools::document(),
 #' styler::style_pkg() or air, and usethis::use_tidy_description().
 #' @details
-#'  The pull request created from this workflow can trigger GitHub Action 
+#'  The pull request created from this workflow can trigger GitHub Action
 #'  runs by using a personal access token (instead of the standard GITHUB_TOKEN)
-#'  to provide the right permissions. 
+#'  to provide the right permissions.
 #'  The PAT is first
 #' [generated on a user account](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
 #'  then [added to the repository or organization as a secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
@@ -218,7 +218,7 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #'  for more information.
 #'
 #' If using the PR_comment build trigger, note that the command to run the workflow
-# 'can be modified from `/doc-and-style` to a different keyword by finding 
+# 'can be modified from `/doc-and-style` to a different keyword by finding
 # \doc-and-style in the created yml file and editing it to a different term.
 #' @template workflow_name
 #' @param use_rm_dollar_sign in addition to devtools::document and
@@ -269,11 +269,11 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
 #' \dontrun{
 #' use_doc_and_style_r(use_pat = TRUE, pat_name = "PAT")
 #' }
-#' 
-#' # set up to run doc and style on a pull request, where an owner or member of 
+#'
+#' # set up to run doc and style on a pull request, where an owner or member of
 #' # the repository adds a comment on the pull request with the command \doc-and-style
 #' \dontrun{
-#'   use_doc_and_style_r(build_trigger = "pr_comment")
+#' use_doc_and_style_r(build_trigger = "pr_comment")
 #' }
 #'
 #' @export
@@ -311,7 +311,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     pull_request = "  pull_request:",
     pr_comment = c("  issue_comment:", "    types: [created] "),
     manually = "  workflow_dispatch:",
-    weekly = c("  schedule:", "# Use https://crontab.guru/ to edit the time",
+    weekly = c(
+      "  schedule:", "# Use https://crontab.guru/ to edit the time",
       "    - cron:  '15 02 * * 0'"
     )
   )
@@ -322,11 +323,13 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   # add new build trigger
   gha <- append(gha, build_trigger_lines, after = insert_line)
 
-  if (build_trigger == "pr_comment" ) {
+  if (build_trigger == "pr_comment") {
     job_name_line <- grep("call-workflow:", gha, fixed = TRUE)
-    if_statement <- c("    if: ${{ github.event.issue.pull_request && ", 
-    "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&", 
-    "            (startsWith(github.event.comment.body, '/doc-and-style')) }}")
+    if_statement <- c(
+      "    if: ${{ github.event.issue.pull_request && ",
+      "            (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') &&",
+      "            (startsWith(github.event.comment.body, '/doc-and-style')) }}"
+    )
     gha <- append(gha, if_statement, after = job_name_line)
   }
   # additional options
