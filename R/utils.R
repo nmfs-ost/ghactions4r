@@ -90,6 +90,13 @@ add_build_trigger <- function(build_trigger, gha) {
     )
   )
 
+  # remove existing build trigger
+  build_trigger_rm_line <- grep("# [build-trigger-goes-here]", gha, fixed = TRUE)
+  gha <- gha[-build_trigger_rm_line]
+  insert_line <- grep("on:", gha, fixed = TRUE)
+  # add new build trigger
+  gha <- append(gha, build_trigger_lines, after = insert_line)
+
   if (build_trigger == "pr_comment") {
     job_name_line <- grep("call-workflow:", gha, fixed = TRUE)
     if_statement <- c(
@@ -99,4 +106,5 @@ add_build_trigger <- function(build_trigger, gha) {
     )
     gha <- append(gha, if_statement, after = job_name_line)
   }
+  gha
 }
