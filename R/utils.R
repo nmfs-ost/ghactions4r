@@ -108,3 +108,17 @@ add_build_trigger <- function(build_trigger, gha) {
   }
   gha
 }
+#' Copy the caller template to an R package
+#'
+#' @param template_name The name of the template in the ghactions4r package
+#' @param workflow_name The user defined name of the workflow to create
+#' @return The path to the caller workflow file copied
+copy_caller_template <- function(template_name = "call-spell-check.yml", workflow_name = "call-spell-check.yml") {
+  template_path <- system.file("templates", template_name,
+                               package = "ghactions4r", mustWork = TRUE)
+  path_to_yml <- file.path(".github", "workflows", workflow_name)
+  dir.create(".github", showWarnings = FALSE)
+  dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
+  file.copy(from = template_path, to = path_to_yml)
+  path_to_yml
+}
