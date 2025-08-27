@@ -2,12 +2,7 @@
 name: call-r-cmd-check
 # on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
-# The default build trigger is to run the action on every push and pull request, for any branch
-  push:
-  pull_request:
-  # To run the default repository branch weekly on Sunday, uncomment the following 2 lines
-  #schedule:
-    #- cron: '0 0 * * 0'
+# [build-trigger-goes-here]
 
 # no permissions are needed by the default github token for this workflow to 
 # run, so don't pass any.

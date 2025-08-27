@@ -28,26 +28,26 @@
 #' }
 #' @export
 use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
+                            build_trigger = c("manually", "weekly", "pull_request", "push_to_main", "push_to_all_branches"),
                             use_full_build_matrix = FALSE,
                             depends_on_tmb = FALSE,
                             depends_on_quarto = FALSE,
                             additional_args = NULL) {
   validate_additional_args(additional_args)
-
+  build_trigger <- match.arg(arg = build_trigger)
   check_workflow_name(workflow_name)
   if (use_full_build_matrix) {
-    url_name <- "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check-full.yml"
+    template_name <- "call-r-cmd-check-full.yml"
   } else {
-    url_name <- "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-r-cmd-check.yml"
+    template_name <- "call-r-cmd-check.yml"
   }
-  usethis::use_github_action("call-r-cmd-check.yml",
-    save_as = workflow_name,
-    url = url_name
-  )
+
+  path_to_yml <- copy_caller_template(template_name = template_name,
+                                      workflow_name = workflow_name)
+  gha <- readLines(path_to_yml)
+  txt <- add_build_trigger(build_trigger, gha)
 
   if (depends_on_tmb | depends_on_quarto) {
-    path_to_yml <- file.path(".github", "workflows", workflow_name)
-    txt <- readLines(path_to_yml)
     if (use_full_build_matrix) {
       prev_line <- grep("use_full_build_matrix: true", txt, fixed = TRUE)
     } else {
@@ -68,8 +68,9 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
     if (depends_on_quarto) {
       txt <- append(txt, "      depends_on_quarto: true", prev_line)
     }
-    writeLines(txt, path_to_yml)
   }
+
+  writeLines(txt, path_to_yml)
 
   if (!is.null(additional_args)) {
     add_args(
@@ -90,20 +91,23 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template workflow_name
 #' @template use_public_rspm
 #' @template depends_on_quarto
+#' @template build_trigger
 #' @export
 use_calc_cov_summaries <- function(
     workflow_name = "call-calc-cov-summaries.yml",
+    build_trigger = c("manually", "pull_request", "push_to_main", "push_to_all_branches"),
     use_public_rspm = TRUE,
     depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-calc-cov-summaries.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-calc-cov-summaries.yml"
-  )
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
+  build_trigger <- match.arg(arg = build_trigger)
+
+
+  path_to_yml <- copy_caller_template(template_name = "call-calc-cov-summaries.yml",
+                                      workflow_name = workflow_name)
+  gha <- readLines(path_to_yml)
+  gha <- add_build_trigger(build_trigger, gha)
 
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
-    gha <- readLines(path_to_yml)
     if (use_public_rspm == FALSE) {
       gha <- add_public_rspm_false(
         uses_line = "uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml",
@@ -116,14 +120,15 @@ use_calc_cov_summaries <- function(
         gha = gha
       )
     }
-    writeLines(gha, path_to_yml)
   }
+  writeLines(gha, path_to_yml)
   # Also create the .octocov.yml file.
-  usethis::use_github_file(
-    "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/.octocov.yml",
-    save_as = ".octocov.yml"
-  )
-  invisible(workflow_name)
+  template_path <- system.file("templates", ".octocov.yml",
+                               package = "ghactions4r", mustWork = TRUE)
+  path_to_octo_yml <- file.path(".octocov.yml")
+  file.copy(from = template_path, to = path_to_octo_yml)
+
+  invisible(path_to_yml)
 }
 
 
@@ -166,15 +171,18 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template workflow_name
 #' @template use_public_rspm
 #' @template depends_on_quarto
+#' @template build_trigger
 #' @export
-use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", use_public_rspm = TRUE, depends_on_quarto = FALSE) {
+use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
+  build_trigger = c("manually", "weekly", "push_to_main"),
+  use_public_rspm = TRUE, depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-create-cov-badge.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-create-cov-badge.yml"
-  )
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
+  build_trigger <- match.arg(arg = build_trigger)
+  path_to_yml <- copy_caller_template(template_name = "call-create-cov-badge.yml",
+                                      workflow_name = workflow_name)
   gha <- readLines(path_to_yml)
+  gha <- add_build_trigger(build_trigger, gha)
+
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
     gha <- readLines(path_to_yml)
     if (use_public_rspm == FALSE) {
@@ -189,8 +197,8 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml", us
         gha = gha
       )
     }
-    writeLines(gha, path_to_yml)
   }
+  writeLines(gha, path_to_yml)
   cli::cli_alert_info("Once pushed up to GitHub, a GitHub action will run that will create the badge on a branch called badges.")
 
   badge_code <- "[![coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/<OWNER>/<REPO>/refs/heads/badges/coverage-badge.json)](https://github.com/<OWNER>/<REPO>/tree/badges)"
@@ -290,12 +298,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
   }
 
-  # get the template github action
-  template_path <- system.file("templates", "call-doc-and-style-r.yml", package = "ghactions4r", mustWork = TRUE)
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  dir.create(".github", showWarnings = FALSE)
-  dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
-  file.copy(from = template_path, to = path_to_yml)
+  path_to_yml <- copy_caller_template(template_name = "call-doc-and-style-r.yml",
+                                      workflow_name = workflow_name)
   gha <- readLines(path_to_yml)
 
   gha <- add_build_trigger(build_trigger, gha)
@@ -375,12 +379,8 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 
   check_workflow_name(workflow_name)
   # get the template github action
-  template_path <- system.file("templates", "call-update-pkgdown.yml", package = "ghactions4r", mustWork = TRUE)
-  
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  dir.create(".github", showWarnings = FALSE)
-  dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
-  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
+  path_to_yml <- copy_caller_template(template_name = "call-update-pkgdown.yml",
+                                      workflow_name = workflow_name)
 
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
@@ -417,15 +417,18 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #'   )
 #' )
 #' }
-#' @export  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
-use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", additional_args = NULL) {
+#' @export
+use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
+                                  build_trigger = c("manually", "weekly", "pull_request", "push_to_main", "push_to_all_branches"),
+                                  additional_args = NULL) {
   validate_additional_args(additional_args)
-
+  build_trigger <- match.arg(arg = build_trigger)
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-build-pkgdown.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-build-pkgdown.yml"
-  )
+  path_to_yml <- copy_caller_template(template_name = "call-build-pkgdown.yml",
+                                      workflow_name = workflow_name)
+  gha <- readLines(path_to_yml)
+  gha <- add_build_trigger(build_trigger, gha)
+  writeLines(gha, path_to_yml)
 
   if (!is.null(additional_args)) {
     add_args(workflow_name = workflow_name, additional_args = additional_args)
@@ -447,10 +450,19 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml", addition
 #' the workflow will fail if any spelling errors are found. If set to "warning", the
 #' the workflow will pass even if spelling errors are found.
 #' @template workflow_name
+#' @template build_trigger
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
+                            build_trigger = c(
+                              "manually",
+                              "weekly",
+                              "pull_request",
+                              "push_to_main",
+                              "push_to_all_branches"
+                            ),
                             spell_check_additional_files = FALSE,
                             spell_check_report_level = c("error", "warning")) {
+  build_trigger <- match.arg(arg = build_trigger)
   # Remind users that spell_check_report_level is set to 'error' by default if users
   # don't specify spell_check_report_level
   if (spell_check_additional_files == TRUE & length(spell_check_report_level) > 1) {
@@ -470,23 +482,24 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
 
   spell_check_report_level <- rlang::arg_match(spell_check_report_level)
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-spell-check.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-spell-check.yml"
-  )
+
+  path_to_yml <- copy_caller_template(template_name = "call-spell-check.yml",
+                                      workflow_name = workflow_name)
+  gha <- readLines(path_to_yml)
+
+  gha <- add_build_trigger(build_trigger, gha)
 
   # Add the spell_check_additional_files option to the workflow if it is TRUE
   if (spell_check_additional_files == TRUE) {
-    path_to_yml <- file.path(".github", "workflows", workflow_name)
-    gha <- readLines(path_to_yml)
     gha <- append(gha, "    with:")
     gha <- append(gha, "      spell_check_additional_files: true")
     gha <- append(gha, paste0("      spell_check_report_level: ", spell_check_report_level))
-    writeLines(gha, path_to_yml)
+
   }
   cli::cli_alert_info(
     "New to spelling::spell_check_package()? Learn more at
     {.url https://docs.ropensci.org/spelling/#spell-check-a-package}"
   )
+  writeLines(gha, path_to_yml)
   invisible(workflow_name)
 }

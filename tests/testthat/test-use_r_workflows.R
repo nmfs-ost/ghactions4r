@@ -323,8 +323,9 @@ test_that("use_update_pkgdown()) works", {
 })
 
 test_that("use_update_pkgdown()) works with additional_args", {
+  workflow_name <- "call-update-pkgdown-1.yml"
   use_update_pkgdown(
-    workflow_name = "call-update-pkgdown.yml",
+    workflow_name = workflow_name,
     additional_args = list(
       "ubuntu" = c(
         "sudo apt-get update",
@@ -336,14 +337,16 @@ test_that("use_update_pkgdown()) works with additional_args", {
       "macos" = c("brew install curl")
     )
   )
-  expect_true(file.exists(".github/workflows/call-update-pkgdown.yml"))
-  test <- readLines(".github/workflows/call-update-pkgdown.yml")
+  path_to_yml <- file.path(".github", "workflows", workflow_name)
+  expect_true(file.exists(path_to_yml))
+  test <- readLines(path_to_yml)
   expect_snapshot(test)
 })
 
 test_that("use_build_pkgdown()) works with additional_args", {
   use_build_pkgdown(
     workflow_name = "call-build-pkgdown.yml",
+    build_trigger = "push_to_all_branches",
     additional_args = list(
       "ubuntu" = c(
         "sudo apt-get update",
@@ -363,7 +366,7 @@ test_that("use_build_pkgdown()) works with additional_args", {
 test_that("use_spell_check() works", {
   file_path <- ".github/workflows/call-spell-check.yml"
   # Test that the function creates the workflow file
-  use_spell_check()
+  use_spell_check(build_trigger = "manually")
   expect_true(file.exists(file_path))
   test <- readLines(file_path)
   expect_snapshot(test)
@@ -372,7 +375,7 @@ test_that("use_spell_check() works", {
   # Test that the function creates the additional spell check workflow file
   report_level <- c("warning", "error")
   for (level in report_level) {
-    use_spell_check(spell_check_additional_files = TRUE, spell_check_report_level = level)
+    use_spell_check(build_trigger = "weekly", spell_check_additional_files = TRUE, spell_check_report_level = level)
     full_spell_check_content <- readLines(file_path)
     expect_snapshot(full_spell_check_content)
     unlink(file_path)
