@@ -6,6 +6,8 @@
 \usage{
 use_r_cmd_check(
   workflow_name = "call-r-cmd-check.yml",
+  build_trigger = c("manually", "weekly", "pull_request", "push_to_main",
+    "push_to_all_branches"),
   use_full_build_matrix = FALSE,
   depends_on_tmb = FALSE,
   depends_on_quarto = FALSE,
@@ -15,6 +17,16 @@ use_r_cmd_check(
 \arguments{
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
+
+\item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
+running on pushing commits to main ("push_to_main", the default); run when a pull request is
+opened, reopened, or updated ("pull_request"); run when a comment containing
+the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
+on the repository ("pr_comment"); run manually with the
+workflow_dispatch trigger ("manually"); run on the default branch (usually
+main) once a week ("weekly"). Currently, it is not possible to create a file
+with multiple build triggers from the function. Instead, users should add all of the
+appropriate build triggers by editing the file after the use_* function.}
 
 \item{use_full_build_matrix}{Run R cmd check with two older versions of R in
 addition to the three runs that use the release version.}

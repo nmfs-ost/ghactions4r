@@ -1,5 +1,6 @@
 #' Use workflow to run r cmd check on Linux, Mac, and Windows GitHub Actions
 #' @template workflow_name
+#' @template build_trigger
 #' @param use_full_build_matrix Run R cmd check with two older versions of R in
 #'   addition to the three runs that use the release version.
 #' @param depends_on_tmb Adds an option that install Matrix from source for windows
@@ -402,6 +403,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' the site, and therefore can be used to test if the build is working in cases
 #' where you do not want to deploy as well.
 #' @template workflow_name
+#' @template build_trigger
 #' @inheritParams use_r_cmd_check
 #' @examples
 #' \dontrun{
