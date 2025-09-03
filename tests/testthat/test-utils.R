@@ -54,3 +54,28 @@ test_that("add_args() works with txt and prev_line", {
   test <- readLines(path)
   expect_snapshot(test)
 })
+
+
+# note: other build triggers not tested here because covered in the
+# "use_doc_and_style_r() works" grid.
+test_that("add_build_trigger() works for push_to_all_branches", {
+  my_workflow_name <- "my-calc-cov-summaries.yml"
+  use_calc_cov_summaries(workflow_name = my_workflow_name,
+                         build_trigger = "push_to_all_branches")
+  path_to_workflow <- file.path(".github", "workflows", my_workflow_name)
+  expect_true(file.exists(path_to_workflow))
+  template_txt <- readLines(path_to_workflow)
+  expect_snapshot(template_txt)
+})
+
+test_that("copy_caller_template works", {
+  my_template_name <- "call-spell-check.yml"
+  my_workflow_name <- "my-workflow.yml"
+  path_to_workflow <- copy_caller_template(template_name = my_template_name,
+                                           workflow_name = my_workflow_name)
+  expect_equal(path_to_workflow, 
+               file.path(".github", "workflows", my_workflow_name))
+  template_txt <- readLines(path_to_workflow)
+  expect_snapshot(template_txt)
+
+})
