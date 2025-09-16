@@ -18,7 +18,9 @@ Imports:
     cli,
     lifecycle,
     rlang,
-    usethis
+    usethis,
+    httr,
+    jsonlite
 Suggests: 
     dplyr,
     knitr,

@@ -139,3 +139,39 @@ copy_caller_template <- function(template_name = "call-spell-check.yml", workflo
   file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
   path_to_yml
 }
+
+
+#' Pin to a particular version of ghactions4r rather than main
+#' @param gha The workflow text
+#' @param tag Version of ghactions4r to pin to a specific version
+use_version_pin <- function(tag, gha) {
+  repo <- "nmfs-ost/ghactions4r"
+  # Note: could considering adding headers for a higher rate limit.
+  # headers <- if (!is.null(token)) httr::add_headers(Authorization = paste("token", token)) else NULL
+  available_tags <- get_tags(repo = repo, headers = NULL)
+  if(tag %in% available_tags) {
+    # sub
+      gha <- sub("@main", paste0("@", tag), gha, fixed = TRUE)
+  } else {
+      cli::cli_abort(c(
+          "{.var tag} must be an existing tag in in ghactions4r",
+        "x" = "You've supplied the {.var tag} {tag}, which is not valid.",
+        "i" = "Available tag options are {available_tags}"
+      ))
+  }
+  gha
+}
+#' Get the tags by calling the GitHub rest API
+#' @param repo owner/repo
+#' @param headers NULL for now
+#' @importFrom httr GET stop_for_status content
+#' @importFrom jsonlite fromJSON
+get_tags <- function(repo = "nmfs-ost/ghactions4r", headers = NULL) {
+  url <- sprintf("https://api.github.com/repos/%s/tags", repo)
+  resp <- httr::GET(url, headers)
+  httr::stop_for_status(resp)
+  content_from_call <- httr::content(resp, as = "text", encoding = "UTF-8")
+  tags <- jsonlite::fromJSON(content_from_call)
+  available_tags <- tags$name
+  available_tags
+}

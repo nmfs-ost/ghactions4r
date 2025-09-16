@@ -79,3 +79,31 @@ test_that("copy_caller_template works", {
   expect_snapshot(template_txt)
 
 })
+
+fake_resp <- c("v0.3.0", "v0.2.0", "v0.1.0", "v0.1.0-prerel2", "v0.1.0-prerel")
+
+test_that("pinning to a specific version works as expected", {
+  template_path <- system.file("templates", "call-r-cmd-check.yml",
+                               package = "ghactions4r", mustWork = TRUE)
+  r_cmd_check_lines <- readLines(template_path)
+  
+  # mock the get_tags function so API calls aren't made.
+  local_mocked_bindings(
+    get_tags = function(...) fake_resp,
+   )
+  new_r_cmd_check_lines <- use_version_pin(gha = r_cmd_check_lines,
+                                           tag = "v0.3.0")
+  expect_snapshot(new_r_cmd_check_lines)
+  # 0.3.0 is not a valid tag
+  expect_snapshot(use_version_pin(gha = r_cmd_check_lines, tag = "0.3.0"),
+                  error = TRUE)
+})
+
+# The following test calls an api, so only want to run locally. APIs can be flaky and hit rate limits.
+# This ensures that the fake response we are using is still valid; if it is not, we can update it.
+test_that("calling api to get tags works", {
+  skip_on_ci()
+  skip_on_cran()
+  available_tags <- get_tags()
+  expect_equal(available_tags, fake_resp)
+})
