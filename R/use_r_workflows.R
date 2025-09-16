@@ -29,7 +29,7 @@
 #' }
 #' @export
 use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
-                            build_trigger = c("manually", "weekly", "pull_request", "push_to_main", "push_to_all_branches"),
+                            build_trigger = c("push_to_main", "push_to_all_branches", "pull_request", "manually", "weekly"),
                             use_full_build_matrix = FALSE,
                             depends_on_tmb = FALSE,
                             depends_on_quarto = FALSE,
@@ -102,7 +102,8 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @export
 use_calc_cov_summaries <- function(
     workflow_name = "call-calc-cov-summaries.yml",
-    build_trigger = c("manually", "pull_request", "push_to_main", "push_to_all_branches"),
+    build_trigger = c("pull_request", "push_to_main", "push_to_all_branches",
+      "manually"),
     use_public_rspm = TRUE,
     depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
@@ -187,7 +188,7 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template build_trigger
 #' @export
 use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
-  build_trigger = c("manually", "weekly", "push_to_main"),
+  build_trigger = c("push_to_main", "weekly", "manually"),
   use_public_rspm = TRUE, depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
     build_trigger <- tryCatch(match.arg(arg = build_trigger),
@@ -443,7 +444,8 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' }
 #' @export
 use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
-                                  build_trigger = c("manually", "weekly", "pull_request", "push_to_main", "push_to_all_branches"),
+                              build_trigger = c("pull_request", "push_to_main",
+                                "push_to_all_branches", "manually", "weekly"),
                                   additional_args = NULL) {
   validate_additional_args(additional_args)
   build_trigger <- tryCatch(match.arg(arg = build_trigger),
@@ -482,12 +484,8 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' @template build_trigger
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
-                            build_trigger = c(
-                              "manually",
-                              "weekly",
-                              "pull_request",
-                              "push_to_main",
-                              "push_to_all_branches"
+                            build_trigger = c("pull_request", "push_to_main",
+                              "push_to_all_branches", "weekly", "manually"
                             ),
                             spell_check_additional_files = FALSE,
                             spell_check_report_level = c("error", "warning")) {

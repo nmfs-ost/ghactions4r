@@ -110,7 +110,7 @@ add_build_trigger <- function(build_trigger, gha) {
 }
 
 #' Function to validate the build trigger and report an error if is length is <1.
-#' @param build_trigger Text of the build trigger option to add
+#' @template build_trigger
 #' @return build_trigger invisibly.
 validate_build_trigger <- function(build_trigger) {
     if(length(build_trigger) != 1) {
