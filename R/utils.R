@@ -108,6 +108,23 @@ add_build_trigger <- function(build_trigger, gha) {
   }
   gha
 }
+
+#' Function to validate the build trigger and report an error if is length is <1.
+#' @param build_trigger Text of the build trigger option to add
+#' @return build_trigger invisibly.
+validate_build_trigger <- function(build_trigger) {
+    if(length(build_trigger) != 1) {
+    len <- length(build_trigger)
+    cli::cli_abort(c(
+      "{.var build_trigger} must be be a vector of length 1.",
+      "i" = "Multiple build triggers are not yet implemented.",
+      "x" = "There {?is/are} {len} element{?s}."
+     ))
+  }
+  invisible(build_trigger)
+}
+
+
 #' Copy the caller template to an R package
 #'
 #' @param template_name The name of the template in the ghactions4r package

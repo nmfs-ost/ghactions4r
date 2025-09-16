@@ -314,6 +314,14 @@ test_that("use_doc_and_style_r() errors when a bad combo", {
   ), "recursive")
 })
 
+# This currently is expected behavior.
+test_that("use_doc_and_style_r() errors when multiple build triggers selected", {
+     expect_snapshot(use_doc_and_style_r(
+    workflow_name = "doc_style_mult_triggers.yml",
+    build_trigger = c("manually", "pull_request")
+    ), error = TRUE)
+})
+
 
 test_that("use_update_pkgdown()) works", {
   use_update_pkgdown()

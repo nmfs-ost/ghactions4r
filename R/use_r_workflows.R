@@ -35,7 +35,13 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
                             depends_on_quarto = FALSE,
                             additional_args = NULL) {
   validate_additional_args(additional_args)
-  build_trigger <- match.arg(arg = build_trigger)
+
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
   check_workflow_name(workflow_name)
   if (use_full_build_matrix) {
     template_name <- "call-r-cmd-check-full.yml"
@@ -100,12 +106,18 @@ use_calc_cov_summaries <- function(
     use_public_rspm = TRUE,
     depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
-  build_trigger <- match.arg(arg = build_trigger)
+    build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
 
 
   path_to_yml <- copy_caller_template(template_name = "call-calc-cov-summaries.yml",
                                       workflow_name = workflow_name)
   gha <- readLines(path_to_yml)
+
   gha <- add_build_trigger(build_trigger, gha)
 
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
@@ -178,7 +190,12 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
   build_trigger = c("manually", "weekly", "push_to_main"),
   use_public_rspm = TRUE, depends_on_quarto = FALSE) {
   check_workflow_name(workflow_name)
-  build_trigger <- match.arg(arg = build_trigger)
+    build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
   path_to_yml <- copy_caller_template(template_name = "call-create-cov-badge.yml",
                                       workflow_name = workflow_name)
   gha <- readLines(path_to_yml)
@@ -294,7 +311,12 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   # input checks
   check_workflow_name(workflow_name)
   how_to_commit <- match.arg(arg = how_to_commit)
-  build_trigger <- match.arg(arg = build_trigger)
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
   if (how_to_commit == "directly" & use_pat == TRUE) {
     stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
   }
@@ -377,7 +399,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
     )
   )
   validate_additional_args(additional_args)
-
+  validate_build_trigger(build_trigger)
   check_workflow_name(workflow_name)
   # get the template github action
   path_to_yml <- copy_caller_template(template_name = "call-update-pkgdown.yml",
@@ -424,7 +446,12 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
                                   build_trigger = c("manually", "weekly", "pull_request", "push_to_main", "push_to_all_branches"),
                                   additional_args = NULL) {
   validate_additional_args(additional_args)
-  build_trigger <- match.arg(arg = build_trigger)
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
   check_workflow_name(workflow_name)
   path_to_yml <- copy_caller_template(template_name = "call-build-pkgdown.yml",
                                       workflow_name = workflow_name)
@@ -464,7 +491,12 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
                             ),
                             spell_check_additional_files = FALSE,
                             spell_check_report_level = c("error", "warning")) {
-  build_trigger <- match.arg(arg = build_trigger)
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
+    error = function(e) {
+      validate_build_trigger(build_trigger)
+      cli_abort(e)
+    }
+  )
   # Remind users that spell_check_report_level is set to 'error' by default if users
   # don't specify spell_check_report_level
   if (spell_check_additional_files == TRUE & length(spell_check_report_level) > 1) {
