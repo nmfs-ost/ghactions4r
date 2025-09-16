@@ -306,6 +306,17 @@ test_that("use_doc_and_style_r() works", {
   # 80              FALSE      directly        weekly   FALSE   FALSE
 })
 
+test_that("use_r_cmd_check() works when an existing workflow is already in the repo", {
+  workflow_name <- "call-r-cmd_check-existing.yml"
+  workflow_path <- file.path(".github", "workflows", workflow_name)
+  use_r_cmd_check(workflow_name = workflow_name)
+  workflow_lines <- readLines(workflow_path)
+  expect_snapshot(workflow_lines)
+  use_r_cmd_check(workflow_name = workflow_name, build_trigger = "manually")
+  workflow_lines_changed <- readLines(workflow_path)
+  expect_snapshot(workflow_lines_changed)
+})
+
 test_that("use_doc_and_style_r() errors when a bad combo", {
   expect_error(use_doc_and_style_r(
     workflow_name = "doc_style_bad.yml",
