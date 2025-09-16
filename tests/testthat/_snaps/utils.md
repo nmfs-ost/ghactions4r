@@ -100,3 +100,33 @@
       [13] "  call-workflow:"                                                                                                                         
       [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
 
+# pinning to a specific version works as expected
+
+    Code
+      new_r_cmd_check_lines
+    Output
+       [1] "# Run r cmd check"                                                                                                                        
+       [2] "name: call-r-cmd-check"                                                                                                                   
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "# [build-trigger-goes-here]"                                                                                                              
+       [6] ""                                                                                                                                         
+       [7] "# no permissions are needed by the default github token for this workflow to "                                                            
+       [8] "# run, so don't pass any."                                                                                                                
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions: {}"                                                                                                                          
+      [11] ""                                                                                                                                         
+      [12] "jobs:"                                                                                                                                    
+      [13] "  call-workflow:"                                                                                                                         
+      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@v0.3.0"                                                                  
+
+---
+
+    Code
+      use_version_pin(gha = r_cmd_check_lines, tag = "0.3.0")
+    Condition
+      Error in `use_version_pin()`:
+      ! `tag` must be an existing tag in in ghactions4r
+      x You've supplied the `tag` 0.3.0, which is not valid.
+      i Available tag options are v0.3.0, v0.2.0, v0.1.0, v0.1.0-prerel2, and v0.1.0-prerel
+

@@ -13,6 +13,7 @@
 #'   macos, or ubuntu), and the values are character vectors of arguments.
 #'   These additional arguments are executed after the step that checks out the
 #'   repository and before the step that sets up R.
+#' @template tag_ghactions4r
 #' @examples
 #' \dontrun{
 #' use_r_cmd_check(
@@ -33,7 +34,8 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
                             use_full_build_matrix = FALSE,
                             depends_on_tmb = FALSE,
                             depends_on_quarto = FALSE,
-                            additional_args = NULL) {
+                            additional_args = NULL, 
+                            tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
 
   build_trigger <- tryCatch(match.arg(arg = build_trigger),
@@ -99,13 +101,15 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template use_public_rspm
 #' @template depends_on_quarto
 #' @template build_trigger
+#' @template tag_ghactions4r
 #' @export
 use_calc_cov_summaries <- function(
     workflow_name = "call-calc-cov-summaries.yml",
     build_trigger = c("pull_request", "push_to_main", "push_to_all_branches",
       "manually"),
     use_public_rspm = TRUE,
-    depends_on_quarto = FALSE) {
+    depends_on_quarto = FALSE,
+    tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
     build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
@@ -186,10 +190,12 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template use_public_rspm
 #' @template depends_on_quarto
 #' @template build_trigger
+#' @template tag_ghactions4r
 #' @export
 use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
   build_trigger = c("push_to_main", "weekly", "manually"),
-  use_public_rspm = TRUE, depends_on_quarto = FALSE) {
+  use_public_rspm = TRUE, depends_on_quarto = FALSE,
+    tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
     build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
@@ -263,6 +269,7 @@ use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
 #'  Only used if `use_pat = TRUE`. After
 #'  [generating the personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
 #' See [how to add it as a secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
+#' @template tag_ghactions4r
 #' @examples
 #' # set up running the doc and style workflow on each push to main, opening a
 #' # pull request to main when changes are found.
@@ -308,7 +315,8 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 ),
                                 use_air = FALSE,
                                 use_pat = FALSE,
-                                pat_name = "PAT") {
+                                pat_name = "PAT",
+                                tag_ghactions4r = NULL) {
   # input checks
   check_workflow_name(workflow_name)
   how_to_commit <- match.arg(arg = how_to_commit)
@@ -369,6 +377,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 #' a branch called `gh-pages`.
 #' @template workflow_name
 #' @template build_trigger
+#' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
 #' \dontrun{
@@ -391,7 +400,8 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
                                  "manually",
                                  "weekly"
                                ),
-                               additional_args = NULL) {
+                               additional_args = NULL,
+                               tag_ghactions4r = NULL) {
   build_trigger <- match.arg(
     arg = build_trigger,
     choices = c(
@@ -427,6 +437,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' where you do not want to deploy as well.
 #' @template workflow_name
 #' @template build_trigger
+#' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
 #' \dontrun{
@@ -446,7 +457,8 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
                               build_trigger = c("pull_request", "push_to_main",
                                 "push_to_all_branches", "manually", "weekly"),
-                                  additional_args = NULL) {
+                              additional_args = NULL,
+                              tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
   build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
@@ -482,13 +494,15 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' the workflow will pass even if spelling errors are found.
 #' @template workflow_name
 #' @template build_trigger
+#' @template tag_ghactions4r
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
                             build_trigger = c("pull_request", "push_to_main",
                               "push_to_all_branches", "weekly", "manually"
                             ),
                             spell_check_additional_files = FALSE,
-                            spell_check_report_level = c("error", "warning")) {
+                            spell_check_report_level = c("error", "warning"),
+                            tag_ghactions4r = NULL) {
   build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
       validate_build_trigger(build_trigger)
