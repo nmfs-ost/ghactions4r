@@ -2298,6 +2298,47 @@
       [19] "      commit-directly: true"                                                                                                              
       [20] "  "                                                                                                                                       
 
+# use_r_cmd_check() works when an existing workflow is already in the repo
+
+    Code
+      workflow_lines
+    Output
+       [1] "# Run r cmd check"                                                                                                                        
+       [2] "name: call-r-cmd-check"                                                                                                                   
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# no permissions are needed by the default github token for this workflow to "                                                            
+       [9] "# run, so don't pass any."                                                                                                                
+      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [11] "permissions: {}"                                                                                                                          
+      [12] ""                                                                                                                                         
+      [13] "jobs:"                                                                                                                                    
+      [14] "  call-workflow:"                                                                                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+
+---
+
+    Code
+      workflow_lines_changed
+    Output
+       [1] "# Run r cmd check"                                                                                                                        
+       [2] "name: call-r-cmd-check"                                                                                                                   
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# no permissions are needed by the default github token for this workflow to "                                                            
+       [8] "# run, so don't pass any."                                                                                                                
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions: {}"                                                                                                                          
+      [11] ""                                                                                                                                         
+      [12] "jobs:"                                                                                                                                    
+      [13] "  call-workflow:"                                                                                                                         
+      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+
 # use_doc_and_style_r() errors when multiple build triggers selected
 
     Code
