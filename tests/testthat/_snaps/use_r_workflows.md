@@ -2280,6 +2280,17 @@
       [19] "      commit-directly: true"                                                                                                              
       [20] "  "                                                                                                                                       
 
+# use_doc_and_style_r() errors when multiple build triggers selected
+
+    Code
+      use_doc_and_style_r(workflow_name = "doc_style_mult_triggers.yml",
+        build_trigger = c("manually", "pull_request"))
+    Condition
+      Error in `validate_build_trigger()`:
+      ! `build_trigger` must be be a vector of length 1.
+      i Multiple build triggers are not yet implemented.
+      x There are 2 elements.
+
 # use_update_pkgdown()) works
 
     Code
