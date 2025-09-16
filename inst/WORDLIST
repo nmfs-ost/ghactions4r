@@ -77,6 +77,7 @@ macos
 macOS
 md
 moretext
+mustWork
 mylist
 myworkflow
 myworkflowmissingext
@@ -94,6 +95,7 @@ normalizePath
 notvalid
 nrow
 NUM
+octo
 octocov
 octoyml
 openssl
@@ -136,6 +138,7 @@ rspm
 schemaVersion
 setdiff
 setwd
+showWarnings
 somename
 startsWith
 stefanzweifel
