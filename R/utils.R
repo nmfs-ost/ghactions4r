@@ -77,7 +77,8 @@ add_quarto_true <- function(uses_line, gha) {
 #' @return The modified workflow file
 #' @noRd
 add_build_trigger <- function(build_trigger, gha) {
-  build_trigger_lines <- switch(build_trigger,
+  build_trigger_lines <- lapply(build_trigger, function(x) {
+    switch(x,
     push_to_main = c("  push:", "    branches: [main]"),
     push_to_all_branches = c("  push:"),
     pull_request = "  pull_request:",
@@ -87,8 +88,22 @@ add_build_trigger <- function(build_trigger, gha) {
       "  schedule:",
       "# Use https://crontab.guru/ to edit the time",
       "    - cron:  '15 02 * * 0'"
-    )
-  )
+    ))
+  })
+  build_trigger_lines <- unlist(build_trigger_lines)
+
+  # build_trigger_lines <- switch(build_trigger,
+  #   push_to_main = c("  push:", "    branches: [main]"),
+  #   push_to_all_branches = c("  push:"),
+  #   pull_request = "  pull_request:",
+  #   pr_comment = c("  issue_comment:", "    types: [created] "),
+  #   manually = "  workflow_dispatch:",
+  #   weekly = c(
+  #     "  schedule:",
+  #     "# Use https://crontab.guru/ to edit the time",
+  #     "    - cron:  '15 02 * * 0'"
+  #   )
+  # )
 
   # remove existing build trigger
   build_trigger_rm_line <- grep("# [build-trigger-goes-here]", gha, fixed = TRUE)
@@ -97,7 +112,7 @@ add_build_trigger <- function(build_trigger, gha) {
   # add new build trigger
   gha <- append(gha, build_trigger_lines, after = insert_line)
 
-  if (build_trigger == "pr_comment") {
+  if ("pr_comment" %in% build_trigger) {
     job_name_line <- grep("call-workflow:", gha, fixed = TRUE)
     if_statement <- c(
       "    if: ${{ github.event.issue.pull_request && ",
@@ -108,22 +123,6 @@ add_build_trigger <- function(build_trigger, gha) {
   }
   gha
 }
-
-#' Function to validate the build trigger and report an error if is length is <1.
-#' @template build_trigger
-#' @return build_trigger invisibly.
-validate_build_trigger <- function(build_trigger) {
-  if (length(build_trigger) != 1) {
-    len <- length(build_trigger)
-    cli::cli_abort(c(
-      "{.var build_trigger} must be be a vector of length 1.",
-      "i" = "Multiple build triggers are not yet implemented.",
-      "x" = "There {?is/are} {len} element{?s}."
-    ))
-  }
-  invisible(build_trigger)
-}
-
 
 #' Copy the caller template to an R package
 #'
