@@ -34,7 +34,7 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
                             use_full_build_matrix = FALSE,
                             depends_on_tmb = FALSE,
                             depends_on_quarto = FALSE,
-                            additional_args = NULL, 
+                            additional_args = NULL,
                             tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
 
@@ -51,8 +51,10 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
     template_name <- "call-r-cmd-check.yml"
   }
 
-  path_to_yml <- copy_caller_template(template_name = template_name,
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = template_name,
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
   txt <- add_build_trigger(build_trigger, gha)
 
@@ -105,13 +107,15 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @export
 use_calc_cov_summaries <- function(
     workflow_name = "call-calc-cov-summaries.yml",
-    build_trigger = c("pull_request", "push_to_main", "push_to_all_branches",
-      "manually"),
+    build_trigger = c(
+      "pull_request", "push_to_main", "push_to_all_branches",
+      "manually"
+    ),
     use_public_rspm = TRUE,
     depends_on_quarto = FALSE,
     tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
-    build_trigger <- tryCatch(match.arg(arg = build_trigger),
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
       validate_build_trigger(build_trigger)
       cli_abort(e)
@@ -119,8 +123,10 @@ use_calc_cov_summaries <- function(
   )
 
 
-  path_to_yml <- copy_caller_template(template_name = "call-calc-cov-summaries.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-calc-cov-summaries.yml",
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
 
   gha <- add_build_trigger(build_trigger, gha)
@@ -142,7 +148,8 @@ use_calc_cov_summaries <- function(
   writeLines(gha, path_to_yml)
   # Also create the .octocov.yml file.
   template_path <- system.file("templates", ".octocov.yml",
-                               package = "ghactions4r", mustWork = TRUE)
+    package = "ghactions4r", mustWork = TRUE
+  )
   path_to_octo_yml <- file.path(".octocov.yml")
   file.copy(from = template_path, to = path_to_octo_yml)
 
@@ -192,19 +199,22 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template build_trigger
 #' @template tag_ghactions4r
 #' @export
-use_create_cov_badge <- function(workflow_name = "call-create-cov-badge.yml",
-  build_trigger = c("push_to_main", "weekly", "manually"),
-  use_public_rspm = TRUE, depends_on_quarto = FALSE,
+use_create_cov_badge <- function(
+    workflow_name = "call-create-cov-badge.yml",
+    build_trigger = c("push_to_main", "weekly", "manually"),
+    use_public_rspm = TRUE, depends_on_quarto = FALSE,
     tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
-    build_trigger <- tryCatch(match.arg(arg = build_trigger),
+  build_trigger <- tryCatch(match.arg(arg = build_trigger),
     error = function(e) {
       validate_build_trigger(build_trigger)
       cli_abort(e)
     }
   )
-  path_to_yml <- copy_caller_template(template_name = "call-create-cov-badge.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-create-cov-badge.yml",
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
 
@@ -330,8 +340,10 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
   }
 
-  path_to_yml <- copy_caller_template(template_name = "call-doc-and-style-r.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-doc-and-style-r.yml",
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
 
   gha <- add_build_trigger(build_trigger, gha)
@@ -413,8 +425,10 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   validate_build_trigger(build_trigger)
   check_workflow_name(workflow_name)
   # get the template github action
-  path_to_yml <- copy_caller_template(template_name = "call-update-pkgdown.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-update-pkgdown.yml",
+    workflow_name = workflow_name
+  )
 
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
@@ -455,8 +469,10 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' }
 #' @export
 use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
-                              build_trigger = c("pull_request", "push_to_main",
-                                "push_to_all_branches", "manually", "weekly"),
+                              build_trigger = c(
+                                "pull_request", "push_to_main",
+                                "push_to_all_branches", "manually", "weekly"
+                              ),
                               additional_args = NULL,
                               tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
@@ -467,8 +483,10 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
     }
   )
   check_workflow_name(workflow_name)
-  path_to_yml <- copy_caller_template(template_name = "call-build-pkgdown.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-build-pkgdown.yml",
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
   gha <- add_build_trigger(build_trigger, gha)
   writeLines(gha, path_to_yml)
@@ -497,7 +515,8 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' @template tag_ghactions4r
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
-                            build_trigger = c("pull_request", "push_to_main",
+                            build_trigger = c(
+                              "pull_request", "push_to_main",
                               "push_to_all_branches", "weekly", "manually"
                             ),
                             spell_check_additional_files = FALSE,
@@ -529,8 +548,10 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
   spell_check_report_level <- rlang::arg_match(spell_check_report_level)
   check_workflow_name(workflow_name)
 
-  path_to_yml <- copy_caller_template(template_name = "call-spell-check.yml",
-                                      workflow_name = workflow_name)
+  path_to_yml <- copy_caller_template(
+    template_name = "call-spell-check.yml",
+    workflow_name = workflow_name
+  )
   gha <- readLines(path_to_yml)
 
   gha <- add_build_trigger(build_trigger, gha)
@@ -540,7 +561,6 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
     gha <- append(gha, "    with:")
     gha <- append(gha, "      spell_check_additional_files: true")
     gha <- append(gha, paste0("      spell_check_report_level: ", spell_check_report_level))
-
   }
   cli::cli_alert_info(
     "New to spelling::spell_check_package()? Learn more at

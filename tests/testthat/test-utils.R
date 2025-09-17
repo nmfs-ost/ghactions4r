@@ -36,14 +36,15 @@ test_that("add_args() works with txt and prev_line", {
   additional_args <- list(
     windows = c("tree"),
     macos = c("brew install curl")
-    )
+  )
 
   use_update_pkgdown(workflow_name = workflow_name, additional_args = additional_args)
   path <- file.path(".github", "workflows", workflow_name)
   txt <- readLines(path)
   prev_line <- grep("uses: nmfs-ost/ghactions4r/.github/workflows/update-pkgdown.yml@main",
     txt,
-    fixed = TRUE) + 1 # add one because should be on the line with "with"
+    fixed = TRUE
+  ) + 1 # add one because should be on the line with "with"
   add_args(
     workflow_name = workflow_name,
     additional_args = list(ubuntu = "sudo apt-get install --only-upgrade libstdc++6"),
@@ -60,8 +61,10 @@ test_that("add_args() works with txt and prev_line", {
 # "use_doc_and_style_r() works" grid.
 test_that("add_build_trigger() works for push_to_all_branches", {
   my_workflow_name <- "my-calc-cov-summaries.yml"
-  use_calc_cov_summaries(workflow_name = my_workflow_name,
-                         build_trigger = "push_to_all_branches")
+  use_calc_cov_summaries(
+    workflow_name = my_workflow_name,
+    build_trigger = "push_to_all_branches"
+  )
   path_to_workflow <- file.path(".github", "workflows", my_workflow_name)
   expect_true(file.exists(path_to_workflow))
   template_txt <- readLines(path_to_workflow)
@@ -71,32 +74,39 @@ test_that("add_build_trigger() works for push_to_all_branches", {
 test_that("copy_caller_template works", {
   my_template_name <- "call-spell-check.yml"
   my_workflow_name <- "my-workflow.yml"
-  path_to_workflow <- copy_caller_template(template_name = my_template_name,
-                                           workflow_name = my_workflow_name)
-  expect_equal(path_to_workflow, 
-               file.path(".github", "workflows", my_workflow_name))
+  path_to_workflow <- copy_caller_template(
+    template_name = my_template_name,
+    workflow_name = my_workflow_name
+  )
+  expect_equal(
+    path_to_workflow,
+    file.path(".github", "workflows", my_workflow_name)
+  )
   template_txt <- readLines(path_to_workflow)
   expect_snapshot(template_txt)
-
 })
 
 fake_resp <- c("v0.3.0", "v0.2.0", "v0.1.0", "v0.1.0-prerel2", "v0.1.0-prerel")
 
 test_that("pinning to a specific version works as expected", {
   template_path <- system.file("templates", "call-r-cmd-check.yml",
-                               package = "ghactions4r", mustWork = TRUE)
+    package = "ghactions4r", mustWork = TRUE
+  )
   r_cmd_check_lines <- readLines(template_path)
-  
+
   # mock the get_tags function so API calls aren't made.
   local_mocked_bindings(
     get_tags = function(...) fake_resp,
-   )
-  new_r_cmd_check_lines <- use_version_pin(gha = r_cmd_check_lines,
-                                           tag = "v0.3.0")
+  )
+  new_r_cmd_check_lines <- use_version_pin(
+    gha = r_cmd_check_lines,
+    tag = "v0.3.0"
+  )
   expect_snapshot(new_r_cmd_check_lines)
   # 0.3.0 is not a valid tag
   expect_snapshot(use_version_pin(gha = r_cmd_check_lines, tag = "0.3.0"),
-                  error = TRUE)
+    error = TRUE
+  )
 })
 
 # The following test calls an api, so only want to run locally. APIs can be flaky and hit rate limits.

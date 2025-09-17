@@ -11,7 +11,8 @@ use_doc_and_style_r(
   build_trigger = c("push_to_main", "pull_request", "pr_comment", "manually", "weekly"),
   use_air = FALSE,
   use_pat = FALSE,
-  pat_name = "PAT"
+  pat_name = "PAT",
+  tag_ghactions4r = NULL
 )
 }
 \arguments{
@@ -27,7 +28,7 @@ where the workflow started; or 2) directly to the branch ("directly") where
 the workflow started.}
 
 \item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main", the default); run when a pull request is
+running on pushing commits to main ("push_to_main"); run when a pull request is
 opened, reopened, or updated ("pull_request"); run when a comment containing
 the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
 on the repository ("pr_comment"); run manually with the
@@ -46,6 +47,18 @@ the doc and style workflow to be able to start other GitHub action runs.}
 Only used if \code{use_pat = TRUE}. After
 \href{https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens}{generating the personal access token},
 See \href{https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository}{how to add it as a secret}.}
+
+\item{tag_ghactions4r}{Tag of ghactions4r workflow to pin to for the
+reusable workflow. This ensures compatibility with a specific version of
+ghactions4r functions. The tradeoff is that fixes will not happen
+automatically; instead, the user will have to update the pinned version of
+the caller workflow used. See the options by looking at the
+\href{https://github.com/nmfs-ost/ghactions4r/tags}{ghactions4r tags}. Another
+option is to pin to commit hashes, but the user will need to do this by
+manually editing the caller workflow after creation. See
+\href{https://docs.github.com/en/actions/reference/security/secure-use}{github documentation on security}
+to understand how this is more secure. Again, the tradeoff is that the
+workflow will not be automatically updated.}
 }
 \description{
 Style your R package components automatically by running devtools::document(),
