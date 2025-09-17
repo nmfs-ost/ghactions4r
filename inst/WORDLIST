@@ -1,5 +1,6 @@
 ️
 alnum
+api
 arg
 args
 assignees
@@ -24,6 +25,7 @@ Config
 cov
 covr
 cpp
+cran
 cron
 crontab
 darkblue
@@ -43,6 +45,7 @@ evans
 fas
 fi
 fromJson
+fromJSON
 getenv
 getwd
 gh
@@ -59,14 +62,18 @@ hpp
 href
 htmltools
 https
+httr
 ifelse
 img
+importFrom
 inheritParams
 io
 isTRUE
 JamesIves
 json
+jsonlite
 lapply
+len
 libcurl
 libstdc
 lifecycle
@@ -77,6 +84,7 @@ macos
 macOS
 md
 moretext
+mult
 mustWork
 mylist
 myworkflow
@@ -113,6 +121,7 @@ pkgs
 png
 ppa
 precompiled
+prerel
 prev
 processblue
 proj
@@ -127,7 +136,6 @@ readme
 reflexblue
 repo
 repos
-requset
 rlang
 Rmd
 ropensci
@@ -140,14 +148,13 @@ setdiff
 setwd
 showWarnings
 somename
+sprintf
 startsWith
 stefanzweifel
 stopifnot
 stringsAsFactors
 styler
-Styler
 sudo
-sunday
 Sys
 tempdir
 testExecutionTime
@@ -157,6 +164,7 @@ tmb
 TMB
 tmp
 toolchain
+tryCatch
 ubuntu
 uncomment
 unlink

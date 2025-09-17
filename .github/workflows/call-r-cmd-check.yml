@@ -8,7 +8,7 @@ on:
     paths-ignore:
       - '.github/workflows/call**'
   schedule:
-    # This should run the default branch weekly on sunday
+    # This should run the default branch weekly on Sunday
     - cron: '0 0 * * 0'
 name: call-r-cmd-check
 
