@@ -327,10 +327,10 @@ test_that("use_doc_and_style_r() errors when a bad combo", {
 
 # This currently is expected behavior.
 test_that("use_doc_and_style_r() errors when multiple build triggers selected", {
-     expect_snapshot(use_doc_and_style_r(
+  expect_snapshot(use_doc_and_style_r(
     workflow_name = "doc_style_mult_triggers.yml",
     build_trigger = c("manually", "pull_request")
-    ), error = TRUE)
+  ), error = TRUE)
 })
 
 

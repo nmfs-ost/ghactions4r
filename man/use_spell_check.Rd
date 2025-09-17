@@ -6,10 +6,11 @@
 \usage{
 use_spell_check(
   workflow_name = "call-spell-check.yml",
-  build_trigger = c("manually", "weekly", "pull_request", "push_to_main",
-    "push_to_all_branches"),
+  build_trigger = c("pull_request", "push_to_main", "push_to_all_branches", "weekly",
+    "manually"),
   spell_check_additional_files = FALSE,
-  spell_check_report_level = c("error", "warning")
+  spell_check_report_level = c("error", "warning"),
+  tag_ghactions4r = NULL
 )
 }
 \arguments{
@@ -17,7 +18,7 @@ use_spell_check(
 have the file extension \code{.yml}}
 
 \item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main", the default); run when a pull request is
+running on pushing commits to main ("push_to_main"); run when a pull request is
 opened, reopened, or updated ("pull_request"); run when a comment containing
 the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
 on the repository ("pr_comment"); run manually with the
@@ -33,6 +34,18 @@ in the package? Defaults to FALSE.}
 Options are "warning" or "error". Defaults to "error". If set to "error",
 the workflow will fail if any spelling errors are found. If set to "warning", the
 the workflow will pass even if spelling errors are found.}
+
+\item{tag_ghactions4r}{Tag of ghactions4r workflow to pin to for the
+reusable workflow. This ensures compatibility with a specific version of
+ghactions4r functions. The tradeoff is that fixes will not happen
+automatically; instead, the user will have to update the pinned version of
+the caller workflow used. See the options by looking at the
+\href{https://github.com/nmfs-ost/ghactions4r/tags}{ghactions4r tags}. Another
+option is to pin to commit hashes, but the user will need to do this by
+manually editing the caller workflow after creation. See
+\href{https://docs.github.com/en/actions/reference/security/secure-use}{github documentation on security}
+to understand how this is more secure. Again, the tradeoff is that the
+workflow will not be automatically updated.}
 }
 \description{
 This workflow will run the spell_check_package() function from the spelling package

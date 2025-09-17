@@ -113,13 +113,13 @@ add_build_trigger <- function(build_trigger, gha) {
 #' @template build_trigger
 #' @return build_trigger invisibly.
 validate_build_trigger <- function(build_trigger) {
-    if(length(build_trigger) != 1) {
+  if (length(build_trigger) != 1) {
     len <- length(build_trigger)
     cli::cli_abort(c(
       "{.var build_trigger} must be be a vector of length 1.",
       "i" = "Multiple build triggers are not yet implemented.",
       "x" = "There {?is/are} {len} element{?s}."
-     ))
+    ))
   }
   invisible(build_trigger)
 }
@@ -132,7 +132,8 @@ validate_build_trigger <- function(build_trigger) {
 #' @return The path to the caller workflow file copied
 copy_caller_template <- function(template_name = "call-spell-check.yml", workflow_name = "call-spell-check.yml") {
   template_path <- system.file("templates", template_name,
-                               package = "ghactions4r", mustWork = TRUE)
+    package = "ghactions4r", mustWork = TRUE
+  )
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   dir.create(".github", showWarnings = FALSE)
   dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
@@ -149,15 +150,15 @@ use_version_pin <- function(tag, gha) {
   # Note: could considering adding headers for a higher rate limit.
   # headers <- if (!is.null(token)) httr::add_headers(Authorization = paste("token", token)) else NULL
   available_tags <- get_tags(repo = repo, headers = NULL)
-  if(tag %in% available_tags) {
+  if (tag %in% available_tags) {
     # sub
-      gha <- sub("@main", paste0("@", tag), gha, fixed = TRUE)
+    gha <- sub("@main", paste0("@", tag), gha, fixed = TRUE)
   } else {
-      cli::cli_abort(c(
-          "{.var tag} must be an existing tag in in ghactions4r",
-        "x" = "You've supplied the {.var tag} {tag}, which is not valid.",
-        "i" = "Available tag options are {available_tags}"
-      ))
+    cli::cli_abort(c(
+      "{.var tag} must be an existing tag in in ghactions4r",
+      "x" = "You've supplied the {.var tag} {tag}, which is not valid.",
+      "i" = "Available tag options are {available_tags}"
+    ))
   }
   gha
 }

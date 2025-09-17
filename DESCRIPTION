@@ -16,11 +16,11 @@ Description: Provides functions to allow users to set up github action
 License: CC0
 Imports:
     cli,
+    httr,
+    jsonlite,
     lifecycle,
     rlang,
-    usethis,
-    httr,
-    jsonlite
+    usethis
 Suggests: 
     dplyr,
     knitr,
@@ -34,4 +34,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
