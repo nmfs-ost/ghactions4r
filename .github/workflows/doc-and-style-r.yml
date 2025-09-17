@@ -146,7 +146,7 @@ jobs:
           out <- lapply(files_to_change, function(x) ghactions4r::rm_dollar_sign(x))
         shell: Rscript {0}
 
-      - name: Style again using Styler
+      - name: Style again using styler
         if: inputs.use-air == false
         run: | 
           results <- styler::style_pkg()

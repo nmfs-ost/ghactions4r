@@ -1,5 +1,5 @@
 # ghactions4r development
-* Add option to use Air instead of Styler in the doc-and-styler-r workflow.
+* Add option to use Air instead of styler in the doc-and-styler-r workflow.
 
 # ghactions4r 0.3.0
 
