@@ -88,6 +88,7 @@ test_that("use_r_cmd_check() works with additional_args mac only", {
   path <- file.path(".github", "workflows", name)
   use_r_cmd_check(
     workflow_name = name,
+    build_trigger = c("push_to_all_branches", "pull_request", "manually"),
     use_full_build_matrix = TRUE,
     depends_on_tmb = FALSE,
     additional_args = list(
@@ -125,8 +126,8 @@ test_that("use_r_cmd_check() doesn't work with invalid additional_args", {
   )
 })
 
-test_that("use_calc_cov_summaries() works", {
-  use_calc_cov_summaries()
+test_that("use_calc_cov_summaries() works and with specified multiple build triggers", {
+  use_calc_cov_summaries(build_trigger = c("push_to_main", "manually"))
   expect_true(file.exists(".github/workflows/call-calc-cov-summaries.yml"))
   test <- readLines(".github/workflows/call-calc-cov-summaries.yml")
   expect_snapshot(test)
@@ -135,6 +136,7 @@ test_that("use_calc_cov_summaries() works", {
   test_octoyml <- readLines(".octocov.yml")
   expect_snapshot(test_octoyml)
 })
+
 
 test_that("use_calc_cov_summaries() works with use_public_rspm = FALSE", {
   workflow_name <- "call-calc-cov-summaries-false.yml"
@@ -326,10 +328,10 @@ test_that("use_doc_and_style_r() errors when a bad combo", {
 })
 
 # This currently is expected behavior.
-test_that("use_doc_and_style_r() errors when multiple build triggers selected", {
+test_that("use_doc_and_style_r() errors when an incorrect build triggers is selected", {
   expect_snapshot(use_doc_and_style_r(
-    workflow_name = "doc_style_mult_triggers.yml",
-    build_trigger = c("manually", "pull_request")
+    workflow_name = "doc_style_wrong_triggers.yml",
+    build_trigger = c("incorrect_build_trigger")
   ), error = TRUE)
 })
 

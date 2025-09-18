@@ -455,22 +455,23 @@
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  push:"                                                                                                                                  
-       [6] "    branches: [main]"                                                                                                                     
-       [7] ""                                                                                                                                         
-       [8] "# no permissions are needed by the default github token for this workflow to "                                                            
-       [9] "# run, so don't pass any."                                                                                                                
-      [10] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
-      [11] "permissions: {}"                                                                                                                          
-      [12] ""                                                                                                                                         
-      [13] "jobs:"                                                                                                                                    
-      [14] "  call-workflow:"                                                                                                                         
-      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
-      [16] "    with:"                                                                                                                                
-      [17] "      additional_args_macos: |"                                                                                                           
-      [18] "        brew install curl"                                                                                                                
-      [19] "      use_full_build_matrix: true"                                                                                                        
+       [6] "  pull_request:"                                                                                                                          
+       [7] "  workflow_dispatch:"                                                                                                                     
+       [8] ""                                                                                                                                         
+       [9] "# no permissions are needed by the default github token for this workflow to "                                                            
+      [10] "# run, so don't pass any."                                                                                                                
+      [11] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [12] "permissions: {}"                                                                                                                          
+      [13] ""                                                                                                                                         
+      [14] "jobs:"                                                                                                                                    
+      [15] "  call-workflow:"                                                                                                                         
+      [16] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
+      [17] "    with:"                                                                                                                                
+      [18] "      additional_args_macos: |"                                                                                                           
+      [19] "        brew install curl"                                                                                                                
+      [20] "      use_full_build_matrix: true"                                                                                                        
 
-# use_calc_cov_summaries() works
+# use_calc_cov_summaries() works and with specified multiple build triggers
 
     Code
       test
@@ -482,16 +483,18 @@
        [5] "name: call-calc-cov-summaries"                                                                                                            
        [6] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [7] "on:"                                                                                                                                      
-       [8] "  pull_request:"                                                                                                                          
-       [9] ""                                                                                                                                         
-      [10] "# limits permissions to write, as the common use case is for pull requests;"                                                              
-      [11] "# this means certain options may not work, but makes the workflow more secure"                                                            
-      [12] "permissions:"                                                                                                                             
-      [13] "  pull-requests: write"                                                                                                                   
-      [14] ""                                                                                                                                         
-      [15] "jobs:"                                                                                                                                    
-      [16] "  call-workflow:"                                                                                                                         
-      [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
+       [8] "  push:"                                                                                                                                  
+       [9] "    branches: [main]"                                                                                                                     
+      [10] "  workflow_dispatch:"                                                                                                                     
+      [11] ""                                                                                                                                         
+      [12] "# limits permissions to write, as the common use case is for pull requests;"                                                              
+      [13] "# this means certain options may not work, but makes the workflow more secure"                                                            
+      [14] "permissions:"                                                                                                                             
+      [15] "  pull-requests: write"                                                                                                                   
+      [16] ""                                                                                                                                         
+      [17] "jobs:"                                                                                                                                    
+      [18] "  call-workflow:"                                                                                                                         
+      [19] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
 
 ---
 
@@ -2339,16 +2342,14 @@
       [13] "  call-workflow:"                                                                                                                         
       [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/r-cmd-check.yml@main"                                                                    
 
-# use_doc_and_style_r() errors when multiple build triggers selected
+# use_doc_and_style_r() errors when an incorrect build triggers is selected
 
     Code
-      use_doc_and_style_r(workflow_name = "doc_style_mult_triggers.yml",
-        build_trigger = c("manually", "pull_request"))
+      use_doc_and_style_r(workflow_name = "doc_style_wrong_triggers.yml",
+        build_trigger = c("incorrect_build_trigger"))
     Condition
-      Error in `validate_build_trigger()`:
-      ! `build_trigger` must be be a vector of length 1.
-      i Multiple build triggers are not yet implemented.
-      x There are 2 elements.
+      Error in `match.arg()`:
+      ! 'arg' should be one of "push_to_main", "pull_request", "pr_comment", "manually", "weekly"
 
 # use_update_pkgdown()) works
 
