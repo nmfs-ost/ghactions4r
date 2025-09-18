@@ -90,7 +90,8 @@ a branch called <code>gh-pages</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_update_pkgdown</span><span class="op">(</span></span>
 <span>  workflow_name <span class="op">=</span> <span class="st">"call-update-pkgdown.yml"</span>,</span>
 <span>  build_trigger <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"push_to_main"</span>, <span class="st">"manually"</span>, <span class="st">"weekly"</span><span class="op">)</span>,</span>
-<span>  additional_args <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  additional_args <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tag_ghactions4r <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -105,7 +106,7 @@ have the file extension <code>.yml</code></p></dd>
 
 <dt id="arg-build-trigger">build_trigger<a class="anchor" aria-label="anchor" href="#arg-build-trigger"></a></dt>
 <dd><p>Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main", the default); run when a pull request is
+running on pushing commits to main ("push_to_main"); run when a pull request is
 opened, reopened, or updated ("pull_request"); run when a comment containing
 the command <code>\doc-and-style</code> is made on a pull request by people with write permissions
 on the repository ("pr_comment"); run manually with the
@@ -121,6 +122,20 @@ passed to the workflow. The names of the list represent the platforms (windows,
 macos, or ubuntu), and the values are character vectors of arguments.
 These additional arguments are executed after the step that checks out the
 repository and before the step that sets up R.</p></dd>
+
+
+<dt id="arg-tag-ghactions-r">tag_ghactions4r<a class="anchor" aria-label="anchor" href="#arg-tag-ghactions-r"></a></dt>
+<dd><p>Tag of ghactions4r workflow to pin to for the
+reusable workflow. This ensures compatibility with a specific version of
+ghactions4r functions. The tradeoff is that fixes will not happen
+automatically; instead, the user will have to update the pinned version of
+the caller workflow used. See the options by looking at the
+<a href="https://github.com/nmfs-ost/ghactions4r/tags" class="external-link">ghactions4r tags</a>. Another
+option is to pin to commit hashes, but the user will need to do this by
+manually editing the caller workflow after creation. See
+<a href="https://docs.github.com/en/actions/reference/security/secure-use" class="external-link">github documentation on security</a>
+to understand how this is more secure. Again, the tradeoff is that the
+workflow will not be automatically updated.</p></dd>
 
 </dl></div>
 
