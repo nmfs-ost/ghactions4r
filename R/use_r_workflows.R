@@ -1,16 +1,17 @@
 #' Use workflow to run r cmd check on Linux, Mac, and Windows GitHub Actions
 #' @template workflow_name
-#' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run on 
-#'  pushing commits to main (`push_to_main`). Other options are running
-#'  on pushing commits to any branch ("push_to_all_branches"); running when a 
-#'  pull request is opened, reopened, or updated (`pull_request`); 
-#'  running manually with the workflow_dispatch trigger (`manually`); 
-#'  and running  on the default branch (usually main) once a week (`weekly`).
-#'  Multiple build triggers are allowed; specify them as a vector. Note that
-#'  invalid build triggers will be silently removed as long as one build 
-#'  trigger is specified correctly.
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @param use_full_build_matrix Run R cmd check with two older versions of R in
 #'   addition to the three runs that use the release version.
 #' @param depends_on_tmb Adds an option that install Matrix from source for windows
@@ -114,12 +115,14 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template use_public_rspm
 #' @template depends_on_quarto
 #' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run when a
-#'  pull request is opened, reopened, or updated (`pull_request`). Other
-#'  options are running on pushing commits to main (`push_to_main`); 
-#'  running on pushing commits to any branch (`push_to_all_branches`); 
-#'  and run manually with the workflow_dispatch trigger (`manually`). 
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`pull_request`}{Run when a
+#'  pull request is opened, reopened, or updated (default)}
+#'   \item{`push_to_main`}{Run on pushing commits to main}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
 #'  Multiple build triggers are allowed; specify them as a vector. Note that 
 #'  invalid build triggers will be  silently removed as long as one build trigger 
 #'  is specified correctly.
@@ -212,13 +215,15 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template use_public_rspm
 #' @template depends_on_quarto
 #' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run on pushing commits to main (`push_to_main`). Other
-#'  options are running on the default branch (usually main) once a week
-#'  (`weekly`) and running manually with the workflow_dispatch trigger 
-#'  (`manually`). Multiple build triggers are allowed; specify them as a
-#'  vector. Note that invalid build triggers will be 
-#'  silently removed as long as one build trigger is specified correctly.
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @export
 use_create_cov_badge <- function(
@@ -287,17 +292,18 @@ use_create_cov_badge <- function(
 #'  committed? Options are 1) in a pull request to the branch ("pull_request")
 #'  where the workflow started; or 2) directly to the branch ("directly") where
 #'  the workflow started.
-#' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run on pushing commits to main (`push_to_main`}). Other
-#'  options are run when a pull request is
-#'  opened, reopened, or updated (`pull_request`); run when a comment containing
-#'  the command `\doc-and-style` is made on a pull request by people with write permissions
-#'  on the repository (`pr_comment`); running manually with the workflow_dispatch trigger 
-#'  (`manually`); and running on the default branch (usually main) once a week
-#'  (`weekly`). Multiple build triggers are allowed; specify them as a
-#'  vector. Note that invalid build triggers will be 
-#'  silently removed as long as one build trigger is specified correctly.
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated}
+#'   \item{`pr_comment`}{Run when a comment containing the command `\doc-and-style` is made on a pull request by people with write permissions on the repository}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @param use_air Use [air](https://posit-dev.github.io/air/) instead of [styler](https://styler.r-lib.org/) to style files? Defaults to FALSE.
 #' @param use_pat Should a personal access token (PAT) stored as a GitHub secret
 #'  be used? This is only necessary if you want the pull request generated by
@@ -412,13 +418,15 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 #' a branch called `gh-pages`.
 #' @template workflow_name
 #' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run on pushing commits to main (`push_to_main`).
-#'  Other options are running on the default branch (usually main) once a week
-#'  (`weekly`) and running manually with the workflow_dispatch trigger 
-#'  (`manually`). Multiple build triggers are allowed; specify them as a
-#'  vector. Note that invalid build triggers will be 
-#'  silently removed as long as one build trigger is specified correctly.
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
@@ -474,16 +482,17 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' the site, and therefore can be used to test if the build is working in cases
 #' where you do not want to deploy as well.
 #' @template workflow_name
-#' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run when a pull request is opened, reopened, or updated
-#'  (`pull_request`).Other options are running on pushing commits to 
-#'  main (`push_to_main`); running on pushing commits to any branch 
-#'  ("push_to_all_branches"); running manually with the workflow_dispatch 
-#'  trigger (`manually`); and running  on the default branch (usually
-#'  main) once a week (`weekly`). Multiple build triggers are allowed;
-#'  specify them as a vector. Note that invalid build triggers will be 
-#'  silently removed as long as one build trigger is specified correctly.
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated (default)}
+#'   \item{`push_to_main`}{Run on pushing commits to main}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
@@ -539,16 +548,7 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' the workflow will fail if any spelling errors are found. If set to "warning", the
 #' the workflow will pass even if spelling errors are found.
 #' @template workflow_name
-#' @param build_trigger Select the 
-#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events).
-#'  The default is to run when a pull request is opened, reopened, or updated
-#'  (`pull_request`).Other options are running on pushing commits to 
-#'  main (`push_to_main`); running on pushing commits to any branch 
-#'  ("push_to_all_branches"); running manually with the workflow_dispatch 
-#'  trigger (`manually`); and running  on the default branch (usually
-#'  main) once a week (`weekly`). Multiple build triggers are allowed;
-#'  specify them as a vector. Note that invalid build triggers will be 
-#'  silently removed as long as one build trigger is specified correctly.
+#' @inheritParams use_build_pkgdown
 #' @template tag_ghactions4r
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
