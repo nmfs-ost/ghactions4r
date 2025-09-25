@@ -1,6 +1,23 @@
 # ghactions4r development
 * Add option to use Air instead of styler in the doc-and-styler-r workflow.
 
+# ghactions4r 1.0.0
+
+## Major Changes
+* Add air as an option for doc and style by @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/204
+* Update spell check GHA and use_spell_check() with configurable inputs by @Bai-Li-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/209
+* Allow doc and style to work on Pull request command by @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/223
+* Cancel concurrent runs. all currently running actions of the same workflow on the same branch will be canceled when a new run is started in https://github.com/nmfs-ost/ghactions4r/pull/200
+* Allow style and doc to work on multiple branches and make PRs for each branch in https://github.com/nmfs-ost/ghactions4r/pull/193
+* Add more build trigger options in https://github.com/nmfs-ost/ghactions4r/pull/229
+* Pull ghactions4r caller workflow templates from the installed ghaction4r package instead of the main branch of ghactions4r on GitHub in https://github.com/nmfs-ost/ghactions4r/pull/229
+* Allow users to use more than 1 build trigger in https://github.com/nmfs-ost/ghactions4r/pull/233
+
+## Minor improvements and bug fixes
+* Fix spell-check.yml by @Bai-Li-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/214
+* Remove unneeded dependencies from doc and style workflow by @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/219
+* Fix bug where a pull_request build trigger would error out for doc-and-style in https://github.com/nmfs-ost/ghactions4r/pull/193
+
 # ghactions4r 0.3.0
 
 ## Major changes
