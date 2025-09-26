@@ -6,7 +6,7 @@
 \usage{
 use_calc_cov_summaries(
   workflow_name = "call-calc-cov-summaries.yml",
-  build_trigger = c("pull_request", "push_to_main", "push_to_all_branches", "manually"),
+  build_trigger = "pull_request",
   use_public_rspm = TRUE,
   depends_on_quarto = FALSE,
   tag_ghactions4r = NULL
@@ -16,15 +16,18 @@ use_calc_cov_summaries(
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
 
-\item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main"); run when a pull request is
-opened, reopened, or updated ("pull_request"); run when a comment containing
-the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
-on the repository ("pr_comment"); run manually with the
-workflow_dispatch trigger ("manually"); run on the default branch (usually
-main) once a week ("weekly"). Currently, it is not possible to create a file
-with multiple build triggers from the function. Instead, users should add all of the
-appropriate build triggers by editing the file after the use_* function.}
+\item{build_trigger}{Select the
+\href{https://docs.github.com/en/actions/get-started/understand-github-actions#events}{event that triggers the workflow}. Options are:
+\describe{
+\item{\code{pull_request}}{Run when a
+pull request is opened, reopened, or updated (default)}
+\item{\code{push_to_main}}{Run on pushing commits to main}
+\item{\code{push_to_all_branches}}{Run on pushing commits to any branch}
+\item{\code{manually}}{run manually with the workflow_dispatch trigger}
+}
+Multiple build triggers are allowed; specify them as a vector. Note that
+invalid build triggers will be  silently removed as long as one build trigger
+is specified correctly.}
 
 \item{use_public_rspm}{Use posit package manager instead of CRAN to install dependencies? The
 advantage here is that dependencies are precompiled, so install should be much quicker. In

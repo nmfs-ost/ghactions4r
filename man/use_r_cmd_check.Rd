@@ -6,8 +6,7 @@
 \usage{
 use_r_cmd_check(
   workflow_name = "call-r-cmd-check.yml",
-  build_trigger = c("push_to_main", "push_to_all_branches", "pull_request", "manually",
-    "weekly"),
+  build_trigger = "push_to_main",
   use_full_build_matrix = FALSE,
   depends_on_tmb = FALSE,
   depends_on_quarto = FALSE,
@@ -19,15 +18,18 @@ use_r_cmd_check(
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
 
-\item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main"); run when a pull request is
-opened, reopened, or updated ("pull_request"); run when a comment containing
-the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
-on the repository ("pr_comment"); run manually with the
-workflow_dispatch trigger ("manually"); run on the default branch (usually
-main) once a week ("weekly"). Currently, it is not possible to create a file
-with multiple build triggers from the function. Instead, users should add all of the
-appropriate build triggers by editing the file after the use_* function.}
+\item{build_trigger}{Select the
+\href{https://docs.github.com/en/actions/get-started/understand-github-actions#events}{event that triggers the workflow}. Options are:
+\describe{
+\item{\code{push_to_main}}{Run on pushing commits to main (default)}
+\item{\code{push_to_all_branches}}{Run on pushing commits to any branch}
+\item{\code{pull_request}}{Run when a pull request is opened, reopened, or updated}
+\item{\code{manually}}{Run manually with the workflow_dispatch trigger}
+\item{\code{weekly}}{Run on the default branch (usually main) once a week}
+}
+Multiple build triggers are allowed; specify them as a vector. Note that
+invalid build triggers will be silently removed as long as one build trigger
+is specified correctly.}
 
 \item{use_full_build_matrix}{Run R cmd check with two older versions of R in
 addition to the three runs that use the release version.}
