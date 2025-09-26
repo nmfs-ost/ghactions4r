@@ -1,6 +1,17 @@
 #' Use workflow to run r cmd check on Linux, Mac, and Windows GitHub Actions
 #' @template workflow_name
-#' @template build_trigger
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @param use_full_build_matrix Run R cmd check with two older versions of R in
 #'   addition to the three runs that use the release version.
 #' @param depends_on_tmb Adds an option that install Matrix from source for windows
@@ -30,7 +41,7 @@
 #' }
 #' @export
 use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
-                            build_trigger = c("push_to_main", "push_to_all_branches", "pull_request", "manually", "weekly"),
+                            build_trigger = "push_to_main",
                             use_full_build_matrix = FALSE,
                             depends_on_tmb = FALSE,
                             depends_on_quarto = FALSE,
@@ -38,12 +49,13 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
                             tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
 
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- match.arg(arg = build_trigger,
+                             choices = c("push_to_main", 
+                                         "push_to_all_branches", 
+                                         "pull_request",
+                                         "manually",
+                                         "weekly"),
+                             several.ok = TRUE)
   check_workflow_name(workflow_name)
   if (use_full_build_matrix) {
     template_name <- "call-r-cmd-check-full.yml"
@@ -102,25 +114,32 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template workflow_name
 #' @template use_public_rspm
 #' @template depends_on_quarto
-#' @template build_trigger
+#' @param build_trigger Select the 
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`pull_request`}{Run when a
+#'  pull request is opened, reopened, or updated (default)}
+#'   \item{`push_to_main`}{Run on pushing commits to main}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be  silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @export
 use_calc_cov_summaries <- function(
     workflow_name = "call-calc-cov-summaries.yml",
-    build_trigger = c(
-      "pull_request", "push_to_main", "push_to_all_branches",
-      "manually"
-    ),
+    build_trigger = "pull_request",
     use_public_rspm = TRUE,
     depends_on_quarto = FALSE,
     tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- 
+    match.arg(arg = build_trigger, 
+              choices = c("pull_request", "push_to_main", "push_to_all_branches",
+                         "manually") ,
+              several.ok = TRUE)
 
 
   path_to_yml <- copy_caller_template(
@@ -130,7 +149,6 @@ use_calc_cov_summaries <- function(
   gha <- readLines(path_to_yml)
 
   gha <- add_build_trigger(build_trigger, gha)
-
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
     if (use_public_rspm == FALSE) {
       gha <- add_public_rspm_false(
@@ -196,21 +214,25 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template workflow_name
 #' @template use_public_rspm
 #' @template depends_on_quarto
-#' @template build_trigger
+#' @param build_trigger Select the 
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @export
 use_create_cov_badge <- function(
     workflow_name = "call-create-cov-badge.yml",
-    build_trigger = c("push_to_main", "weekly", "manually"),
+    build_trigger = "push_to_main",
     use_public_rspm = TRUE, depends_on_quarto = FALSE,
     tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- match.arg(arg = build_trigger, choices = c("push_to_main", "weekly", "manually"), several.ok = TRUE)
   path_to_yml <- copy_caller_template(
     template_name = "call-create-cov-badge.yml",
     workflow_name = workflow_name
@@ -270,7 +292,18 @@ use_create_cov_badge <- function(
 #'  committed? Options are 1) in a pull request to the branch ("pull_request")
 #'  where the workflow started; or 2) directly to the branch ("directly") where
 #'  the workflow started.
-#' @template build_trigger
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated}
+#'   \item{`pr_comment`}{Run when a comment containing the command `\doc-and-style` is made on a pull request by people with write permissions on the repository}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @param use_air Use [air](https://posit-dev.github.io/air/) instead of [styler](https://styler.r-lib.org/) to style files? Defaults to FALSE.
 #' @param use_pat Should a personal access token (PAT) stored as a GitHub secret
 #'  be used? This is only necessary if you want the pull request generated by
@@ -316,13 +349,7 @@ use_create_cov_badge <- function(
 use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
                                 use_rm_dollar_sign = FALSE,
                                 how_to_commit = c("pull_request", "directly"),
-                                build_trigger = c(
-                                  "push_to_main",
-                                  "pull_request",
-                                  "pr_comment",
-                                  "manually",
-                                  "weekly"
-                                ),
+                                build_trigger = "push_to_main",
                                 use_air = FALSE,
                                 use_pat = FALSE,
                                 pat_name = "PAT",
@@ -330,12 +357,14 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
   # input checks
   check_workflow_name(workflow_name)
   how_to_commit <- match.arg(arg = how_to_commit)
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- match.arg(arg = build_trigger,
+                                      choices = c(
+                                                  "push_to_main",
+                                                  "pull_request",
+                                                  "pr_comment",
+                                                  "manually",
+                                                  "weekly"),
+                                      several.ok = TRUE)
   if (how_to_commit == "directly" & use_pat == TRUE) {
     stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
   }
@@ -388,7 +417,16 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 #' running this function. This workflow will assume the website is built from
 #' a branch called `gh-pages`.
 #' @template workflow_name
-#' @template build_trigger
+#' @param build_trigger Select the 
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`push_to_main`}{Run on pushing commits to main (default)}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'   \item{`manually`}{run manually with the workflow_dispatch trigger}
+#' }
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
@@ -407,22 +445,16 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
 #' }
 #' @export
 use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
-                               build_trigger = c(
-                                 "push_to_main",
-                                 "manually",
-                                 "weekly"
-                               ),
+                               build_trigger = "push_to_main",
                                additional_args = NULL,
                                tag_ghactions4r = NULL) {
   build_trigger <- match.arg(
     arg = build_trigger,
     choices = c(
-      "push_to_main", "manually",
-      "weekly"
-    )
+      "push_to_main", "weekly", "manually"), 
+    several.ok = TRUE
   )
   validate_additional_args(additional_args)
-  validate_build_trigger(build_trigger)
   check_workflow_name(workflow_name)
   # get the template github action
   path_to_yml <- copy_caller_template(
@@ -450,7 +482,17 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' the site, and therefore can be used to test if the build is working in cases
 #' where you do not want to deploy as well.
 #' @template workflow_name
-#' @template build_trigger
+#' @param build_trigger Select the
+#'  [event that triggers the workflow](https://docs.github.com/en/actions/get-started/understand-github-actions#events). Options are:
+#' \describe{
+#'   \item{`pull_request`}{Run when a pull request is opened, reopened, or updated (default)}
+#'   \item{`push_to_main`}{Run on pushing commits to main}
+#'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
+#'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
+#'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#'  Multiple build triggers are allowed; specify them as a vector. Note that 
+#'  invalid build triggers will be silently removed as long as one build trigger 
+#'  is specified correctly.
 #' @template tag_ghactions4r
 #' @inheritParams use_r_cmd_check
 #' @examples
@@ -469,19 +511,14 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #' }
 #' @export
 use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
-                              build_trigger = c(
-                                "pull_request", "push_to_main",
-                                "push_to_all_branches", "manually", "weekly"
-                              ),
+                              build_trigger = "pull_request",
                               additional_args = NULL,
                               tag_ghactions4r = NULL) {
   validate_additional_args(additional_args)
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- match.arg(arg = build_trigger, choices = c(
+                                "pull_request", "push_to_main",
+                                "push_to_all_branches", "manually", "weekly"
+                              ), several.ok = TRUE)
   check_workflow_name(workflow_name)
   path_to_yml <- copy_caller_template(
     template_name = "call-build-pkgdown.yml",
@@ -511,23 +548,18 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' the workflow will fail if any spelling errors are found. If set to "warning", the
 #' the workflow will pass even if spelling errors are found.
 #' @template workflow_name
-#' @template build_trigger
+#' @inheritParams use_build_pkgdown
 #' @template tag_ghactions4r
 #' @export
 use_spell_check <- function(workflow_name = "call-spell-check.yml",
-                            build_trigger = c(
-                              "pull_request", "push_to_main",
-                              "push_to_all_branches", "weekly", "manually"
-                            ),
+                            build_trigger = "pull_request",
                             spell_check_additional_files = FALSE,
                             spell_check_report_level = c("error", "warning"),
                             tag_ghactions4r = NULL) {
-  build_trigger <- tryCatch(match.arg(arg = build_trigger),
-    error = function(e) {
-      validate_build_trigger(build_trigger)
-      cli_abort(e)
-    }
-  )
+  build_trigger <- match.arg(arg = build_trigger, choices = c(
+                              "pull_request", "push_to_main",
+                              "push_to_all_branches", "manually", "weekly"
+                            ), several.ok = TRUE)
   # Remind users that spell_check_report_level is set to 'error' by default if users
   # don't specify spell_check_report_level
   if (spell_check_additional_files == TRUE & length(spell_check_report_level) > 1) {
