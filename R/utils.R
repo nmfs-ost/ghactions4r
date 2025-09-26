@@ -79,16 +79,17 @@ add_quarto_true <- function(uses_line, gha) {
 add_build_trigger <- function(build_trigger, gha) {
   build_trigger_lines <- lapply(build_trigger, function(x) {
     switch(x,
-    push_to_main = c("  push:", "    branches: [main]"),
-    push_to_all_branches = c("  push:"),
-    pull_request = "  pull_request:",
-    pr_comment = c("  issue_comment:", "    types: [created] "),
-    manually = "  workflow_dispatch:",
-    weekly = c(
-      "  schedule:",
-      "# Use https://crontab.guru/ to edit the time",
-      "    - cron:  '15 02 * * 0'"
-    ))
+      push_to_main = c("  push:", "    branches: [main]"),
+      push_to_all_branches = c("  push:"),
+      pull_request = "  pull_request:",
+      pr_comment = c("  issue_comment:", "    types: [created] "),
+      manually = "  workflow_dispatch:",
+      weekly = c(
+        "  schedule:",
+        "# Use https://crontab.guru/ to edit the time",
+        "    - cron:  '15 02 * * 0'"
+      )
+    )
   })
   build_trigger_lines <- unlist(build_trigger_lines)
 

@@ -6,7 +6,7 @@
 \usage{
 use_update_pkgdown(
   workflow_name = "call-update-pkgdown.yml",
-  build_trigger = c("push_to_main", "manually", "weekly"),
+  build_trigger = "push_to_main",
   additional_args = NULL,
   tag_ghactions4r = NULL
 )
@@ -15,15 +15,16 @@ use_update_pkgdown(
 \item{workflow_name}{What to name the github action workflow locally. Must
 have the file extension \code{.yml}}
 
-\item{build_trigger}{Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main"); run when a pull request is
-opened, reopened, or updated ("pull_request"); run when a comment containing
-the command \verb{\\doc-and-style} is made on a pull request by people with write permissions
-on the repository ("pr_comment"); run manually with the
-workflow_dispatch trigger ("manually"); run on the default branch (usually
-main) once a week ("weekly"). Currently, it is not possible to create a file
-with multiple build triggers from the function. Instead, users should add all of the
-appropriate build triggers by editing the file after the use_* function.}
+\item{build_trigger}{Select the
+\href{https://docs.github.com/en/actions/get-started/understand-github-actions#events}{event that triggers the workflow}. Options are:
+\describe{
+\item{\code{push_to_main}}{Run on pushing commits to main (default)}
+\item{\code{weekly}}{Run on the default branch (usually main) once a week}
+\item{\code{manually}}{run manually with the workflow_dispatch trigger}
+}
+Multiple build triggers are allowed; specify them as a vector. Note that
+invalid build triggers will be silently removed as long as one build trigger
+is specified correctly.}
 
 \item{additional_args}{A named list of additional command line arguments to be
 passed to the workflow. The names of the list represent the platforms (windows,
