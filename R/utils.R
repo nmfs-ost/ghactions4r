@@ -129,6 +129,7 @@ add_build_trigger <- function(build_trigger, gha) {
 #'
 #' @param template_name The name of the template in the ghactions4r package
 #' @param workflow_name The user defined name of the workflow to create
+#' @noRd
 #' @return The path to the caller workflow file copied
 copy_caller_template <- function(template_name = "call-spell-check.yml", workflow_name = "call-spell-check.yml") {
   template_path <- system.file("templates", template_name,
@@ -145,6 +146,7 @@ copy_caller_template <- function(template_name = "call-spell-check.yml", workflo
 #' Pin to a particular version of ghactions4r rather than main
 #' @param gha The workflow text
 #' @param tag Version of ghactions4r to pin to a specific version
+#' @noRd
 use_version_pin <- function(tag, gha) {
   repo <- "nmfs-ost/ghactions4r"
   # Note: could considering adding headers for a higher rate limit.
@@ -165,6 +167,7 @@ use_version_pin <- function(tag, gha) {
 #' Get the tags by calling the GitHub rest API
 #' @param repo owner/repo
 #' @param headers NULL for now
+#' @noRd
 #' @importFrom httr GET stop_for_status content
 #' @importFrom jsonlite fromJSON
 get_tags <- function(repo = "nmfs-ost/ghactions4r", headers = NULL) {

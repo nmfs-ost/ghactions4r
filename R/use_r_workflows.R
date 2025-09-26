@@ -502,6 +502,7 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
 #'   \item{`push_to_all_branches`}{Run on pushing commits to any branch}
 #'   \item{`manually`}{Run manually with the workflow_dispatch trigger}
 #'   \item{`weekly`}{Run on the default branch (usually main) once a week}
+#' }
 #'  Multiple build triggers are allowed; specify them as a vector. Note that
 #'  invalid build triggers will be silently removed as long as one build trigger
 #'  is specified correctly.
