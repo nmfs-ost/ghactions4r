@@ -89,8 +89,7 @@ It will also run the spell_check_files() on specified file types if spell_check_
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_spell_check</span><span class="op">(</span></span>
 <span>  workflow_name <span class="op">=</span> <span class="st">"call-spell-check.yml"</span>,</span>
-<span>  build_trigger <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pull_request"</span>, <span class="st">"push_to_main"</span>, <span class="st">"push_to_all_branches"</span>, <span class="st">"weekly"</span>,</span>
-<span>    <span class="st">"manually"</span><span class="op">)</span>,</span>
+<span>  build_trigger <span class="op">=</span> <span class="st">"pull_request"</span>,</span>
 <span>  spell_check_additional_files <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  spell_check_report_level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"error"</span>, <span class="st">"warning"</span><span class="op">)</span>,</span>
 <span>  tag_ghactions4r <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -107,15 +106,26 @@ have the file extension <code>.yml</code></p></dd>
 
 
 <dt id="arg-build-trigger">build_trigger<a class="anchor" aria-label="anchor" href="#arg-build-trigger"></a></dt>
-<dd><p>Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main"); run when a pull request is
-opened, reopened, or updated ("pull_request"); run when a comment containing
-the command <code>\doc-and-style</code> is made on a pull request by people with write permissions
-on the repository ("pr_comment"); run manually with the
-workflow_dispatch trigger ("manually"); run on the default branch (usually
-main) once a week ("weekly"). Currently, it is not possible to create a file
-with multiple build triggers from the function. Instead, users should add all of the
-appropriate build triggers by editing the file after the use_* function.</p></dd>
+<dd><p>Select the
+<a href="https://docs.github.com/en/actions/get-started/understand-github-actions#events" class="external-link">event that triggers the workflow</a>. Options are:</p><dl><dt><code>push_to_main</code></dt>
+<dd><p>Run on pushing commits to main (default)</p></dd>
+
+<dt><code>push_to_all_branches</code></dt>
+<dd><p>Run on pushing commits to any branch</p></dd>
+
+<dt><code>pull_request</code></dt>
+<dd><p>Run when a pull request is opened, reopened, or updated</p></dd>
+
+<dt><code>manually</code></dt>
+<dd><p>Run manually with the workflow_dispatch trigger</p></dd>
+
+<dt><code>weekly</code></dt>
+<dd><p>Run on the default branch (usually main) once a week</p></dd>
+
+
+</dl><p>Multiple build triggers are allowed; specify them as a vector. Note that
+invalid build triggers will be silently removed as long as one build trigger
+is specified correctly.</p></dd>
 
 
 <dt id="arg-spell-check-additional-files">spell_check_additional_files<a class="anchor" aria-label="anchor" href="#arg-spell-check-additional-files"></a></dt>

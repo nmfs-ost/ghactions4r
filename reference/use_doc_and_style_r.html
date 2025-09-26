@@ -89,7 +89,7 @@ styler::style_pkg() or air, and usethis::use_tidy_description().</p>
 <span>  workflow_name <span class="op">=</span> <span class="st">"call-doc-and-style-r.yml"</span>,</span>
 <span>  use_rm_dollar_sign <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  how_to_commit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pull_request"</span>, <span class="st">"directly"</span><span class="op">)</span>,</span>
-<span>  build_trigger <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"push_to_main"</span>, <span class="st">"pull_request"</span>, <span class="st">"pr_comment"</span>, <span class="st">"manually"</span>, <span class="st">"weekly"</span><span class="op">)</span>,</span>
+<span>  build_trigger <span class="op">=</span> <span class="st">"push_to_main"</span>,</span>
 <span>  use_air <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_pat <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pat_name <span class="op">=</span> <span class="st">"PAT"</span>,</span>
@@ -119,15 +119,26 @@ the workflow started.</p></dd>
 
 
 <dt id="arg-build-trigger">build_trigger<a class="anchor" aria-label="anchor" href="#arg-build-trigger"></a></dt>
-<dd><p>Select the build trigger. Options may include (depending on the workflow)
-running on pushing commits to main ("push_to_main"); run when a pull request is
-opened, reopened, or updated ("pull_request"); run when a comment containing
-the command <code>\doc-and-style</code> is made on a pull request by people with write permissions
-on the repository ("pr_comment"); run manually with the
-workflow_dispatch trigger ("manually"); run on the default branch (usually
-main) once a week ("weekly"). Currently, it is not possible to create a file
-with multiple build triggers from the function. Instead, users should add all of the
-appropriate build triggers by editing the file after the use_* function.</p></dd>
+<dd><p>Select the
+<a href="https://docs.github.com/en/actions/get-started/understand-github-actions#events" class="external-link">event that triggers the workflow</a>. Options are:</p><dl><dt><code>push_to_main</code></dt>
+<dd><p>Run on pushing commits to main (default)</p></dd>
+
+<dt><code>pull_request</code></dt>
+<dd><p>Run when a pull request is opened, reopened, or updated</p></dd>
+
+<dt><code>pr_comment</code></dt>
+<dd><p>Run when a comment containing the command <code>\doc-and-style</code> is made on a pull request by people with write permissions on the repository</p></dd>
+
+<dt><code>manually</code></dt>
+<dd><p>Run manually with the workflow_dispatch trigger</p></dd>
+
+<dt><code>weekly</code></dt>
+<dd><p>Run on the default branch (usually main) once a week</p></dd>
+
+
+</dl><p>Multiple build triggers are allowed; specify them as a vector. Note that
+invalid build triggers will be silently removed as long as one build trigger
+is specified correctly.</p></dd>
 
 
 <dt id="arg-use-air">use_air<a class="anchor" aria-label="anchor" href="#arg-use-air"></a></dt>
