@@ -19,9 +19,9 @@ have the file extension \code{.yml}}
 \item{build_trigger}{Select the
 \href{https://docs.github.com/en/actions/get-started/understand-github-actions#events}{event that triggers the workflow}. Options are:
 \describe{
-\item{\code{push_to_main}}{Run on pushing commits to main (default)}
+\item{\code{pull_request}}{Run when a pull request is opened, reopened, or updated (default)}
+\item{\code{push_to_main}}{Run on pushing commits to main}
 \item{\code{push_to_all_branches}}{Run on pushing commits to any branch}
-\item{\code{pull_request}}{Run when a pull request is opened, reopened, or updated}
 \item{\code{manually}}{Run manually with the workflow_dispatch trigger}
 \item{\code{weekly}}{Run on the default branch (usually main) once a week}
 }
