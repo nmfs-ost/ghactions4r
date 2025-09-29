@@ -107,14 +107,14 @@ have the file extension <code>.yml</code></p></dd>
 
 <dt id="arg-build-trigger">build_trigger<a class="anchor" aria-label="anchor" href="#arg-build-trigger"></a></dt>
 <dd><p>Select the
-<a href="https://docs.github.com/en/actions/get-started/understand-github-actions#events" class="external-link">event that triggers the workflow</a>. Options are:</p><dl><dt><code>push_to_main</code></dt>
-<dd><p>Run on pushing commits to main (default)</p></dd>
+<a href="https://docs.github.com/en/actions/get-started/understand-github-actions#events" class="external-link">event that triggers the workflow</a>. Options are:</p><dl><dt><code>pull_request</code></dt>
+<dd><p>Run when a pull request is opened, reopened, or updated (default)</p></dd>
+
+<dt><code>push_to_main</code></dt>
+<dd><p>Run on pushing commits to main</p></dd>
 
 <dt><code>push_to_all_branches</code></dt>
 <dd><p>Run on pushing commits to any branch</p></dd>
-
-<dt><code>pull_request</code></dt>
-<dd><p>Run when a pull request is opened, reopened, or updated</p></dd>
 
 <dt><code>manually</code></dt>
 <dd><p>Run manually with the workflow_dispatch trigger</p></dd>
