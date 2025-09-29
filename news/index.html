@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ghactions4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -77,6 +77,33 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="ghactions4r-100">ghactions4r 1.0.0<a class="anchor" aria-label="anchor" href="#ghactions4r-100"></a></h2>
+<p>This is technically the first stable release of ghactions4r. We intend to follow <a href="https://semver.org/" class="external-link">semantic versioning</a> from here on.</p>
+<div class="section level3">
+<h3 id="major-changes-1-0-0">Major Changes<a class="anchor" aria-label="anchor" href="#major-changes-1-0-0"></a></h3>
+<ul><li>Allow the doc-and-style workflow to work on multiple branches and make pull requests for each branch in <a href="https://github.com/nmfs-ost/ghactions4r/pull/193" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/193</a>
+</li>
+<li>Cancel concurrent runs. all currently running actions of the same workflow on the same branch will be canceled when a new run is started in <a href="https://github.com/nmfs-ost/ghactions4r/pull/200" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/200</a>
+</li>
+<li>Add air as an option for the doc-and-style workflow. See the <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html" class="external-link"><code>use_doc_and_style_r</code> documentation</a> for information on how to use air instead of styler for styling. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/204" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/204</a>
+</li>
+<li>Allow the spell_check workflow to optionally spell check additional files. See more information in the <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_spell_check.html" class="external-link"><code>use_spell_check()</code> documentation</a>. By @Bai-Li-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/209" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/209</a> and <a href="https://github.com/nmfs-ost/ghactions4r/pull/214" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/214</a>.</li>
+<li>Allow the doc-and-style workflow to work on pull request command. See the <a href="https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html" class="external-link"><code>use_doc_and_style_r</code> documentation</a> for information on how to set up the doc-and-style caller workflow to work on pull request. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/223" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/223</a>
+</li>
+<li>Add more build trigger options. The options available differ by workflow and are listed on each use_* <a href="https://nmfs-ost.github.io/ghactions4r/reference/index.html" class="external-link">function</a> under the <code>build_trigger</code> argument description. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/229" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/229</a>.</li>
+<li>Pull <code>{ghactions4r}</code> caller workflow templates from the installed <code>{ghaction4r}</code> package instead of the main branch of <code>{ghactions4r}</code> on GitHub. This helps ensure the templates and functions will play well together. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/229" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/229</a>.</li>
+<li>Allow users to include more than 1 build trigger. The <code>build_trigger</code> argument can be specified as a vector. The options available differ by workflow and are listed on each use_* function under the <code>build_trigger</code> argument description for each <a href="https://nmfs-ost.github.io/ghactions4r/reference/index.html" class="external-link">function</a>. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/233" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/233</a>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-1-0-0">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-1-0-0"></a></h3>
+<ul><li>Fix a bug where a <code>pull_request</code> build trigger would error out for the doc-and-style workflow. By @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/193" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/193</a>
+</li>
+<li>Remove unneeded dependencies from the doc-and-style workflow by @k-doering-NOAA in <a href="https://github.com/nmfs-ost/ghactions4r/pull/219" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/219</a> and <a href="https://github.com/nmfs-ost/ghactions4r/pull/222" class="external-link uri">https://github.com/nmfs-ost/ghactions4r/pull/222</a>
+</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="ghactions4r-030">ghactions4r 0.3.0<a class="anchor" aria-label="anchor" href="#ghactions4r-030"></a></h2>
 <div class="section level3">
