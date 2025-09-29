@@ -1,17 +1,14 @@
-# ghactions4r development
-* Add option to use Air instead of styler in the doc-and-styler-r workflow.
-
 # ghactions4r 1.0.0
 
-This is technically the first stable release of ghactions4r! The API will not change unexpectedly.
+This is technically the first stable release of ghactions4r. We intend to follow [semantic versioning](https://semver.org/) from here on.
 
 ## Major Changes
 
-* Allow style and doc to work on multiple branches and make PRs for each branch in https://github.com/nmfs-ost/ghactions4r/pull/193 
+* Allow the doc-and-style workflow to work on multiple branches and make pull requests for each branch in https://github.com/nmfs-ost/ghactions4r/pull/193 
 * Cancel concurrent runs. all currently running actions of the same workflow on the same branch will be canceled when a new run is started in https://github.com/nmfs-ost/ghactions4r/pull/200
-* Add air as an option for doc and style. See the [`use_doc_and_style_r` documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html) for information on how to use air instead of styler for styling. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/204
+* Add air as an option for the doc-and-style workflow. See the [`use_doc_and_style_r` documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html) for information on how to use air instead of styler for styling. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/204
 * Allow the spell_check workflow to optionally spell check additional files. See more information in the [`use_spell_check()` documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_spell_check.html). By @Bai-Li-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/209 and https://github.com/nmfs-ost/ghactions4r/pull/214.
-* Allow doc and style to work on pull request command. See the [`use_doc_and_style_r` documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html) for information on how to set up the doc and styler caller to work on pull request. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/223
+* Allow the doc-and-style workflow to work on pull request command. See the [`use_doc_and_style_r` documentation](https://nmfs-ost.github.io/ghactions4r/reference/use_doc_and_style_r.html) for information on how to set up the doc-and-style caller workflow to work on pull request. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/223
 * Add more build trigger options. The options available differ by workflow and are listed on each use_* [function](https://nmfs-ost.github.io/ghactions4r/reference/index.html) under the `build_trigger` argument description. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/229.
 * Pull `{ghactions4r}` caller workflow templates from the installed `{ghaction4r}` package instead of the main branch of `{ghactions4r}` on GitHub. This helps ensure the templates and functions will play well together. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/229.
 * Allow users to include more than 1 build trigger. The `build_trigger` argument can be specified as a vector. The options available differ by workflow and are listed on each use_* function under the `build_trigger` argument description for each [function](https://nmfs-ost.github.io/ghactions4r/reference/index.html). By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/233
@@ -19,7 +16,7 @@ This is technically the first stable release of ghactions4r! The API will not ch
 ## Minor improvements and bug fixes
 
 * Fix a bug where a `pull_request` build trigger would error out for the doc-and-style workflow. By @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/193
-* Remove unneeded dependencies from doc and style workflow by @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/219 and https://github.com/nmfs-ost/ghactions4r/pull/222
+* Remove unneeded dependencies from the doc-and-style workflow by @k-doering-NOAA in https://github.com/nmfs-ost/ghactions4r/pull/219 and https://github.com/nmfs-ost/ghactions4r/pull/222
 
 # ghactions4r 0.3.0
 
