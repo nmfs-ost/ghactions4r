@@ -175,7 +175,7 @@ jobs:
         
       - name: commit if using commit directly
         if: inputs.commit-directly == true
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'style and docs: run devtools::document() and style with styler or air'
       
