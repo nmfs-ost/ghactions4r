@@ -64,7 +64,7 @@ jobs:
           Rscript -e 'pkgdown::build_site()'
      
       - name: save pkgdown output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pkgdown-site
           path: docs/
