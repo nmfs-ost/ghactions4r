@@ -614,3 +614,67 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
   writeLines(gha, path_to_yml)
   invisible(workflow_name)
 }
+
+#' Use the cSpell workflow to check spelling in selected files
+#'
+#' This workflow checks files with cSpell, using the organization-wide
+#' configuration by default. A repository-specific config can be provided.
+#' @template workflow_name
+#' @inheritParams use_build_pkgdown
+#' @param files Glob pattern(s) for files to check.
+#' @param custom_config Path to a repository-specific cSpell configuration file.
+#'   Defaults to the organization-wide configuration.
+#' @param only_new Logical. Should cSpell check only newly changed files? Defaults
+#'   to TRUE.
+#' @template tag_ghactions4r
+#' @export
+use_cspell <- function(workflow_name = "call-cspell.yml",
+                       build_trigger = "pull_request",
+                       files = "**/*.{R,Rmd,qmd,md,Rd,cpp,h}",
+                       custom_config = NULL,
+                       only_new = TRUE,
+                       tag_ghactions4r = NULL) {
+  build_trigger <- match.arg(arg = build_trigger, choices = c(
+    "pull_request", "push_to_main",
+    "push_to_all_branches", "manually", "weekly"
+  ), several.ok = TRUE)
+  check_workflow_name(workflow_name)
+
+  path_to_yml <- copy_caller_template(
+    template_name = "call-cspell.yml",
+    workflow_name = workflow_name
+  )
+  gha <- readLines(path_to_yml)
+  gha <- add_build_trigger(build_trigger, gha)
+
+  uses_line <- grep(
+    "uses: nmfs-ost/ghactions4r/.github/workflows/cspell.yml",
+    gha,
+    fixed = TRUE
+  )
+  gha <- append(gha, "    with:", after = uses_line)
+  gha <- append(
+    gha,
+    paste0("      files: '", gsub("'", "''", files, fixed = TRUE), "'"),
+    after = uses_line + 1
+  )
+  if (!is.null(custom_config)) {
+    gha <- append(
+      gha,
+      paste0("      custom-config: '", gsub("'", "''", custom_config, fixed = TRUE), "'"),
+      after = uses_line + 2
+    )
+  }
+  gha <- append(
+    gha,
+    paste0("      only-new: ", tolower(as.character(only_new))),
+    after = uses_line + if (is.null(custom_config)) 2 else 3
+  )
+
+  if (!is.null(tag_ghactions4r)) {
+    gha <- use_version_pin(tag_ghactions4r, gha)
+  }
+
+  writeLines(gha, path_to_yml)
+  invisible(workflow_name)
+}
