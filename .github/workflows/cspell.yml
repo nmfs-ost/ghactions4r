@@ -51,21 +51,37 @@ jobs:
       # Step that executes ONLY if cSpell fails
       - name: Output Spell Check Failure Instructions
         if: always() && steps.cspell.outcome == 'failure'
+        env:
+          CUSTOM_CONFIG: ${{ inputs.custom-config }}
         run: |
           echo "=========================================================================="
           echo "❌ SPELL CHECK FAILED"
           echo "--------------------------------------------------------------------------"
           echo "One or more unrecognized words were found in this repository."
           echo ""
-          echo "If these are valid terms, acronyms, or proper names:"
-          echo "  Please submit a Pull Request to add them to the central wordlist at:"
-          echo "  👉 NOAA-FIMS/.github/cspell.json"
-          echo ""
-          echo "Location: https://github.com/noaa-fims/.github/blob/main/cspell.json"
+          if [ -n "$CUSTOM_CONFIG" ]; then
+            echo "If these are valid terms, acronyms, or proper names, add them to the custom cSpell config: $CUSTOM_CONFIG"
+          else
+            echo "If these are valid terms, acronyms, or proper names:"
+            echo "  Please submit a Pull Request to add them to the central wordlist at:"
+            echo "  👉 NOAA-FIMS/.github/cspell.json"
+            echo ""
+            echo "Location: https://github.com/noaa-fims/.github/blob/main/cspell.json"
+          fi
+
           echo "=========================================================================="
           
           # Write to Job Summary so it shows prominently in the GitHub Actions UI
-          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          if [ -n "$CUSTOM_CONFIG" ]; then
+            {
+              echo "### ❌ Spell Check Failed"
+              echo ""
+              echo "Unrecognized words were detected during the spellcheck step."
+              echo ""
+              printf 'Add legitimate words or domain terms to the custom cSpell configuration: `%s`.\n' "$CUSTOM_CONFIG"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            cat << 'EOF' >> "$GITHUB_STEP_SUMMARY"
           ### ❌ Spell Check Failed
 
           Unrecognized words were detected during the spellcheck step.
@@ -75,3 +91,4 @@ jobs:
           - Edit: **[`NOAA-FIMS/.github/cspell.json`](https://github.com/noaa-fims/.github/blob/main/cspell.json)**
           - Add the missing terms to the `"words"` array.
           EOF
+          fi
