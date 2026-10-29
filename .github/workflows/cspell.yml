@@ -59,36 +59,20 @@ jobs:
           echo "--------------------------------------------------------------------------"
           echo "One or more unrecognized words were found in this repository."
           echo ""
-          if [ -n "$CUSTOM_CONFIG" ]; then
-            echo "If these are valid terms, acronyms, or proper names, add them to the custom cSpell config: $CUSTOM_CONFIG"
-          else
-            echo "If these are valid terms, acronyms, or proper names:"
-            echo "  Please submit a Pull Request to add them to the central wordlist at:"
-            echo "  👉 NOAA-FIMS/.github/cspell.json"
-            echo ""
-            echo "Location: https://github.com/noaa-fims/.github/blob/main/cspell.json"
-          fi
+          CONFIG_PATH="${CUSTOM_CONFIG:-https://github.com/noaa-fims/.github/blob/main/cspell.json}"
+          echo "If these are valid terms, acronyms, or proper names, add them to the cSpell config file at: $CONFIG_PATH"
 
           echo "=========================================================================="
           
           # Write to Job Summary so it shows prominently in the GitHub Actions UI
-          if [ -n "$CUSTOM_CONFIG" ]; then
-            {
-              echo "### ❌ Spell Check Failed"
-              echo ""
-              echo "Unrecognized words were detected during the spellcheck step."
-              echo ""
-              printf 'Add legitimate words or domain terms to the custom cSpell configuration: `%s`.\n' "$CUSTOM_CONFIG"
-            } >> "$GITHUB_STEP_SUMMARY"
-          else
-            cat << 'EOF' >> "$GITHUB_STEP_SUMMARY"
+          {
+            cat << 'EOF'
           ### ❌ Spell Check Failed
 
           Unrecognized words were detected during the spellcheck step.
 
           **How to fix this:**
-          If these are legitimate words or domain terms, update the organization-wide wordlist in the `.github` repository:
-          - Edit: **[`NOAA-FIMS/.github/cspell.json`](https://github.com/noaa-fims/.github/blob/main/cspell.json)**
-          - Add the missing terms to the `"words"` array.
+          If these are valid terms, acronyms, or proper names, add them to the cSpell config file at:
           EOF
-          fi
+            printf '`%s`\n' "$CONFIG_PATH"
+          } >> "$GITHUB_STEP_SUMMARY"
