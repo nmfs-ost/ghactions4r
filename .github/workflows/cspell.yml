@@ -1,0 +1,77 @@
+name: Reusable cSpell Check
+
+on:
+  workflow_call:
+    inputs:
+      files:
+        description: 'Glob patterns for files to check'
+        required: false
+        type: string
+        default: '**/*.{R,Rmd,qmd,md,Rd,cpp,h}'
+      custom-config:
+        description: 'Path to local repo cspell config (if overriding central config)'
+        required: false
+        type: string
+        default: ''
+      only-new:
+        description: 'Check just the files you are committing?'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  spell-check:
+    runs-on: ubuntu-latest
+    # Automatically cancels redundant/outdated runs on the same branch in the caller repo
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Target Repository
+        uses: actions/checkout@v7
+
+      # Fetch only the single cspell.json file from noaa-fims/.github
+      - name: Fetch Global cSpell Config
+        run: |
+          curl -sSL \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3.raw" \
+            "https://raw.githubusercontent.com/noaa-fims/.github/main/cspell.json" \
+            -o global-cspell.json
+
+      - name: Run cSpell Action
+        id: cspell
+        uses: streetsidesoftware/cspell-action@v9
+        with:
+          config: ${{ inputs.custom-config != '' && inputs.custom-config || 'global-cspell.json' }}
+          files: ${{ inputs.files }}
+          incremental_files_only: ${{ inputs.only-new }}
+
+      # Step that executes ONLY if cSpell fails
+      - name: Output Spell Check Failure Instructions
+        if: always() && steps.cspell.outcome == 'failure'
+        run: |
+          echo "=========================================================================="
+          echo "❌ SPELL CHECK FAILED"
+          echo "--------------------------------------------------------------------------"
+          echo "One or more unrecognized words were found in this repository."
+          echo ""
+          echo "If these are valid terms, acronyms, or proper names:"
+          echo "  Please submit a Pull Request to add them to the central wordlist at:"
+          echo "  👉 NOAA-FIMS/.github/cspell.json"
+          echo ""
+          echo "Location: https://github.com/noaa-fims/.github/blob/main/cspell.json"
+          echo "=========================================================================="
+          
+          # Write to Job Summary so it shows prominently in the GitHub Actions UI
+          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          ### ❌ Spell Check Failed
+
+          Unrecognized words were detected during the spellcheck step.
+
+          **How to fix this:**
+          If these are legitimate words or domain terms, update the organization-wide wordlist in the `.github` repository:
+          - Edit: **[`NOAA-FIMS/.github/cspell.json`](https://github.com/noaa-fims/.github/blob/main/cspell.json)**
+          - Add the missing terms to the `"words"` array.
+          EOF
