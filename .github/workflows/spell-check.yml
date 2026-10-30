@@ -71,16 +71,37 @@ jobs:
 
           print(spell_check_results)
           if (nrow(spell_check_results) > 0) {
-            message(
+            instructions <- paste0(
               "Spelling errors found in additional files.\n",
               "Need to ignore some words? Read up on using the WORDLIST file:\n",
               "https://docs.ropensci.org/spelling/reference/wordlist.html.\n",
-              "Following R code can be used to add words to the WORDLIST file:\n",
+              "Review the flagged words and fix typos before adding valid words to WORDLIST.\n",
+              "With the spelling package installed, run the following R code from the package root:\n",
+              "files <- list.files(\n",
+              "  \".\",\n",
+              "  recursive = TRUE,\n",
+              "  full.names = TRUE,\n",
+              "  pattern = \"\\\\.(cpp|hpp|md|qmd|R|Rmd|txt|yml)$\",\n",
+              "  ignore.case = TRUE,\n",
+              "  all.files = TRUE\n",
+              ")\n",
+              "word_list <- spelling::get_wordlist(\".\")\n",
+              "spell_check_results <- spelling::spell_check_files(\n",
+              "  files,\n",
+              "  ignore = word_list\n",
+              ")\n",
+              "# Review spell_check_results before adding these words.\n",
+              "print(spell_check_results)\n",
               "wordlist_path <- file.path('inst', 'WORDLIST')\n",
-              "all_words <- c(word_list, spell_check_results$word)\n",
-              "sorted_words <- sort(unique(all_words))\n",
+              "all_words <- c(word_list, spell_check_results[['word']])\n",
+              "sorted_words <- sort(unique(all_words), method = \"radix\")\n",
+              "if (!dir.exists(dirname(wordlist_path))) {\n",
+              "  dir.create(dirname(wordlist_path), recursive = TRUE)\n",
+              "}\n",
               "writeLines(sorted_words, wordlist_path)"
             )
+            message(instructions)
+            writeLines(instructions, "spell-check-instructions.txt")
           }
           writeLines(
             as.character(nrow(spell_check_results)),
@@ -95,13 +116,15 @@ jobs:
           tmp_nrow_results=$(awk '{print int($1)}' nrow_results.txt)
           echo "nrow_results=$tmp_nrow_results" >> $GITHUB_OUTPUT
       
-      - name: ⚠️ Report spelling issues as a warning
+      - name: ⚠ Report spelling issues as a warning
         if: ${{ (steps.set_output.outputs.nrow_results > 0) && (inputs.spell_check_report_level == 'warning') }}
         run: |
+          cat spell-check-instructions.txt
           echo "::warning title=Spelling errors were found::Spelling errors were found in the Run additional spell check using spelling::spell_check_file() step. Need to ignore some words? Read up on using the WORDLIST file: https://docs.ropensci.org/spelling/reference/wordlist.html"
 
       - name: ❌ Report spelling issues as an error
         if: ${{ (steps.set_output.outputs.nrow_results > 0) && (inputs.spell_check_report_level == 'error') }}
         run: |
+          cat spell-check-instructions.txt
           echo "::error title=Spelling errors were found::Spelling errors were found in the Run additional spell check using spelling::spell_check_file() step. Need to ignore some words? Read up on using the WORDLIST file: https://docs.ropensci.org/spelling/reference/wordlist.html"
           exit 1 # This will cause the workflow to fail      
