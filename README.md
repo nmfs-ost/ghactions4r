@@ -67,6 +67,13 @@ ghactions4r::use_create_cov_badge()
 ghactions4r::use_doc_and_style_r(use_rm_dollar_sign = FALSE)
 ```
 
+When triggered by a `pull_request` event, the workflow automatically requests a
+review from the original PR author on the generated styling PR. No additional
+configuration is needed. Other triggers (including PR comments) do not provide
+`github.event.pull_request.user.login`, so no reviewer is requested. This has no
+effect when changes are committed directly. If using a PAT, its owner cannot
+review a PR created by that same account.
+
 - To automatically update pkgdown that has already been set up:
 ```r
 ghactions4r::use_update_pkgdown()
