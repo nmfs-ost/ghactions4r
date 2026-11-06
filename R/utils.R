@@ -1,26 +1,22 @@
 #' Add platform-specific additional arguments to a GitHub workflow YAML file
 #'
 #' @inheritParams use_r_cmd_check
-#' @param txt A character vector of YAML file lines. If NULL, the function reads the YAML file
-#'   automatically. Default is NULL.
-#' @param prev_line An integer specifying the line number in txt where the arguments
-#'   should be added. If NULL, the function determines this value automatically. Default is NULL.
+#' @param txt A character vector of YAML file lines.
+#' @param prev_line An optional line number in txt where the arguments should be added.
+#'   If NULL, the function determines this value automatically.
 #' @noRd
-add_args <- function(workflow_name, additional_args, txt = NULL, prev_line = NULL) {
-  path_to_yml <- file.path(".github", "workflows", workflow_name)
-  if (is.null(txt) | is.null(prev_line)) {
-    txt <- readLines(path_to_yml)
-
-    prev_line <- grep(
+add_args <- function(additional_args, txt, prev_line = NULL) {
+  if (is.null(prev_line)) {
+    uses_line <- grep(
       "uses: nmfs-ost/ghactions4r/.github/workflows/",
       txt,
       fixed = TRUE
     )
-    if (grepl("with:", txt[prev_line + 1], fixed = TRUE)) {
-      prev_line <- prev_line + 1
+    if (grepl("with:", txt[uses_line + 1], fixed = TRUE)) {
+      prev_line <- uses_line + 1
     } else {
-      txt <- append(txt, "    with:", prev_line)
-      prev_line <- prev_line + 1
+      txt <- append(txt, "    with:", uses_line)
+      prev_line <- uses_line + 1
     }
   }
 
@@ -31,8 +27,7 @@ add_args <- function(workflow_name, additional_args, txt = NULL, prev_line = NUL
       txt <- append(txt, paste0("      additional_args_", platform, ": |"), prev_line)
     }
   }
-  writeLines(txt, path_to_yml)
-  invisible(workflow_name)
+  txt
 }
 
 #' Add public rspm is false option to workflows.
@@ -125,20 +120,37 @@ add_build_trigger <- function(build_trigger, gha) {
   gha
 }
 
-#' Copy the caller template to an R package
+#' Read the caller template from the package
 #'
 #' @param template_name The name of the template in the ghactions4r package
-#' @param workflow_name The user defined name of the workflow to create
 #' @noRd
-#' @return The path to the caller workflow file copied
-copy_caller_template <- function(template_name = "call-spell-check.yml", workflow_name = "call-spell-check.yml") {
+#' @return The caller workflow template as a character vector
+read_caller_template <- function(template_name) {
   template_path <- system.file("templates", template_name,
     package = "ghactions4r", mustWork = TRUE
   )
+  readLines(template_path)
+}
+
+#' Write a caller workflow to an R package
+#'
+#' @param txt The caller workflow as a character vector
+#' @param workflow_name The user defined name of the workflow to create
+#' @noRd
+#' @return The path to the caller workflow file written
+write_caller_template <- function(txt, workflow_name) {
   path_to_yml <- file.path(".github", "workflows", workflow_name)
   dir.create(".github", showWarnings = FALSE)
   dir.create(file.path(".github", "workflows"), showWarnings = FALSE)
-  file.copy(from = template_path, to = path_to_yml, overwrite = TRUE)
+  temp_path <- tempfile(
+    pattern = paste0(".", basename(path_to_yml), "-"),
+    tmpdir = dirname(path_to_yml)
+  )
+  on.exit(unlink(temp_path), add = TRUE)
+  writeLines(txt, temp_path)
+  if (!file.rename(temp_path, path_to_yml)) {
+    stop("Could not replace workflow file '", path_to_yml, "'.", call. = FALSE)
+  }
   path_to_yml
 }
 
