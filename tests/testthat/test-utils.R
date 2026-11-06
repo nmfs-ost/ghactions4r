@@ -21,13 +21,12 @@ test_that("add_args() works with additional_args", {
     macos = c("brew install curl")
   )
 
-  add_args(
-    workflow_name = workflow_name,
-    additional_args = additional_args
-  )
+  txt <- readLines(file.path(".github", "workflows", workflow_name))
+  test <- add_args(additional_args = additional_args, txt = txt)
+  expect_equal(readLines(file.path(".github", "workflows", workflow_name)), txt)
+  writeLines(test, file.path(".github", "workflows", workflow_name))
   path <- file.path(".github", "workflows", workflow_name)
   expect_true(file.exists(path))
-  test <- readLines(path)
   expect_snapshot(test)
 })
 
@@ -45,12 +44,13 @@ test_that("add_args() works with txt and prev_line", {
     txt,
     fixed = TRUE
   ) + 1 # add one because should be on the line with "with"
-  add_args(
-    workflow_name = workflow_name,
+  modified_txt <- add_args(
     additional_args = list(ubuntu = "sudo apt-get install --only-upgrade libstdc++6"),
     txt = txt,
     prev_line = prev_line
   )
+  expect_equal(readLines(path), txt)
+  writeLines(modified_txt, path)
   expect_true(file.exists(path))
   test <- readLines(path)
   expect_snapshot(test)
@@ -71,19 +71,49 @@ test_that("add_build_trigger() works for push_to_all_branches", {
   expect_snapshot(template_txt)
 })
 
-test_that("copy_caller_template works", {
+test_that("read_caller_template returns lines", {
   my_template_name <- "call-spell-check.yml"
-  my_workflow_name <- "my-workflow.yml"
-  path_to_workflow <- copy_caller_template(
-    template_name = my_template_name,
-    workflow_name = my_workflow_name
-  )
+  template_txt <- read_caller_template(my_template_name)
   expect_equal(
-    path_to_workflow,
-    file.path(".github", "workflows", my_workflow_name)
+    template_txt,
+    readLines(system.file("templates", my_template_name, package = "ghactions4r", mustWork = TRUE))
   )
-  template_txt <- readLines(path_to_workflow)
-  expect_snapshot(template_txt)
+})
+
+test_that("write_caller_template replaces files after writing the new contents", {
+  workflow_name <- "atomic-write.yml"
+  path <- file.path(".github", "workflows", workflow_name)
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  writeLines("original contents", path)
+
+  workflow_path <- write_caller_template(
+    txt = c("updated", "contents"),
+    workflow_name = workflow_name
+  )
+
+  expect_equal(workflow_path, path)
+  expect_equal(readLines(path), c("updated", "contents"))
+  expect_length(
+    list.files(dirname(path), pattern = paste0("^\\.", workflow_name, "-"), all.files = TRUE),
+    0
+  )
+})
+
+test_that("write_caller_template leaves the target intact if replacement fails", {
+  workflow_name <- "cannot-replace.yml"
+  path <- file.path(".github", "workflows", workflow_name)
+  dir.create(path, recursive = TRUE)
+
+  expect_error(
+    suppressWarnings(write_caller_template("contents", workflow_name)),
+    "Could not replace workflow file"
+  )
+
+  expect_true(dir.exists(path))
+  expect_length(
+    list.files(dirname(path), pattern = paste0("^\\.", workflow_name, "-"), all.files = TRUE),
+    0
+  )
 })
 
 fake_resp <- c("v0.3.0", "v0.2.0", "v0.1.0", "v0.1.0-prerel2", "v0.1.0-prerel")
@@ -115,5 +145,7 @@ test_that("calling api to get tags works", {
   skip_on_ci()
   skip_on_cran()
   available_tags <- get_tags()
-  expect_equal(available_tags, fake_resp)
+  # Ensure that all fake response tags are present in the available tags from the API
+  # This keeps the test's intended check while allowing newer tags to appear.
+  expect_true(all(fake_resp %in% available_tags))
 })

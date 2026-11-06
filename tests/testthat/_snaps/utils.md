@@ -80,26 +80,6 @@
       [16] "  call-workflow:"                                                                                                                         
       [17] "    uses: nmfs-ost/ghactions4r/.github/workflows/calc-cov-summaries.yml@main"                                                             
 
-# copy_caller_template works
-
-    Code
-      template_txt
-    Output
-       [1] "# run devtools::spell_check()"                                                                                                            
-       [2] "name: call-spell-check"                                                                                                                   
-       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
-       [4] "on:"                                                                                                                                      
-       [5] "# [build-trigger-goes-here]"                                                                                                              
-       [6] ""                                                                                                                                         
-       [7] "# no permissions are needed by the default github token for this workflow to "                                                            
-       [8] "# run, so don't pass any."                                                                                                                
-       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
-      [10] "permissions: {}"                                                                                                                          
-      [11] ""                                                                                                                                         
-      [12] "jobs:"                                                                                                                                    
-      [13] "  call-workflow:"                                                                                                                         
-      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/spell-check.yml@main"                                                                    
-
 # pinning to a specific version works as expected
 
     Code
