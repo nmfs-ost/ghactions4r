@@ -3,6 +3,8 @@ name: call-doc-and-style-r
 
 on:
   workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
   push:
     branches: [main]
     paths: 
