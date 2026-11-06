@@ -133,11 +133,12 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
 #' @template tag_ghactions4r
 #' @export
 use_calc_cov_summaries <- function(
-    workflow_name = "call-calc-cov-summaries.yml",
-    build_trigger = "pull_request",
-    use_public_rspm = TRUE,
-    depends_on_quarto = FALSE,
-    tag_ghactions4r = NULL) {
+  workflow_name = "call-calc-cov-summaries.yml",
+  build_trigger = "pull_request",
+  use_public_rspm = TRUE,
+  depends_on_quarto = FALSE,
+  tag_ghactions4r = NULL
+) {
   check_workflow_name(workflow_name)
   build_trigger <-
     match.arg(
@@ -235,10 +236,11 @@ use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_publ
 #' @template tag_ghactions4r
 #' @export
 use_create_cov_badge <- function(
-    workflow_name = "call-create-cov-badge.yml",
-    build_trigger = "push_to_main",
-    use_public_rspm = TRUE, depends_on_quarto = FALSE,
-    tag_ghactions4r = NULL) {
+  workflow_name = "call-create-cov-badge.yml",
+  build_trigger = "push_to_main",
+  use_public_rspm = TRUE, depends_on_quarto = FALSE,
+  tag_ghactions4r = NULL
+) {
   check_workflow_name(workflow_name)
   build_trigger <- match.arg(arg = build_trigger, choices = c("push_to_main", "weekly", "manually"), several.ok = TRUE)
   path_to_yml <- copy_caller_template(
