@@ -420,14 +420,13 @@ test_that("use_spell_check() works", {
 
 test_that("use_cspell() creates a caller workflow with configurable inputs", {
   file_path <- ".github/workflows/call-cspell.yml"
+  # Mock the tag lookup so the pinned version test does not call the GitHub API.
   local_mocked_bindings(get_tags = function(...) "v1.0.0")
   use_cspell(build_trigger = "manually")
   expect_true(file.exists(file_path))
   workflow <- readLines(file_path)
-  expect_true(any("  workflow_dispatch:" == workflow))
-  expect_true(any(grepl("uses: nmfs-ost/ghactions4r/.github/workflows/cspell.yml@main", workflow, fixed = TRUE)))
-  expect_true(any("      files: '**/*.{R,Rmd,qmd,md,Rd,cpp,h}'" == workflow))
-  expect_true(any("      only-new: true" == workflow))
+  expect_snapshot(workflow)
+  unlink(file_path)
 
   use_cspell(
     workflow_name = "call-cspell-custom.yml",
@@ -438,9 +437,6 @@ test_that("use_cspell() creates a caller workflow with configurable inputs", {
     tag_ghactions4r = "v1.0.0"
   )
   custom_workflow <- readLines(".github/workflows/call-cspell-custom.yml")
-  expect_true(any("  push:" == custom_workflow))
-  expect_true(any(grepl("uses: nmfs-ost/ghactions4r/.github/workflows/cspell.yml@v1.0.0", custom_workflow, fixed = TRUE)))
-  expect_true(any("      files: 'R/**.R, docs/**.md'" == custom_workflow))
-  expect_true(any("      custom-config: '.github/cspell.json'" == custom_workflow))
-  expect_true(any("      only-new: false" == custom_workflow))
+  expect_snapshot(custom_workflow)
+  unlink(".github/workflows/call-cspell-custom.yml")
 })

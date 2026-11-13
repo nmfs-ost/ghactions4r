@@ -7,9 +7,9 @@
 use_cspell(
   workflow_name = "call-cspell.yml",
   build_trigger = "pull_request",
-  files = "**/*.{R,Rmd,qmd,md,Rd,cpp,h}",
+  files = "**/*.{R,Rmd,qmd,md,Rd}",
   custom_config = NULL,
-  only_new = TRUE,
+  only_new = FALSE,
   tag_ghactions4r = NULL
 )
 }
@@ -36,7 +36,7 @@ is specified correctly.}
 Defaults to the organization-wide configuration.}
 
 \item{only_new}{Logical. Should cSpell check only newly changed files? Defaults
-to TRUE.}
+to FALSE.}
 
 \item{tag_ghactions4r}{Tag of ghactions4r workflow to pin to for the
 reusable workflow. This ensures compatibility with a specific version of

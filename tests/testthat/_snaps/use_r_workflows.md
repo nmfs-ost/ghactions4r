@@ -2506,3 +2506,48 @@
       [18] "      spell_check_additional_files: true"                                                                                                 
       [19] "      spell_check_report_level: error"                                                                                                    
 
+# use_cspell() creates a caller workflow with configurable inputs
+
+    Code
+      workflow
+    Output
+       [1] "# Check spelling with cSpell"                                                                                                             
+       [2] "name: call-cspell"                                                                                                                        
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  workflow_dispatch:"                                                                                                                     
+       [6] ""                                                                                                                                         
+       [7] "# no permissions are needed by the default github token for this workflow"                                                                
+       [8] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+       [9] "permissions: {}"                                                                                                                          
+      [10] ""                                                                                                                                         
+      [11] "jobs:"                                                                                                                                    
+      [12] "  call-workflow:"                                                                                                                         
+      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/cspell.yml@main"                                                                         
+      [14] "    with:"                                                                                                                                
+      [15] "      files: '**/*.{R,Rmd,qmd,md,Rd}'"                                                                                                    
+      [16] "      only-new: false"                                                                                                                    
+
+---
+
+    Code
+      custom_workflow
+    Output
+       [1] "# Check spelling with cSpell"                                                                                                             
+       [2] "name: call-cspell-custom"                                                                                                                 
+       [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
+       [4] "on:"                                                                                                                                      
+       [5] "  push:"                                                                                                                                  
+       [6] "    branches: [main]"                                                                                                                     
+       [7] ""                                                                                                                                         
+       [8] "# no permissions are needed by the default github token for this workflow"                                                                
+       [9] "# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/controlling-permissions-for-github_token"         
+      [10] "permissions: {}"                                                                                                                          
+      [11] ""                                                                                                                                         
+      [12] "jobs:"                                                                                                                                    
+      [13] "  call-workflow:"                                                                                                                         
+      [14] "    uses: nmfs-ost/ghactions4r/.github/workflows/cspell.yml@v1.0.0"                                                                       
+      [15] "    with:"                                                                                                                                
+      [16] "      files: 'R/**.R, docs/**.md'"                                                                                                        
+      [17] "      custom-config: '.github/cspell.json'"                                                                                               
+      [18] "      only-new: false"                                                                                                                    

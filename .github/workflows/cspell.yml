@@ -7,17 +7,17 @@ on:
         description: 'Glob patterns for files to check'
         required: false
         type: string
-        default: '**/*.{R,Rmd,qmd,md,Rd,cpp,h}'
+        default: '**/*.{R,Rmd,qmd,md,Rd}'
       custom-config:
         description: 'Path to local repo cspell config (if overriding central config)'
         required: false
         type: string
         default: ''
       only-new:
-        description: 'Check just the files you are committing?'
+        description: 'Check only newly changed files?'
         required: false
         type: boolean
-        default: true
+        default: false
 
 jobs:
   spell-check:
@@ -31,20 +31,31 @@ jobs:
       - name: Checkout Target Repository
         uses: actions/checkout@v7
 
-      # Fetch only the single cspell.json file from noaa-fims/.github
-      - name: Fetch Global cSpell Config
+      - name: Set cSpell Config
+        id: config
+        env:
+          CUSTOM_CONFIG: ${{ inputs.custom-config }}
         run: |
-          curl -sSL \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3.raw" \
-            "https://raw.githubusercontent.com/noaa-fims/.github/main/cspell.json" \
-            -o global-cspell.json
+          if [ -n "$CUSTOM_CONFIG" ]; then
+            ACTION_CONFIG_PATH="$CUSTOM_CONFIG"
+            INSTRUCTIONS_CONFIG_PATH="$CUSTOM_CONFIG"
+          else
+            ACTION_CONFIG_PATH="global-cspell.json"
+            INSTRUCTIONS_CONFIG_PATH="https://github.com/noaa-fims/.github/blob/main/cspell.json"
+            curl -sSL \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3.raw" \
+              "https://raw.githubusercontent.com/noaa-fims/.github/main/cspell.json" \
+              -o "$ACTION_CONFIG_PATH"
+          fi
+          echo "action_config_path=$ACTION_CONFIG_PATH" >> "$GITHUB_OUTPUT"
+          echo "instructions_config_path=$INSTRUCTIONS_CONFIG_PATH" >> "$GITHUB_OUTPUT"
 
       - name: Run cSpell Action
         id: cspell
         uses: streetsidesoftware/cspell-action@v9
         with:
-          config: ${{ inputs.custom-config != '' && inputs.custom-config || 'global-cspell.json' }}
+          config: ${{ steps.config.outputs.action_config_path }}
           files: ${{ inputs.files }}
           incremental_files_only: ${{ inputs.only-new }}
 
@@ -52,14 +63,13 @@ jobs:
       - name: Output Spell Check Failure Instructions
         if: always() && steps.cspell.outcome == 'failure'
         env:
-          CUSTOM_CONFIG: ${{ inputs.custom-config }}
+          CONFIG_PATH: ${{ steps.config.outputs.instructions_config_path }}
         run: |
           echo "=========================================================================="
           echo "❌ SPELL CHECK FAILED"
           echo "--------------------------------------------------------------------------"
           echo "One or more unrecognized words were found in this repository."
           echo ""
-          CONFIG_PATH="${CUSTOM_CONFIG:-https://github.com/noaa-fims/.github/blob/main/cspell.json}"
           echo "If these are valid terms, acronyms, or proper names, add them to the cSpell config file at: $CONFIG_PATH"
 
           echo "=========================================================================="

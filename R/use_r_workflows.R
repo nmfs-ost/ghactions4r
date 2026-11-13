@@ -625,14 +625,14 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
 #' @param custom_config Path to a repository-specific cSpell configuration file.
 #'   Defaults to the organization-wide configuration.
 #' @param only_new Logical. Should cSpell check only newly changed files? Defaults
-#'   to TRUE.
+#'   to FALSE.
 #' @template tag_ghactions4r
 #' @export
 use_cspell <- function(workflow_name = "call-cspell.yml",
                        build_trigger = "pull_request",
-                       files = "**/*.{R,Rmd,qmd,md,Rd,cpp,h}",
+                       files = "**/*.{R,Rmd,qmd,md,Rd}",
                        custom_config = NULL,
-                       only_new = TRUE,
+                       only_new = FALSE,
                        tag_ghactions4r = NULL) {
   build_trigger <- match.arg(arg = build_trigger, choices = c(
     "pull_request", "push_to_main",
