@@ -557,6 +557,22 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' `DESCRIPTION`, together with knitr and rmarkdown. Include all rendering
 #' dependencies, including knitr and rmarkdown, in the renv lockfile.
 #'
+#' @details
+#' Python/Jupyter documents and automatic publishing are not supported by this
+#' workflow.
+#'
+#' Set `artifact_path` to the actual output files or directory, relative to the
+#' repository root, including any supporting files. Output is not inferred:
+#' websites usually use `_site/`, books `_book/`, and individual documents write
+#' beside their sources unless configured otherwise. A project in `docs/` might
+#' therefore need `artifact_path = "docs/_site/"`. Missing artifacts fail the run.
+#'
+#' Leave `render_format = ""` to use Quarto's configured format, or use `"all"` to
+#' render every configured format. For an HTML document, upload both its `.html`
+#' file and supporting directory using a glob or newline-separated paths, or
+#' configure Quarto's `output-dir` and upload that directory. These options are
+#' also available as inputs in the generated caller workflow.
+#'
 #' @template workflow_name
 #' @inheritParams use_build_pkgdown
 #' @param render_path Quarto document or project path, relative to the repository

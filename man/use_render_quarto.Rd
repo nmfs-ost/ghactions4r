@@ -67,6 +67,22 @@ when present; otherwise R dependencies are installed from a root-level
 \code{DESCRIPTION}, together with knitr and rmarkdown. Include all rendering
 dependencies, including knitr and rmarkdown, in the renv lockfile.
 }
+\details{
+Python/Jupyter documents and automatic publishing are not supported by this
+workflow.
+
+Set \code{artifact_path} to the actual output files or directory, relative to the
+repository root, including any supporting files. Output is not inferred:
+websites usually use \verb{_site/}, books \verb{_book/}, and individual documents write
+beside their sources unless configured otherwise. A project in \verb{docs/} might
+therefore need \code{artifact_path = "docs/_site/"}. Missing artifacts fail the run.
+
+Leave \code{render_format = ""} to use Quarto's configured format, or use \code{"all"} to
+render every configured format. For an HTML document, upload both its \code{.html}
+file and supporting directory using a glob or newline-separated paths, or
+configure Quarto's \code{output-dir} and upload that directory. These options are
+also available as inputs in the generated caller workflow.
+}
 \examples{
 \dontrun{
 use_render_quarto()

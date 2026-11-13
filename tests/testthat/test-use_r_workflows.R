@@ -424,13 +424,7 @@ test_that("use_render_quarto() creates the default caller", {
   path <- file.path(".github", "workflows", workflow_name)
   expect_true(file.exists(path))
   gha <- readLines(path)
-  expect_true("  pull_request:" %in% gha)
-  expect_true("  contents: read" %in% gha)
-  expect_true("    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main" %in% gha)
-  expect_true('      artifact-path: "_site/"' %in% gha)
-  expect_true('      render-format: ""' %in% gha)
-  expect_true("      tinytex: false" %in% gha)
-  expect_false(any(grepl("[build-trigger-goes-here]", gha, fixed = TRUE)))
+  expect_snapshot(gha)
   unlink(path)
 })
 
@@ -447,19 +441,9 @@ test_that("use_render_quarto() preserves custom inputs and triggers", {
     artifact_name = 'report "output"'
   )
   path <- ".github/workflows/custom-quarto.yml"
+  expect_true(file.exists(path))
   gha <- readLines(path)
-  expect_true(all(c("  push:", "    branches: [main]", "  workflow_dispatch:") %in% gha))
-  expect_true("      tinytex: true" %in% gha)
-  expected <- list(
-    "render-path" = render_path, "render-format" = "html",
-    "artifact-path" = artifact_path, "artifact-name" = 'report "output"'
-  )
-  for (name in names(expected)) {
-    prefix <- paste0("      ", name, ": ")
-    line <- gha[startsWith(gha, prefix)]
-    expect_length(line, 1L)
-    expect_identical(jsonlite::fromJSON(substring(line, nchar(prefix) + 1L)), expected[[name]])
-  }
+  expect_snapshot(gha)
   unlink(path)
 })
 

@@ -2506,3 +2506,51 @@
       [18] "      spell_check_additional_files: true"                                                                                                 
       [19] "      spell_check_report_level: error"                                                                                                    
 
+# use_render_quarto() creates the default caller
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"\""                                                    
+      [15] "      tinytex: false"                                                         
+      [16] "      artifact-path: \"_site/\""                                              
+      [17] "      artifact-name: \"quarto-output\""                                       
+
+# use_render_quarto() preserves custom inputs and triggers
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  push:"                                                                      
+       [5] "    branches: [main]"                                                         
+       [6] "  workflow_dispatch:"                                                         
+       [7] ""                                                                             
+       [8] "permissions:"                                                                 
+       [9] "  contents: read"                                                             
+      [10] ""                                                                             
+      [11] "jobs:"                                                                        
+      [12] "  call-workflow:"                                                             
+      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [14] "    with:"                                                                    
+      [15] "      render-path: \"docs/a 'quoted': report.qmd\""                           
+      [16] "      render-format: \"html\""                                                
+      [17] "      tinytex: true"                                                          
+      [18] "      artifact-path: \"docs/report.html\\ndocs/report_files/\""               
+      [19] "      artifact-name: \"report \\\"output\\\"\""                               
+
