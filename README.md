@@ -89,6 +89,12 @@ ghactions4r::use_build_pkgdown()
 ghactions4r::use_spell_check()
 ```
 
+- To check spelling with cSpell, using the organization-wide configuration by default:
+```r
+ghactions4r::use_cspell()
+```
+You can optionally provide `files`, `custom_config`, and `only_new` to configure the files checked and how they are checked.
+
 Commit and push the files generated up to github, making the github actions available for the repository of the R package.
 
 The templates these functions generate can also be [viewed](https://github.com/nmfs-ost/ghactions4r/tree/main/inst/templates) for reference.

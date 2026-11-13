@@ -417,3 +417,26 @@ test_that("use_spell_check() works", {
   )
   unlink(file_path)
 })
+
+test_that("use_cspell() creates a caller workflow with configurable inputs", {
+  file_path <- ".github/workflows/call-cspell.yml"
+  # Mock the tag lookup so the pinned version test does not call the GitHub API.
+  local_mocked_bindings(get_tags = function(...) "v1.0.0")
+  use_cspell(build_trigger = "manually")
+  expect_true(file.exists(file_path))
+  workflow <- readLines(file_path)
+  expect_snapshot(workflow)
+  unlink(file_path)
+
+  use_cspell(
+    workflow_name = "call-cspell-custom.yml",
+    build_trigger = "push_to_main",
+    files = "R/**.R, docs/**.md",
+    custom_config = ".github/cspell.json",
+    only_new = FALSE,
+    tag_ghactions4r = "v1.0.0"
+  )
+  custom_workflow <- readLines(".github/workflows/call-cspell-custom.yml")
+  expect_snapshot(custom_workflow)
+  unlink(".github/workflows/call-cspell-custom.yml")
+})

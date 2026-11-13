@@ -128,5 +128,5 @@
       Error in `use_version_pin()`:
       ! `tag` must be an existing tag in in ghactions4r
       x You've supplied the `tag` 0.3.0, which is not valid.
-      i Available tag options are v0.3.0, v0.2.0, v0.1.0, v0.1.0-prerel2, and v0.1.0-prerel
+      i Available tag options are v1.0.0, v0.3.0, v0.2.0, v0.1.0, v0.1.0-prerel2, and v0.1.0-prerel
 
