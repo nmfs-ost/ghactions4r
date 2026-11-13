@@ -32,6 +32,7 @@ darkblue
 dev
 devtools
 dir
+dirname
 doering
 Doering
 dontrun
@@ -155,14 +156,17 @@ stopifnot
 stringsAsFactors
 styler
 sudo
+suppressWarnings
 Sys
 tempdir
+tempfile
 testExecutionTime
 testthat
 textarea
 tmb
 TMB
 tmp
+tmpdir
 toolchain
 tryCatch
 ubuntu
