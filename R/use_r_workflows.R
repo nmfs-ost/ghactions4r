@@ -67,11 +67,7 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
     template_name <- "call-r-cmd-check.yml"
   }
 
-  path_to_yml <- copy_caller_template(
-    template_name = template_name,
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template(template_name)
   txt <- add_build_trigger(build_trigger, gha)
 
   if (depends_on_tmb | depends_on_quarto) {
@@ -97,16 +93,10 @@ use_r_cmd_check <- function(workflow_name = "call-r-cmd-check.yml",
     }
   }
 
-  writeLines(txt, path_to_yml)
-
   if (!is.null(additional_args)) {
-    add_args(
-      workflow_name = workflow_name,
-      additional_args = additional_args,
-      txt = NULL,
-      prev_line = NULL
-    )
+    txt <- add_args(additional_args = additional_args, txt = txt)
   }
+  write_caller_template(txt, workflow_name)
   invisible(workflow_name)
 }
 
@@ -150,11 +140,7 @@ use_calc_cov_summaries <- function(
     )
 
 
-  path_to_yml <- copy_caller_template(
-    template_name = "call-calc-cov-summaries.yml",
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-calc-cov-summaries.yml")
 
   gha <- add_build_trigger(build_trigger, gha)
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
@@ -171,13 +157,13 @@ use_calc_cov_summaries <- function(
       )
     }
   }
-  writeLines(gha, path_to_yml)
   # Also create the .octocov.yml file.
   template_path <- system.file("templates", ".octocov.yml",
     package = "ghactions4r", mustWork = TRUE
   )
   path_to_octo_yml <- file.path(".octocov.yml")
   file.copy(from = template_path, to = path_to_octo_yml)
+  path_to_yml <- write_caller_template(gha, workflow_name)
 
   invisible(path_to_yml)
 }
@@ -196,19 +182,14 @@ use_calc_cov_summaries <- function(
 use_calc_coverage <- function(workflow_name = "call-calc-coverage.yml", use_public_rspm = TRUE) {
   lifecycle::deprecate_warn("0.3.0", "use_calc_coverage()", "use_calc_cov_summaries()")
   check_workflow_name(workflow_name)
-  usethis::use_github_action("call-calc-coverage.yml",
-    save_as = workflow_name,
-    url = "https://raw.githubusercontent.com/nmfs-ost/ghactions4r/main/inst/templates/call-calc-coverage.yml"
-  )
+  gha <- read_caller_template("call-calc-coverage.yml")
   if (use_public_rspm == FALSE) {
-    path_to_yml <- file.path(".github", "workflows", workflow_name)
-    gha <- readLines(path_to_yml)
     gha <- add_public_rspm_false(
       uses_line = "uses: nmfs-ost/ghactions4r/.github/workflows/calc-coverage.yml",
       gha = gha
     )
-    writeLines(gha, path_to_yml)
   }
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
 
@@ -241,15 +222,10 @@ use_create_cov_badge <- function(
     tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
   build_trigger <- match.arg(arg = build_trigger, choices = c("push_to_main", "weekly", "manually"), several.ok = TRUE)
-  path_to_yml <- copy_caller_template(
-    template_name = "call-create-cov-badge.yml",
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-create-cov-badge.yml")
   gha <- add_build_trigger(build_trigger, gha)
 
   if (use_public_rspm == FALSE | depends_on_quarto == TRUE) {
-    gha <- readLines(path_to_yml)
     if (use_public_rspm == FALSE) {
       gha <- add_public_rspm_false(
         uses_line = "uses: nmfs-ost/ghactions4r/.github/workflows/create-cov-badge.yml",
@@ -263,13 +239,13 @@ use_create_cov_badge <- function(
       )
     }
   }
-  writeLines(gha, path_to_yml)
   cli::cli_alert_info("Once pushed up to GitHub, a GitHub action will run that will create the badge on a branch called badges.")
 
   badge_code <- "[![coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/<OWNER>/<REPO>/refs/heads/badges/coverage-badge.json)](https://github.com/<OWNER>/<REPO>/tree/badges)"
   cli::cli_alert_info("Copy and paste the following into your readme for a badge, replacing <OWNER> and <REPO> for your GitHub repository location:")
   cli::cli_alert_info("{.code {badge_code}}")
 
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
 
@@ -380,11 +356,7 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     stop("Using how_to_commit = 'directly' and use_pat = TRUE can lead to recursive runs.")
   }
 
-  path_to_yml <- copy_caller_template(
-    template_name = "call-doc-and-style-r.yml",
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-doc-and-style-r.yml")
 
   gha <- add_build_trigger(build_trigger, gha)
   # additional options
@@ -416,9 +388,9 @@ use_doc_and_style_r <- function(workflow_name = "call-doc-and-style-r.yml",
     gha <- append(gha, "    secrets:", after = uses_line)
     gha <- append(gha, pat_line, after = uses_line + 1)
   }
-  writeLines(gha, path_to_yml)
   usethis::use_git_ignore(ignores = "*.rds", directory = file.path(".github"))
 
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
 
@@ -469,19 +441,14 @@ use_update_pkgdown <- function(workflow_name = "call-update-pkgdown.yml",
   validate_additional_args(additional_args)
   check_workflow_name(workflow_name)
   # get the template github action
-  path_to_yml <- copy_caller_template(
-    template_name = "call-update-pkgdown.yml",
-    workflow_name = workflow_name
-  )
-
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-update-pkgdown.yml")
   gha <- add_build_trigger(build_trigger, gha)
-  writeLines(gha, path_to_yml)
   if (!is.null(additional_args)) {
-    add_args(workflow_name = workflow_name, additional_args = additional_args)
+    gha <- add_args(additional_args = additional_args, txt = gha)
   }
   cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/NOAA-pkgdown/}.")
 
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
 
@@ -533,18 +500,14 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
     "push_to_all_branches", "manually", "weekly"
   ), several.ok = TRUE)
   check_workflow_name(workflow_name)
-  path_to_yml <- copy_caller_template(
-    template_name = "call-build-pkgdown.yml",
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-build-pkgdown.yml")
   gha <- add_build_trigger(build_trigger, gha)
-  writeLines(gha, path_to_yml)
 
   if (!is.null(additional_args)) {
-    add_args(workflow_name = workflow_name, additional_args = additional_args)
+    gha <- add_args(additional_args = additional_args, txt = gha)
   }
   cli::cli_alert_info("New to pkgdown? Follow these instructions to set up pkgdown on GitHub Pages {.url https://nmfs-ost.github.io/noaa-fit-resources/noaa%20resources/NOAA-pkgdown/}.")
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
 
@@ -593,11 +556,7 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
   spell_check_report_level <- rlang::arg_match(spell_check_report_level)
   check_workflow_name(workflow_name)
 
-  path_to_yml <- copy_caller_template(
-    template_name = "call-spell-check.yml",
-    workflow_name = workflow_name
-  )
-  gha <- readLines(path_to_yml)
+  gha <- read_caller_template("call-spell-check.yml")
 
   gha <- add_build_trigger(build_trigger, gha)
 
@@ -611,6 +570,6 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
     "New to spelling::spell_check_package()? Learn more at
     {.url https://docs.ropensci.org/spelling/#spell-check-a-package}"
   )
-  writeLines(gha, path_to_yml)
+  write_caller_template(gha, workflow_name)
   invisible(workflow_name)
 }
