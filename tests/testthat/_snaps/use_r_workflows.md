@@ -2534,7 +2534,7 @@
       custom_workflow
     Output
        [1] "# Check spelling with cSpell"                                                                                                             
-       [2] "name: call-cspell-custom"                                                                                                                 
+       [2] "name: call-cspell"                                                                                                                        
        [3] "# on specifies the build triggers. See more info at https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows"
        [4] "on:"                                                                                                                                      
        [5] "  push:"                                                                                                                                  
@@ -2551,3 +2551,4 @@
       [16] "      files: 'R/**.R, docs/**.md'"                                                                                                        
       [17] "      custom-config: '.github/cspell.json'"                                                                                               
       [18] "      only-new: false"                                                                                                                    
+
