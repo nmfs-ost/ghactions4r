@@ -161,12 +161,16 @@ stopifnot
 stringsAsFactors
 styler
 sudo
+suppressWarnings
+Sys
 tempdir
+tempfile
 testExecutionTime
 testthat
 textarea
 tmb
 tmp
+tmpdir
 toolchain
 tryCatch
 ubuntu
