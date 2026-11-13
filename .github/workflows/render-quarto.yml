@@ -1,0 +1,88 @@
+# Render Quarto documents that execute R code; publishing is not included.
+name: render-quarto
+
+on:
+  workflow_call:
+    inputs:
+      render-path:
+        description: Quarto document or project path relative to the repository root
+        type: string
+        default: "."
+      render-format:
+        description: Output format (for example html, pdf, or all); empty uses Quarto configuration
+        type: string
+        default: ""
+      tinytex:
+        description: Install TinyTeX for PDF rendering
+        type: boolean
+        default: false
+      artifact-path:
+        description: Rendered files or directory to upload, relative to the repository root
+        type: string
+        required: true
+      artifact-name:
+        description: Name of the downloadable artifact
+        type: string
+        default: quarto-output
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check dependency configuration
+        run: |
+          if [ ! -f renv.lock ] && [ ! -f DESCRIPTION ]; then
+            echo "::error::Provide renv.lock or DESCRIPTION at the repository root."
+            exit 1
+          fi
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: ${{ inputs.tinytex }}
+
+      - name: Restore R dependencies with renv
+        if: hashFiles('renv.lock') != ''
+        uses: r-lib/actions/setup-renv@v2
+
+      - name: Install R dependencies from DESCRIPTION
+        if: hashFiles('renv.lock') == ''
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::knitr, any::rmarkdown
+          install-quarto: false
+
+      - name: Render Quarto
+        env:
+          RENDER_PATH: ${{ inputs.render-path }}
+          RENDER_FORMAT: ${{ inputs.render-format }}
+          QUARTO_PRINT_STACK: true
+        run: |
+          if [ -n "$RENDER_FORMAT" ]; then
+            quarto render "$RENDER_PATH" --to "$RENDER_FORMAT"
+          else
+            quarto render "$RENDER_PATH"
+          fi
+
+      - name: Save rendered output
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: ${{ inputs.artifact-path }}
+          if-no-files-found: error

@@ -417,3 +417,64 @@ test_that("use_spell_check() works", {
   )
   unlink(file_path)
 })
+
+test_that("use_render_quarto() creates the default caller", {
+  workflow_name <- use_render_quarto()
+  expect_identical(workflow_name, "call-render-quarto.yml")
+  path <- file.path(".github", "workflows", workflow_name)
+  expect_true(file.exists(path))
+  gha <- readLines(path)
+  expect_true("  pull_request:" %in% gha)
+  expect_true("  contents: read" %in% gha)
+  expect_true("    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main" %in% gha)
+  expect_true('      artifact-path: "_site/"' %in% gha)
+  expect_true('      render-format: ""' %in% gha)
+  expect_true("      tinytex: false" %in% gha)
+  expect_false(any(grepl("[build-trigger-goes-here]", gha, fixed = TRUE)))
+  unlink(path)
+})
+
+test_that("use_render_quarto() preserves custom inputs and triggers", {
+  render_path <- "docs/a 'quoted': report.qmd"
+  artifact_path <- "docs/report.html\ndocs/report_files/"
+  use_render_quarto(
+    workflow_name = "custom-quarto.yml",
+    build_trigger = c("push_to_main", "manually"),
+    render_path = render_path,
+    render_format = "html",
+    tinytex = TRUE,
+    artifact_path = artifact_path,
+    artifact_name = 'report "output"'
+  )
+  path <- ".github/workflows/custom-quarto.yml"
+  gha <- readLines(path)
+  expect_true(all(c("  push:", "    branches: [main]", "  workflow_dispatch:") %in% gha))
+  expect_true("      tinytex: true" %in% gha)
+  expected <- list(
+    "render-path" = render_path, "render-format" = "html",
+    "artifact-path" = artifact_path, "artifact-name" = 'report "output"'
+  )
+  for (name in names(expected)) {
+    prefix <- paste0("      ", name, ": ")
+    line <- gha[startsWith(gha, prefix)]
+    expect_length(line, 1L)
+    expect_identical(jsonlite::fromJSON(substring(line, nchar(prefix) + 1L)), expected[[name]])
+  }
+  unlink(path)
+})
+
+test_that("use_render_quarto() validates inputs before creating a file", {
+  workflow_name <- "invalid-quarto.yml"
+  for (name in c("render_path", "artifact_path", "artifact_name")) {
+    for (value in list("", " ", NA_character_, character(), c("a", "b"), FALSE)) {
+      args <- c(list(workflow_name = workflow_name), setNames(list(value), name))
+      expect_error(do.call(use_render_quarto, args), "single non-missing string")
+    }
+  }
+  expect_error(use_render_quarto(workflow_name, render_format = NA_character_))
+  expect_error(use_render_quarto(workflow_name, tinytex = NA))
+  expect_error(use_render_quarto(workflow_name, tinytex = "true"))
+  expect_error(use_render_quarto(workflow_name, build_trigger = "invalid"))
+  expect_false(file.exists(file.path(".github", "workflows", workflow_name)))
+  expect_error(use_render_quarto(workflow_name = "quarto.yaml"))
+})

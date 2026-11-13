@@ -82,6 +82,40 @@ ghactions4r::use_build_pkgdown()
 ghactions4r::use_spell_check()
 ```
 
+- To render a Quarto website containing R code and download the output as a
+GitHub Actions artifact (without publishing):
+```r
+ghactions4r::use_render_quarto(artifact_path = "_site/")
+```
+
+The workflow installs R and Quarto on Ubuntu. Put either `renv.lock` or
+`DESCRIPTION` at the repository root to manage R dependencies. A lockfile takes
+precedence and must include all packages used to render, including `knitr` and
+`rmarkdown`. Without a lockfile, the workflow installs dependencies from
+`DESCRIPTION`, plus `knitr` and `rmarkdown`. Python/Jupyter documents and
+automatic publishing are not supported by this workflow.
+
+Set `artifact_path` to the actual output files or directory, **relative to the
+repository root**, including any supporting files. Output is not inferred:
+websites usually use `_site/`, books `_book/`, and individual documents write
+beside their sources unless configured otherwise. A project in `docs/` might
+therefore need `artifact_path = "docs/_site/"`. Missing artifacts fail the run.
+For example, render only a PDF and install TinyTeX:
+```r
+ghactions4r::use_render_quarto(
+  render_path = "report.qmd",
+  render_format = "pdf",
+  tinytex = TRUE,
+  artifact_path = "report.pdf"
+)
+```
+
+Leave `render_format = ""` to use Quarto's configured format, or use `"all"` to
+render every configured format. For an HTML document, upload both its `.html`
+file and supporting directory using a glob or newline-separated paths, or
+configure Quarto's `output-dir` and upload that directory. These options are
+also available as inputs in the generated caller workflow.
+
 Commit and push the files generated up to github, making the github actions available for the repository of the R package.
 
 The templates these functions generate can also be [viewed](https://github.com/nmfs-ost/ghactions4r/tree/main/inst/templates) for reference.

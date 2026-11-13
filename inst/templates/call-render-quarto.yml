@@ -1,0 +1,17 @@
+# Render Quarto documents with R code and save the output without publishing.
+name: call-render-quarto
+on:
+# [build-trigger-goes-here]
+
+permissions:
+  contents: read
+
+jobs:
+  call-workflow:
+    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main
+    with:
+      render-path: "."
+      render-format: ""
+      tinytex: false
+      artifact-path: "_site/"
+      artifact-name: "quarto-output"

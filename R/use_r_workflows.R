@@ -548,6 +548,81 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
   invisible(workflow_name)
 }
 
+#' Use a workflow to render Quarto documents with R code
+#'
+#' Render a Quarto document or project on Ubuntu and save its output as a
+#' downloadable GitHub Actions artifact, without publishing it. R and Quarto
+#' are installed automatically. A `renv.lock` at the repository root is restored
+#' when present; otherwise R dependencies are installed from a root-level
+#' `DESCRIPTION`, together with knitr and rmarkdown. Include all rendering
+#' dependencies, including knitr and rmarkdown, in the renv lockfile.
+#'
+#' @template workflow_name
+#' @inheritParams use_build_pkgdown
+#' @param render_path Quarto document or project path, relative to the repository
+#'   root. Defaults to `"."` for the entire project.
+#' @param render_format Output format, such as `"html"`, `"pdf"`, or `"all"`.
+#'   The default, `""`, uses the document or project configuration.
+#' @param tinytex Install TinyTeX for PDF rendering? Defaults to `FALSE`.
+#' @param artifact_path Output files, directory, or glob to upload, relative to
+#'   the repository root. Must match the actual Quarto output location.
+#'   Defaults to `"_site/"` for websites; books commonly use `"_book/"`.
+#'   For a single document, specify its output file and any supporting files.
+#' @param artifact_name Name of the downloadable artifact.
+#' @template tag_ghactions4r
+#' @examples
+#' \dontrun{
+#' use_render_quarto()
+#' use_render_quarto(
+#'   render_path = "report.qmd", render_format = "pdf",
+#'   tinytex = TRUE, artifact_path = "report.pdf"
+#' )
+#' }
+#' @export
+use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
+                              build_trigger = "pull_request",
+                              render_path = ".",
+                              render_format = "",
+                              tinytex = FALSE,
+                              artifact_path = "_site/",
+                              artifact_name = "quarto-output",
+                              tag_ghactions4r = NULL) {
+  check_workflow_name(workflow_name)
+  build_trigger <- match.arg(arg = build_trigger, choices = c(
+    "pull_request", "push_to_main",
+    "push_to_all_branches", "manually", "weekly"
+  ), several.ok = TRUE)
+  inputs <- list(
+    "render-path" = render_path,
+    "render-format" = render_format,
+    "artifact-path" = artifact_path,
+    "artifact-name" = artifact_name
+  )
+  for (name in names(inputs)) {
+    value <- inputs[[name]]
+    if (!is.character(value) || length(value) != 1L || is.na(value) ||
+      (name != "render-format" && !nzchar(trimws(value)))) {
+      cli::cli_abort("{.var {name}} must be a single non-missing string, and only render-format may be empty.")
+    }
+  }
+  stopifnot(is.logical(tinytex), length(tinytex) == 1L, !is.na(tinytex))
+  path_to_yml <- copy_caller_template(
+    template_name = "call-render-quarto.yml",
+    workflow_name = workflow_name
+  )
+  gha <- add_build_trigger(build_trigger, readLines(path_to_yml))
+  for (name in names(inputs)) {
+    line <- grep(paste0("      ", name, ":"), gha, fixed = TRUE)
+    gha[line] <- paste0("      ", name, ": ", jsonlite::toJSON(inputs[[name]], auto_unbox = TRUE))
+  }
+  gha[grep("      tinytex:", gha, fixed = TRUE)] <- paste0("      tinytex: ", tolower(tinytex))
+  if (!is.null(tag_ghactions4r)) {
+    gha <- use_version_pin(tag = tag_ghactions4r, gha = gha)
+  }
+  writeLines(gha, path_to_yml)
+  invisible(workflow_name)
+}
+
 #' use workflow to run spelling::spell_check_package()
 #'
 #' This workflow will run the spell_check_package() function from the spelling package
