@@ -2506,3 +2506,52 @@
       [18] "      spell_check_additional_files: true"                                                                                                 
       [19] "      spell_check_report_level: error"                                                                                                    
 
+# use_update_manifest() creates the default caller
+
+    Code
+      test
+    Output
+       [1] "# Update a Posit Connect manifest and open a pull request"                
+       [2] "name: call-update-manifest"                                               
+       [3] "on:"                                                                      
+       [4] "  push:"                                                                  
+       [5] "    branches: [main]"                                                     
+       [6] ""                                                                         
+       [7] "permissions:"                                                             
+       [8] "  contents: write"                                                        
+       [9] "  pull-requests: write"                                                   
+      [10] ""                                                                         
+      [11] "jobs:"                                                                    
+      [12] "  call-workflow:"                                                         
+      [13] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-manifest.yml@main"
+
+# use_update_manifest() supports content settings and a PAT
+
+    Code
+      test
+    Output
+       [1] "# Update a Posit Connect manifest and open a pull request"                
+       [2] "name: call-update-manifest"                                               
+       [3] "on:"                                                                      
+       [4] "  schedule:"                                                              
+       [5] "# Use https://crontab.guru/ to edit the time"                             
+       [6] "    - cron:  '15 02 * * 0'"                                               
+       [7] "  workflow_dispatch:"                                                     
+       [8] ""                                                                         
+       [9] "permissions:"                                                             
+      [10] "  contents: write"                                                        
+      [11] "  pull-requests: write"                                                   
+      [12] ""                                                                         
+      [13] "jobs:"                                                                    
+      [14] "  call-workflow:"                                                         
+      [15] "    uses: nmfs-ost/ghactions4r/.github/workflows/update-manifest.yml@main"
+      [16] "    with:"                                                                
+      [17] "      app-dir: \"content/app\""                                           
+      [18] "      r-version: \"4.5.2\""                                               
+      [19] "      use-renv: true"                                                     
+      [20] "      extra-packages: \"any::shiny, any::rmarkdown\""                     
+      [21] "      app-primary-doc: \"report's results.Rmd\""                          
+      [22] "      use-quarto: true"                                                   
+      [23] "    secrets:"                                                             
+      [24] "      PAT: ${{ secrets.CONNECT_PAT }}"                                    
+

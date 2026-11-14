@@ -614,3 +614,111 @@ use_spell_check <- function(workflow_name = "call-spell-check.yml",
   writeLines(gha, path_to_yml)
   invisible(workflow_name)
 }
+
+#' Update a Posit Connect manifest through a pull request
+#'
+#' Regenerate `manifest.json` for R content using `rsconnect::writeManifest()`.
+#' Only the manifest is proposed in a pull request to the triggering branch;
+#' no changes are committed directly to that branch.
+#'
+#' @template workflow_name
+#' @param build_trigger Events to use: `"push_to_main"` (default), `"manually"`,
+#'   or `"weekly"`. Multiple triggers can be supplied as a vector.
+#' @param app_dir Content directory relative to the repository root.
+#' @param r_version R version installed on the runner. Pin this to the version
+#'   used in development and supported by Connect to avoid version drift.
+#' @param use_renv Restore `renv.lock` in `app_dir`? The lockfile must include
+#'   `rsconnect` and all content dependencies.
+#' @param extra_packages Content dependencies to install without renv, as a
+#'   space- or comma-separated string in pak syntax, e.g. `"any::shiny"`.
+#'   `rsconnect` is installed automatically. Ignored when `use_renv = TRUE`.
+#' @param app_primary_doc Primary document relative to `app_dir`. An empty
+#'   string lets rsconnect detect it automatically.
+#' @param use_quarto Install Quarto on the runner for Quarto content?
+#' @param use_pat Use a personal access token to let the generated pull request
+#'   trigger other GitHub Actions? Defaults to FALSE.
+#' @param pat_name Name of the repository secret containing the PAT.
+#' @template tag_ghactions4r
+#' @details
+#' Enable GitHub Actions to create pull requests in the repository settings.
+#' With the default GitHub token, generated pull requests do not trigger other
+#' workflows. An optional PAT can enable those checks.
+#'
+#' Review every generated manifest before merging: runner R, package, Quarto,
+#' and system dependency versions can differ from development or Connect.
+#' Use a pinned R version and renv for reproducibility. Without renv, list all
+#' content dependencies in `extra_packages`; they are not inferred or installed
+#' from the existing manifest.
+#'
+#' Use `.rscignore` to exclude files that should not be deployed. Automatic
+#' file selection or primary-document detection may differ from manual settings.
+#' Python or mixed-language content, private/local packages, custom app modes,
+#' images, and environment-management settings need additional setup and may
+#' not be preserved. This workflow is intended for R content using default
+#' rsconnect deployment settings. Merging may trigger a Git-backed deployment.
+#' @return Invisibly, the workflow filename.
+#' @examples
+#' \dontrun{
+#' use_update_manifest(extra_packages = "any::shiny")
+#' use_update_manifest(
+#'   build_trigger = c("weekly", "manually"),
+#'   app_dir = "app",
+#'   r_version = "4.5.2",
+#'   use_renv = TRUE
+#' )
+#' }
+#' @export
+use_update_manifest <- function(workflow_name = "call-update-manifest.yml",
+                                build_trigger = "push_to_main",
+                                app_dir = ".",
+                                r_version = "release",
+                                use_renv = FALSE,
+                                extra_packages = "",
+                                app_primary_doc = "",
+                                use_quarto = FALSE,
+                                use_pat = FALSE,
+                                pat_name = "PAT",
+                                tag_ghactions4r = NULL) {
+  check_workflow_name(workflow_name)
+  build_trigger <- match.arg(
+    build_trigger,
+    choices = c("push_to_main", "manually", "weekly"),
+    several.ok = TRUE
+  )
+  for (value in list(app_dir, r_version, extra_packages, app_primary_doc, pat_name)) {
+    stopifnot(is.character(value), length(value) == 1L, !is.na(value))
+  }
+  for (value in list(use_renv, use_quarto, use_pat)) {
+    stopifnot(is.logical(value), length(value) == 1L, !is.na(value))
+  }
+  if (use_pat) stopifnot(grepl("^[A-Za-z_][A-Za-z0-9_]*$", pat_name))
+
+  path_to_yml <- copy_caller_template(
+    template_name = "call-update-manifest.yml",
+    workflow_name = workflow_name
+  )
+  gha <- add_build_trigger(build_trigger, readLines(path_to_yml))
+  inputs <- list(
+    "app-dir" = app_dir,
+    "r-version" = r_version,
+    "use-renv" = use_renv,
+    "extra-packages" = extra_packages,
+    "app-primary-doc" = app_primary_doc,
+    "use-quarto" = use_quarto
+  )
+  defaults <- list(".", "release", FALSE, "", "", FALSE)
+  changed <- !vapply(seq_along(inputs), function(i) identical(inputs[[i]], defaults[[i]]), logical(1))
+  if (any(changed)) {
+    gha <- c(gha, "    with:", vapply(names(inputs)[changed], function(name) {
+      paste0("      ", name, ": ", jsonlite::toJSON(inputs[[name]], auto_unbox = TRUE))
+    }, character(1)))
+  }
+  if (use_pat) {
+    gha <- c(gha, "    secrets:", paste0("      PAT: ${{ secrets.", pat_name, " }}"))
+  }
+  if (!is.null(tag_ghactions4r)) {
+    gha <- use_version_pin(tag = tag_ghactions4r, gha = gha)
+  }
+  writeLines(gha, path_to_yml)
+  invisible(workflow_name)
+}
