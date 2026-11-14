@@ -1,0 +1,12 @@
+# Update a Posit Connect manifest and open a pull request
+name: call-update-manifest
+on:
+# [build-trigger-goes-here]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  call-workflow:
+    uses: nmfs-ost/ghactions4r/.github/workflows/update-manifest.yml@main

@@ -89,6 +89,38 @@ ghactions4r::use_build_pkgdown()
 ghactions4r::use_spell_check()
 ```
 
+- To regenerate a Posit Connect `manifest.json` and open a pull request:
+```r
+ghactions4r::use_update_manifest(extra_packages = "any::shiny")
+```
+
+For reproducible R content, commit a `renv.lock` containing `rsconnect` and
+the content dependencies, then use:
+```r
+ghactions4r::use_update_manifest(
+  build_trigger = c("weekly", "manually"),
+  app_dir = "app",
+  r_version = "4.5.2",
+  use_renv = TRUE
+)
+```
+
+Choose an R version matching development and supported by Connect. Without
+renv, supply the content dependencies through `extra_packages` (pak syntax).
+Use `app_primary_doc` for ambiguous document selection and `use_quarto = TRUE`
+for Quarto content. Enable **Allow GitHub Actions to create and approve pull
+requests** in repository settings. Set `use_pat = TRUE` and `pat_name` to a
+repository secret if the generated PR should trigger other workflows.
+
+Review generated manifests before merging: runner R, package, Quarto, and
+system dependency versions may differ from development or Connect. Automatic
+file selection can include unwanted files or omit required ones; configure
+`.rscignore` and inspect the manifest. Python/mixed-language content,
+private/local packages, custom app modes, images, or environment-management
+settings require additional setup and may not be preserved. The workflow is
+intended for R content using default rsconnect deployment settings. Only the
+manifest is proposed; merging may trigger a Git-backed Connect deployment.
+
 Commit and push the files generated up to github, making the github actions available for the repository of the R package.
 
 The templates these functions generate can also be [viewed](https://github.com/nmfs-ost/ghactions4r/tree/main/inst/templates) for reference.
