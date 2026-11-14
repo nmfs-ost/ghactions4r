@@ -2524,10 +2524,8 @@
       [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
       [12] "    with:"                                                                    
       [13] "      render-path: \".\""                                                     
-      [14] "      render-format: \"\""                                                    
-      [15] "      tinytex: false"                                                         
-      [16] "      artifact-path: \"_site/\""                                              
-      [17] "      artifact-name: \"quarto-output\""                                       
+      [14] "      render-format: \"pdf\""                                                 
+      [15] "      artifact-name: \"quarto-output\""                                       
 
 # use_render_quarto() preserves custom inputs and triggers
 
@@ -2550,7 +2548,110 @@
       [14] "    with:"                                                                    
       [15] "      render-path: \"docs/a 'quoted': report.qmd\""                           
       [16] "      render-format: \"html\""                                                
-      [17] "      tinytex: true"                                                          
-      [18] "      artifact-path: \"docs/report.html\\ndocs/report_files/\""               
-      [19] "      artifact-name: \"report \\\"output\\\"\""                               
+      [17] "      artifact-name: \"report \\\"output\\\"\""                               
+
+# use_render_quarto() supports configured, multiple, and custom formats
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"\""                                                    
+      [15] "      artifact-name: \"quarto-output\""                                       
+
+---
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"all\""                                                 
+      [15] "      artifact-name: \"quarto-output\""                                       
+
+---
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"docx\""                                                
+      [15] "      artifact-name: \"quarto-output\""                                       
+
+---
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"revealjs\""                                            
+      [15] "      artifact-name: \"quarto-output\""                                       
+
+---
+
+    Code
+      gha
+    Output
+       [1] "# Render Quarto documents with R code and save the output without publishing."
+       [2] "name: call-render-quarto"                                                     
+       [3] "on:"                                                                          
+       [4] "  pull_request:"                                                              
+       [5] ""                                                                             
+       [6] "permissions:"                                                                 
+       [7] "  contents: read"                                                             
+       [8] ""                                                                             
+       [9] "jobs:"                                                                        
+      [10] "  call-workflow:"                                                             
+      [11] "    uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main"      
+      [12] "    with:"                                                                    
+      [13] "      render-path: \".\""                                                     
+      [14] "      render-format: \"custom-html\""                                         
+      [15] "      artifact-name: \"quarto-output\""                                       
 

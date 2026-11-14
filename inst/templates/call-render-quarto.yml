@@ -11,7 +11,5 @@ jobs:
     uses: nmfs-ost/ghactions4r/.github/workflows/render-quarto.yml@main
     with:
       render-path: "."
-      render-format: ""
-      tinytex: false
-      artifact-path: "_site/"
+      render-format: "pdf"
       artifact-name: "quarto-output"

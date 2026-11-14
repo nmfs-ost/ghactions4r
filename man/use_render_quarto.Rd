@@ -8,9 +8,7 @@ use_render_quarto(
   workflow_name = "call-render-quarto.yml",
   build_trigger = "pull_request",
   render_path = ".",
-  render_format = "",
-  tinytex = FALSE,
-  artifact_path = "_site/",
+  render_format = "pdf",
   artifact_name = "quarto-output",
   tag_ghactions4r = NULL
 )
@@ -35,17 +33,32 @@ is specified correctly.}
 \item{render_path}{Quarto document or project path, relative to the repository
 root. Defaults to \code{"."} for the entire project.}
 
-\item{render_format}{Output format, such as \code{"html"}, \code{"pdf"}, or \code{"all"}.
-The default, \code{""}, uses the document or project configuration.}
+\item{render_format}{Quarto output format. Defaults to \code{"pdf"}. Use \code{""} for
+the configured format or \code{"all"} for every configured format.
+Built-in format names (including aliases) are:
+\code{"asciidoc"}, \code{"asciidoctor"}, \code{"beamer"}, \code{"biblatex"}, \code{"bibtex"},
+\code{"chunkedhtml"}, \code{"commonmark"}, \code{"commonmark_x"}, \code{"context"}, \code{"csljson"},
+\code{"dashboard"}, \code{"docbook"}, \code{"docbook4"}, \code{"docbook5"}, \code{"docx"}, \code{"dokuwiki"},
+\code{"dzslides"}, \code{"email"}, \code{"epub"}, \code{"epub2"}, \code{"epub3"}, \code{"fb2"}, \code{"gfm"},
+\code{"haddock"}, \code{"html"}, \code{"html4"}, \code{"html5"}, \code{"icml"}, \code{"ipynb"}, \code{"jats"},
+\code{"jats_archiving"}, \code{"jats_articleauthoring"}, \code{"jats_publishing"}, \code{"jira"},
+\code{"json"}, \code{"latex"}, \code{"man"}, \code{"markdown"}, \code{"markdown_github"},
+\code{"markdown_mmd"}, \code{"markdown_phpextra"}, \code{"markdown_strict"}, \code{"markua"},
+\code{"md"}, \code{"mediawiki"}, \code{"ms"}, \code{"muse"}, \code{"native"}, \code{"odt"}, \code{"opendocument"},
+\code{"opml"}, \code{"org"}, \code{"pdf"}, \code{"plain"}, \code{"pptx"}, \code{"revealjs"}, \code{"rst"},
+\code{"rtf"}, \code{"s5"}, \code{"slideous"}, \code{"slidy"}, \code{"tei"}, \code{"texinfo"}, \code{"textile"},
+\code{"typst"}, \code{"xwiki"}, and \code{"zimwiki"}.
+Bundled extension formats include \code{"hugo-md"} (also \code{"hugo"}),
+\code{"docusaurus-md"}, \code{"confluence-html"}, and \code{"confluence-publish"}.
+Installed custom format extensions and Pandoc writers are also accepted.
+Available formats depend on the installed Quarto version; some require
+additional tools, and not every format is compatible with every project type.
+See \href{https://quarto.org/docs/output-formats/all-formats.html}{Quarto's format documentation}.}
 
-\item{tinytex}{Install TinyTeX for PDF rendering? Defaults to \code{FALSE}.}
-
-\item{artifact_path}{Output files, directory, or glob to upload, relative to
-the repository root. Must match the actual Quarto output location.
-Defaults to \code{"_site/"} for websites; books commonly use \code{"_book/"}.
-For a single document, specify its output file and any supporting files.}
-
-\item{artifact_name}{Name of the downloadable artifact.}
+\item{artifact_name}{Name of the downloadable GitHub Actions artifact, without
+a file extension (for example, \code{"quarto-output"}). This is an archive label,
+not an output filename; GitHub adds \code{.zip} when downloading the artifact.
+Rendered files inside the archive retain their format-specific extensions.}
 
 \item{tag_ghactions4r}{Tag of ghactions4r workflow to pin to for the
 reusable workflow. This ensures compatibility with a specific version of
@@ -71,24 +84,26 @@ dependencies, including knitr and rmarkdown, in the renv lockfile.
 Python/Jupyter documents and automatic publishing are not supported by this
 workflow.
 
-Set \code{artifact_path} to the actual output files or directory, relative to the
-repository root, including any supporting files. Output is not inferred:
-websites usually use \verb{_site/}, books \verb{_book/}, and individual documents write
-beside their sources unless configured otherwise. A project in \verb{docs/} might
-therefore need \code{artifact_path = "docs/_site/"}. Missing artifacts fail the run.
+TinyTeX is always installed for LaTeX-based PDF rendering. It is a lightweight
+TeX Live distribution using the same TeX engines as a full TeX Live installation,
+with missing LaTeX packages installed as needed.
 
-Leave \code{render_format = ""} to use Quarto's configured format, or use \code{"all"} to
-render every configured format. For an HTML document, upload both its \code{.html}
-file and supporting directory using a glob or newline-separated paths, or
-configure Quarto's \code{output-dir} and upload that directory. These options are
-also available as inputs in the generated caller workflow.
+The workflow overrides Quarto's \code{output-dir} with a runner-temporary directory
+and uploads its contents automatically. Output files for the selected format,
+including supporting files for HTML, are collected without needing an artifact
+path. This also works for projects in subdirectories and multiple formats.
+An empty output directory fails the run.
+
+Use \code{render_format = ""} to use Quarto's configured format, or \code{"all"} to render
+every configured format. Websites should use \code{"html"} rather than the PDF
+default. These options are also available in the generated caller workflow.
 }
 \examples{
 \dontrun{
 use_render_quarto()
+use_render_quarto(render_format = "html")
 use_render_quarto(
-  render_path = "report.qmd", render_format = "pdf",
-  tinytex = TRUE, artifact_path = "report.pdf"
+  render_path = "report.qmd", render_format = "pdf", artifact_name = "report"
 )
 }
 }

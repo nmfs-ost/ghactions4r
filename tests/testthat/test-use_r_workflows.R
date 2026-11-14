@@ -430,14 +430,11 @@ test_that("use_render_quarto() creates the default caller", {
 
 test_that("use_render_quarto() preserves custom inputs and triggers", {
   render_path <- "docs/a 'quoted': report.qmd"
-  artifact_path <- "docs/report.html\ndocs/report_files/"
   use_render_quarto(
     workflow_name = "custom-quarto.yml",
     build_trigger = c("push_to_main", "manually"),
     render_path = render_path,
     render_format = "html",
-    tinytex = TRUE,
-    artifact_path = artifact_path,
     artifact_name = 'report "output"'
   )
   path <- ".github/workflows/custom-quarto.yml"
@@ -449,16 +446,24 @@ test_that("use_render_quarto() preserves custom inputs and triggers", {
 
 test_that("use_render_quarto() validates inputs before creating a file", {
   workflow_name <- "invalid-quarto.yml"
-  for (name in c("render_path", "artifact_path", "artifact_name")) {
+  for (name in c("render_path", "artifact_name")) {
     for (value in list("", " ", NA_character_, character(), c("a", "b"), FALSE)) {
       args <- c(list(workflow_name = workflow_name), setNames(list(value), name))
       expect_error(do.call(use_render_quarto, args), "single non-missing string")
     }
   }
   expect_error(use_render_quarto(workflow_name, render_format = NA_character_))
-  expect_error(use_render_quarto(workflow_name, tinytex = NA))
-  expect_error(use_render_quarto(workflow_name, tinytex = "true"))
   expect_error(use_render_quarto(workflow_name, build_trigger = "invalid"))
   expect_false(file.exists(file.path(".github", "workflows", workflow_name)))
   expect_error(use_render_quarto(workflow_name = "quarto.yaml"))
+})
+
+test_that("use_render_quarto() supports configured, multiple, and custom formats", {
+  path <- ".github/workflows/quarto-formats.yml"
+  for (format in c("", "all", "docx", "revealjs", "custom-html")) {
+    use_render_quarto(workflow_name = "quarto-formats.yml", render_format = format)
+    gha <- readLines(path)
+    expect_snapshot(gha)
+  }
+  unlink(path)
 })

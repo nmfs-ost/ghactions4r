@@ -561,46 +561,63 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
 #' Python/Jupyter documents and automatic publishing are not supported by this
 #' workflow.
 #'
-#' Set `artifact_path` to the actual output files or directory, relative to the
-#' repository root, including any supporting files. Output is not inferred:
-#' websites usually use `_site/`, books `_book/`, and individual documents write
-#' beside their sources unless configured otherwise. A project in `docs/` might
-#' therefore need `artifact_path = "docs/_site/"`. Missing artifacts fail the run.
+#' TinyTeX is always installed for LaTeX-based PDF rendering. It is a lightweight
+#' TeX Live distribution using the same TeX engines as a full TeX Live installation,
+#' with missing LaTeX packages installed as needed.
 #'
-#' Leave `render_format = ""` to use Quarto's configured format, or use `"all"` to
-#' render every configured format. For an HTML document, upload both its `.html`
-#' file and supporting directory using a glob or newline-separated paths, or
-#' configure Quarto's `output-dir` and upload that directory. These options are
-#' also available as inputs in the generated caller workflow.
+#' The workflow overrides Quarto's `output-dir` with a runner-temporary directory
+#' and uploads its contents automatically. Output files for the selected format,
+#' including supporting files for HTML, are collected without needing an artifact
+#' path. This also works for projects in subdirectories and multiple formats.
+#' An empty output directory fails the run.
+#'
+#' Use `render_format = ""` to use Quarto's configured format, or `"all"` to render
+#' every configured format. Websites should use `"html"` rather than the PDF
+#' default. These options are also available in the generated caller workflow.
 #'
 #' @template workflow_name
 #' @inheritParams use_build_pkgdown
 #' @param render_path Quarto document or project path, relative to the repository
 #'   root. Defaults to `"."` for the entire project.
-#' @param render_format Output format, such as `"html"`, `"pdf"`, or `"all"`.
-#'   The default, `""`, uses the document or project configuration.
-#' @param tinytex Install TinyTeX for PDF rendering? Defaults to `FALSE`.
-#' @param artifact_path Output files, directory, or glob to upload, relative to
-#'   the repository root. Must match the actual Quarto output location.
-#'   Defaults to `"_site/"` for websites; books commonly use `"_book/"`.
-#'   For a single document, specify its output file and any supporting files.
-#' @param artifact_name Name of the downloadable artifact.
+#' @param render_format Quarto output format. Defaults to `"pdf"`. Use `""` for
+#'   the configured format or `"all"` for every configured format.
+#'   Built-in format names (including aliases) are:
+#'   `"asciidoc"`, `"asciidoctor"`, `"beamer"`, `"biblatex"`, `"bibtex"`,
+#'   `"chunkedhtml"`, `"commonmark"`, `"commonmark_x"`, `"context"`, `"csljson"`,
+#'   `"dashboard"`, `"docbook"`, `"docbook4"`, `"docbook5"`, `"docx"`, `"dokuwiki"`,
+#'   `"dzslides"`, `"email"`, `"epub"`, `"epub2"`, `"epub3"`, `"fb2"`, `"gfm"`,
+#'   `"haddock"`, `"html"`, `"html4"`, `"html5"`, `"icml"`, `"ipynb"`, `"jats"`,
+#'   `"jats_archiving"`, `"jats_articleauthoring"`, `"jats_publishing"`, `"jira"`,
+#'   `"json"`, `"latex"`, `"man"`, `"markdown"`, `"markdown_github"`,
+#'   `"markdown_mmd"`, `"markdown_phpextra"`, `"markdown_strict"`, `"markua"`,
+#'   `"md"`, `"mediawiki"`, `"ms"`, `"muse"`, `"native"`, `"odt"`, `"opendocument"`,
+#'   `"opml"`, `"org"`, `"pdf"`, `"plain"`, `"pptx"`, `"revealjs"`, `"rst"`,
+#'   `"rtf"`, `"s5"`, `"slideous"`, `"slidy"`, `"tei"`, `"texinfo"`, `"textile"`,
+#'   `"typst"`, `"xwiki"`, and `"zimwiki"`.
+#'   Bundled extension formats include `"hugo-md"` (also `"hugo"`),
+#'   `"docusaurus-md"`, `"confluence-html"`, and `"confluence-publish"`.
+#'   Installed custom format extensions and Pandoc writers are also accepted.
+#'   Available formats depend on the installed Quarto version; some require
+#'   additional tools, and not every format is compatible with every project type.
+#'   See [Quarto's format documentation](https://quarto.org/docs/output-formats/all-formats.html).
+#' @param artifact_name Name of the downloadable GitHub Actions artifact, without
+#'   a file extension (for example, `"quarto-output"`). This is an archive label,
+#'   not an output filename; GitHub adds `.zip` when downloading the artifact.
+#'   Rendered files inside the archive retain their format-specific extensions.
 #' @template tag_ghactions4r
 #' @examples
 #' \dontrun{
 #' use_render_quarto()
+#' use_render_quarto(render_format = "html")
 #' use_render_quarto(
-#'   render_path = "report.qmd", render_format = "pdf",
-#'   tinytex = TRUE, artifact_path = "report.pdf"
+#'   render_path = "report.qmd", render_format = "pdf", artifact_name = "report"
 #' )
 #' }
 #' @export
 use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
                               build_trigger = "pull_request",
                               render_path = ".",
-                              render_format = "",
-                              tinytex = FALSE,
-                              artifact_path = "_site/",
+                              render_format = "pdf",
                               artifact_name = "quarto-output",
                               tag_ghactions4r = NULL) {
   check_workflow_name(workflow_name)
@@ -611,7 +628,6 @@ use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
   inputs <- list(
     "render-path" = render_path,
     "render-format" = render_format,
-    "artifact-path" = artifact_path,
     "artifact-name" = artifact_name
   )
   for (name in names(inputs)) {
@@ -621,7 +637,6 @@ use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
       cli::cli_abort("{.var {name}} must be a single non-missing string, and only render-format may be empty.")
     }
   }
-  stopifnot(is.logical(tinytex), length(tinytex) == 1L, !is.na(tinytex))
   path_to_yml <- copy_caller_template(
     template_name = "call-render-quarto.yml",
     workflow_name = workflow_name
@@ -631,7 +646,6 @@ use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
     line <- grep(paste0("      ", name, ":"), gha, fixed = TRUE)
     gha[line] <- paste0("      ", name, ": ", jsonlite::toJSON(inputs[[name]], auto_unbox = TRUE))
   }
-  gha[grep("      tinytex:", gha, fixed = TRUE)] <- paste0("      tinytex: ", tolower(tinytex))
   if (!is.null(tag_ghactions4r)) {
     gha <- use_version_pin(tag = tag_ghactions4r, gha = gha)
   }

@@ -9,19 +9,11 @@ on:
         type: string
         default: "."
       render-format:
-        description: Output format (for example html, pdf, or all); empty uses Quarto configuration
+        description: Quarto output format; defaults to pdf, all renders every configured format, empty uses Quarto configuration
         type: string
-        default: ""
-      tinytex:
-        description: Install TinyTeX for PDF rendering
-        type: boolean
-        default: false
-      artifact-path:
-        description: Rendered files or directory to upload, relative to the repository root
-        type: string
-        required: true
+        default: pdf
       artifact-name:
-        description: Name of the downloadable artifact
+        description: Name of the downloadable artifact, without a file extension
         type: string
         default: quarto-output
 
@@ -55,7 +47,7 @@ jobs:
 
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
-          tinytex: ${{ inputs.tinytex }}
+          tinytex: true
 
       - name: Restore R dependencies with renv
         if: hashFiles('renv.lock') != ''
@@ -69,20 +61,23 @@ jobs:
           install-quarto: false
 
       - name: Render Quarto
+        id: render-quarto
         env:
           RENDER_PATH: ${{ inputs.render-path }}
           RENDER_FORMAT: ${{ inputs.render-format }}
           QUARTO_PRINT_STACK: true
         run: |
+          output_dir="$(mktemp -d "$RUNNER_TEMP/quarto-output.XXXXXX")"
           if [ -n "$RENDER_FORMAT" ]; then
-            quarto render "$RENDER_PATH" --to "$RENDER_FORMAT"
+            quarto render "$RENDER_PATH" --to "$RENDER_FORMAT" --output-dir "$output_dir"
           else
-            quarto render "$RENDER_PATH"
+            quarto render "$RENDER_PATH" --output-dir "$output_dir"
           fi
+          printf 'output-dir=%s\n' "$output_dir" >> "$GITHUB_OUTPUT"
 
       - name: Save rendered output
         uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.artifact-name }}
-          path: ${{ inputs.artifact-path }}
+          path: ${{ steps.render-quarto.outputs.output-dir }}
           if-no-files-found: error
