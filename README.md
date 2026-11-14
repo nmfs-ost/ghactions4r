@@ -89,6 +89,12 @@ ghactions4r::use_build_pkgdown()
 ghactions4r::use_spell_check()
 ```
 
+- To render a Quarto website containing R code and download the output as a
+GitHub Actions artifact (without publishing):
+```r
+ghactions4r::use_render_quarto(render_format = "html")
+```
+
 Commit and push the files generated up to github, making the github actions available for the repository of the R package.
 
 The templates these functions generate can also be [viewed](https://github.com/nmfs-ost/ghactions4r/tree/main/inst/templates) for reference.

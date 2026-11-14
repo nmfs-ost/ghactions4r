@@ -548,6 +548,111 @@ use_build_pkgdown <- function(workflow_name = "call-build-pkgdown.yml",
   invisible(workflow_name)
 }
 
+#' Use a workflow to render Quarto documents with R code
+#'
+#' Render a Quarto document or project on Ubuntu and save its output as a
+#' downloadable GitHub Actions artifact, without publishing it. R and Quarto
+#' are installed automatically. A `renv.lock` at the repository root is restored
+#' when present; otherwise R dependencies are installed from a root-level
+#' `DESCRIPTION`, together with knitr and rmarkdown. Include all rendering
+#' dependencies, including knitr and rmarkdown, in the renv lockfile.
+#'
+#' @details
+#' Python/Jupyter documents and automatic publishing are not supported by this
+#' workflow.
+#'
+#' TinyTeX is always installed for LaTeX-based PDF rendering. It is a lightweight
+#' TeX Live distribution using the same TeX engines as a full TeX Live installation,
+#' with missing LaTeX packages installed as needed.
+#'
+#' The workflow overrides Quarto's `output-dir` with a runner-temporary directory
+#' and uploads its contents automatically. Output files for the selected format,
+#' including supporting files for HTML, are collected without needing an artifact
+#' path. This also works for projects in subdirectories and multiple formats.
+#' An empty output directory fails the run.
+#'
+#' Use `render_format = ""` to use Quarto's configured format, or `"all"` to render
+#' every configured format. Websites should use `"html"` rather than the PDF
+#' default. These options are also available in the generated caller workflow.
+#'
+#' @template workflow_name
+#' @inheritParams use_build_pkgdown
+#' @param render_path Quarto document or project path, relative to the repository
+#'   root. Defaults to `"."` for the entire project.
+#' @param render_format Quarto output format. Defaults to `"pdf"`. Use `""` for
+#'   the configured format or `"all"` for every configured format.
+#'   Built-in format names (including aliases) are:
+#'   `"asciidoc"`, `"asciidoctor"`, `"beamer"`, `"biblatex"`, `"bibtex"`,
+#'   `"chunkedhtml"`, `"commonmark"`, `"commonmark_x"`, `"context"`, `"csljson"`,
+#'   `"dashboard"`, `"docbook"`, `"docbook4"`, `"docbook5"`, `"docx"`, `"dokuwiki"`,
+#'   `"dzslides"`, `"email"`, `"epub"`, `"epub2"`, `"epub3"`, `"fb2"`, `"gfm"`,
+#'   `"haddock"`, `"html"`, `"html4"`, `"html5"`, `"icml"`, `"ipynb"`, `"jats"`,
+#'   `"jats_archiving"`, `"jats_articleauthoring"`, `"jats_publishing"`, `"jira"`,
+#'   `"json"`, `"latex"`, `"man"`, `"markdown"`, `"markdown_github"`,
+#'   `"markdown_mmd"`, `"markdown_phpextra"`, `"markdown_strict"`, `"markua"`,
+#'   `"md"`, `"mediawiki"`, `"ms"`, `"muse"`, `"native"`, `"odt"`, `"opendocument"`,
+#'   `"opml"`, `"org"`, `"pdf"`, `"plain"`, `"pptx"`, `"revealjs"`, `"rst"`,
+#'   `"rtf"`, `"s5"`, `"slideous"`, `"slidy"`, `"tei"`, `"texinfo"`, `"textile"`,
+#'   `"typst"`, `"xwiki"`, and `"zimwiki"`.
+#'   Bundled extension formats include `"hugo-md"` (also `"hugo"`),
+#'   `"docusaurus-md"`, `"confluence-html"`, and `"confluence-publish"`.
+#'   Installed custom format extensions and Pandoc writers are also accepted.
+#'   Available formats depend on the installed Quarto version; some require
+#'   additional tools, and not every format is compatible with every project type.
+#'   See [Quarto's format documentation](https://quarto.org/docs/output-formats/all-formats.html).
+#' @param artifact_name Name of the downloadable GitHub Actions artifact, without
+#'   a file extension (for example, `"quarto-output"`). This is an archive label,
+#'   not an output filename; GitHub adds `.zip` when downloading the artifact.
+#'   Rendered files inside the archive retain their format-specific extensions.
+#' @template tag_ghactions4r
+#' @examples
+#' \dontrun{
+#' use_render_quarto()
+#' use_render_quarto(render_format = "html")
+#' use_render_quarto(
+#'   render_path = "report.qmd", render_format = "pdf", artifact_name = "report"
+#' )
+#' }
+#' @export
+use_render_quarto <- function(workflow_name = "call-render-quarto.yml",
+                              build_trigger = "pull_request",
+                              render_path = ".",
+                              render_format = "pdf",
+                              artifact_name = "quarto-output",
+                              tag_ghactions4r = NULL) {
+  check_workflow_name(workflow_name)
+  build_trigger <- match.arg(arg = build_trigger, choices = c(
+    "pull_request", "push_to_main",
+    "push_to_all_branches", "manually", "weekly"
+  ), several.ok = TRUE)
+  inputs <- list(
+    "render-path" = render_path,
+    "render-format" = render_format,
+    "artifact-name" = artifact_name
+  )
+  for (name in names(inputs)) {
+    value <- inputs[[name]]
+    if (!is.character(value) || length(value) != 1L || is.na(value) ||
+      (name != "render-format" && !nzchar(trimws(value)))) {
+      cli::cli_abort("{.var {name}} must be a single non-missing string, and only render-format may be empty.")
+    }
+  }
+  path_to_yml <- copy_caller_template(
+    template_name = "call-render-quarto.yml",
+    workflow_name = workflow_name
+  )
+  gha <- add_build_trigger(build_trigger, readLines(path_to_yml))
+  for (name in names(inputs)) {
+    line <- grep(paste0("      ", name, ":"), gha, fixed = TRUE)
+    gha[line] <- paste0("      ", name, ": ", jsonlite::toJSON(inputs[[name]], auto_unbox = TRUE))
+  }
+  if (!is.null(tag_ghactions4r)) {
+    gha <- use_version_pin(tag = tag_ghactions4r, gha = gha)
+  }
+  writeLines(gha, path_to_yml)
+  invisible(workflow_name)
+}
+
 #' use workflow to run spelling::spell_check_package()
 #'
 #' This workflow will run the spell_check_package() function from the spelling package
