@@ -417,3 +417,53 @@ test_that("use_spell_check() works", {
   )
   unlink(file_path)
 })
+
+test_that("use_render_quarto() creates the default caller", {
+  workflow_name <- use_render_quarto()
+  expect_identical(workflow_name, "call-render-quarto.yml")
+  path <- file.path(".github", "workflows", workflow_name)
+  expect_true(file.exists(path))
+  gha <- readLines(path)
+  expect_snapshot(gha)
+  unlink(path)
+})
+
+test_that("use_render_quarto() preserves custom inputs and triggers", {
+  render_path <- "docs/a 'quoted': report.qmd"
+  use_render_quarto(
+    workflow_name = "custom-quarto.yml",
+    build_trigger = c("push_to_main", "manually"),
+    render_path = render_path,
+    render_format = "html",
+    artifact_name = 'report "output"'
+  )
+  path <- ".github/workflows/custom-quarto.yml"
+  expect_true(file.exists(path))
+  gha <- readLines(path)
+  expect_snapshot(gha)
+  unlink(path)
+})
+
+test_that("use_render_quarto() validates inputs before creating a file", {
+  workflow_name <- "invalid-quarto.yml"
+  for (name in c("render_path", "artifact_name")) {
+    for (value in list("", " ", NA_character_, character(), c("a", "b"), FALSE)) {
+      args <- c(list(workflow_name = workflow_name), setNames(list(value), name))
+      expect_error(do.call(use_render_quarto, args), "single non-missing string")
+    }
+  }
+  expect_error(use_render_quarto(workflow_name, render_format = NA_character_))
+  expect_error(use_render_quarto(workflow_name, build_trigger = "invalid"))
+  expect_false(file.exists(file.path(".github", "workflows", workflow_name)))
+  expect_error(use_render_quarto(workflow_name = "quarto.yaml"))
+})
+
+test_that("use_render_quarto() supports configured, multiple, and custom formats", {
+  path <- ".github/workflows/quarto-formats.yml"
+  for (format in c("", "all", "docx", "revealjs", "custom-html")) {
+    use_render_quarto(workflow_name = "quarto-formats.yml", render_format = format)
+    gha <- readLines(path)
+    expect_snapshot(gha)
+  }
+  unlink(path)
+})
