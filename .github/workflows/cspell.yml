@@ -1,0 +1,88 @@
+name: Reusable cSpell Check
+
+on:
+  workflow_call:
+    inputs:
+      files:
+        description: 'Glob patterns for files to check'
+        required: false
+        type: string
+        default: '**/*.{R,Rmd,qmd,md,Rd}'
+      custom-config:
+        description: 'Path to local repo cspell config (if overriding central config)'
+        required: false
+        type: string
+        default: ''
+      only-new:
+        description: 'Check only newly changed files?'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  spell-check:
+    runs-on: ubuntu-latest
+    # Automatically cancels redundant/outdated runs on the same branch in the caller repo
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Target Repository
+        uses: actions/checkout@v7
+
+      - name: Set cSpell Config
+        id: config
+        env:
+          CUSTOM_CONFIG: ${{ inputs.custom-config }}
+        run: |
+          if [ -n "$CUSTOM_CONFIG" ]; then
+            ACTION_CONFIG_PATH="$CUSTOM_CONFIG"
+            INSTRUCTIONS_CONFIG_PATH="$CUSTOM_CONFIG"
+          else
+            ACTION_CONFIG_PATH="global-cspell.json"
+            INSTRUCTIONS_CONFIG_PATH="https://github.com/noaa-fims/.github/blob/main/cspell.json"
+            curl -sSL \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3.raw" \
+              "https://raw.githubusercontent.com/noaa-fims/.github/main/cspell.json" \
+              -o "$ACTION_CONFIG_PATH"
+          fi
+          echo "action_config_path=$ACTION_CONFIG_PATH" >> "$GITHUB_OUTPUT"
+          echo "instructions_config_path=$INSTRUCTIONS_CONFIG_PATH" >> "$GITHUB_OUTPUT"
+
+      - name: Run cSpell Action
+        id: cspell
+        uses: streetsidesoftware/cspell-action@v9
+        with:
+          config: ${{ steps.config.outputs.action_config_path }}
+          files: ${{ inputs.files }}
+          incremental_files_only: ${{ inputs.only-new }}
+
+      # Step that executes ONLY if cSpell fails
+      - name: Output Spell Check Failure Instructions
+        if: always() && steps.cspell.outcome == 'failure'
+        env:
+          CONFIG_PATH: ${{ steps.config.outputs.instructions_config_path }}
+        run: |
+          echo "=========================================================================="
+          echo "❌ SPELL CHECK FAILED"
+          echo "--------------------------------------------------------------------------"
+          echo "One or more unrecognized words were found in this repository."
+          echo ""
+          echo "If these are valid terms, acronyms, or proper names, add them to the cSpell config file at: $CONFIG_PATH"
+
+          echo "=========================================================================="
+          
+          # Write to Job Summary so it shows prominently in the GitHub Actions UI
+          {
+            cat << 'EOF'
+          ### ❌ Spell Check Failed
+
+          Unrecognized words were detected during the spellcheck step.
+
+          **How to fix this:**
+          If these are valid terms, acronyms, or proper names, add them to the cSpell config file at:
+          EOF
+            printf '`%s`\n' "$CONFIG_PATH"
+          } >> "$GITHUB_STEP_SUMMARY"

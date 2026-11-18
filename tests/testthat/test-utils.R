@@ -116,7 +116,7 @@ test_that("write_caller_template leaves the target intact if replacement fails",
   )
 })
 
-fake_resp <- c("v0.3.0", "v0.2.0", "v0.1.0", "v0.1.0-prerel2", "v0.1.0-prerel")
+fake_resp <- c("v1.0.0", "v0.3.0", "v0.2.0", "v0.1.0", "v0.1.0-prerel2", "v0.1.0-prerel")
 
 test_that("pinning to a specific version works as expected", {
   template_path <- system.file("templates", "call-r-cmd-check.yml",
@@ -125,9 +125,9 @@ test_that("pinning to a specific version works as expected", {
   r_cmd_check_lines <- readLines(template_path)
 
   # mock the get_tags function so API calls aren't made.
-  local_mocked_bindings(
-    get_tags = function(...) fake_resp,
-  )
+  # local_mocked_bindings(
+  #   get_tags = function(...) fake_resp,
+  # )
   new_r_cmd_check_lines <- use_version_pin(
     gha = r_cmd_check_lines,
     tag = "v0.3.0"
