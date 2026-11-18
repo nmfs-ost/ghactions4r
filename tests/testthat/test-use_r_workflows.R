@@ -417,3 +417,46 @@ test_that("use_spell_check() works", {
   )
   unlink(file_path)
 })
+
+test_that("use_update_manifest() creates the default caller", {
+  workflow_name <- "call-update-manifest.yml"
+  expect_identical(use_update_manifest(), workflow_name)
+  file_path <- file.path(".github", "workflows", workflow_name)
+  expect_true(file.exists(file_path))
+  test <- readLines(file_path)
+  expect_snapshot(test)
+  unlink(file_path)
+})
+
+test_that("use_update_manifest() supports content settings and a PAT", {
+  workflow_name <- "connect.yml"
+  use_update_manifest(
+    workflow_name = workflow_name,
+    build_trigger = c("weekly", "manually"),
+    app_dir = "content/app",
+    r_version = "4.5.2",
+    use_renv = TRUE,
+    extra_packages = "any::shiny, any::rmarkdown",
+    app_primary_doc = "report's results.Rmd",
+    use_quarto = TRUE,
+    use_pat = TRUE,
+    pat_name = "CONNECT_PAT"
+  )
+  file_path <- file.path(".github", "workflows", workflow_name)
+  expect_true(file.exists(file_path))
+  test <- readLines(file_path)
+  expect_snapshot(test)
+  unlink(file_path)
+})
+
+test_that("use_update_manifest() rejects invalid inputs", {
+  expect_error(use_update_manifest(workflow_name = "manifest.yaml"))
+  expect_error(use_update_manifest(build_trigger = "pull_request"))
+  expect_error(use_update_manifest(build_trigger = "pr_comment"))
+  expect_error(use_update_manifest(app_dir = NA_character_))
+  expect_error(use_update_manifest(r_version = c("release", "devel")))
+  expect_error(use_update_manifest(use_renv = "true"))
+  expect_error(use_update_manifest(use_quarto = NA))
+  expect_error(use_update_manifest(use_pat = TRUE, pat_name = "bad\nname"))
+  expect_false(file.exists(".github/workflows/call-update-manifest.yml"))
+})

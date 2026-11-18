@@ -1,0 +1,136 @@
+# Regenerate an R content manifest for Posit Connect Git-backed publishing.
+name: update-manifest
+
+on:
+  workflow_call:
+    secrets:
+      PAT:
+        required: false
+    inputs:
+      app-dir:
+        description: Directory containing the content, relative to the repository root
+        type: string
+        default: '.'
+      r-version:
+        description: R version used to generate the manifest
+        type: string
+        default: 'release'
+      use-renv:
+        description: Restore renv.lock (which must include rsconnect)
+        type: boolean
+        default: false
+      extra-packages:
+        description: Content dependencies to install when not using renv, in pak syntax
+        type: string
+        default: ''
+      app-primary-doc:
+        description: Primary document, relative to app-dir; empty means automatic detection
+        type: string
+        default: ''
+      use-quarto:
+        description: Install Quarto for Quarto content
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.app-dir }}
+  cancel-in-progress: true
+
+jobs:
+  update-manifest:
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') &&
+      github.ref_type == 'branch' && !startsWith(github.ref_name, 'update-manifest/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: false
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ inputs.r-version }}
+          use-public-rspm: true
+
+      - name: Validate content directory
+        id: content
+        env:
+          APP_DIR: ${{ inputs.app-dir }}
+          USE_RENV: ${{ inputs.use-renv }}
+        shell: Rscript {0}
+        run: |
+          app_dir <- Sys.getenv("APP_DIR")
+          if (grepl("[\r\n*?\\[\\]]", app_dir, perl = TRUE)) {
+            stop("app-dir must not contain newlines or glob characters")
+          }
+          root <- normalizePath(".", winslash = "/", mustWork = TRUE)
+          app_dir <- normalizePath(app_dir, winslash = "/", mustWork = TRUE)
+          if (!dir.exists(app_dir) || !(app_dir == root || startsWith(app_dir, paste0(root, "/")))) {
+            stop("app-dir must be a directory inside the repository")
+          }
+          if (Sys.getenv("USE_RENV") == "true" && !file.exists(file.path(app_dir, "renv.lock"))) {
+            stop("use-renv requires renv.lock in app-dir")
+          }
+          relative_dir <- if (app_dir == root) "." else substring(app_dir, nchar(root) + 2L)
+          branch_id <- strsplit(system2("sha256sum", input = relative_dir, stdout = TRUE), " ")[[1]][1]
+          cat("app-dir=", relative_dir, "\n",
+              "manifest-file=", relative_dir, "/manifest.json\n",
+              "branch-id=", branch_id, "\n",
+              file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        if: inputs.use-quarto
+
+      - uses: r-lib/actions/setup-renv@v2
+        if: inputs.use-renv
+        with:
+          working-directory: ${{ steps.content.outputs.app-dir }}
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ !inputs.use-renv }}
+        with:
+          working-directory: ${{ steps.content.outputs.app-dir }}
+          packages: any::rsconnect
+          extra-packages: ${{ inputs.extra-packages }}
+          install-quarto: false
+
+      - name: Write manifest
+        working-directory: ${{ steps.content.outputs.app-dir }}
+        env:
+          APP_PRIMARY_DOC: ${{ inputs.app-primary-doc }}
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("rsconnect", quietly = TRUE)) {
+            stop("Install rsconnect and include it in renv.lock when using renv")
+          }
+          primary_doc <- Sys.getenv("APP_PRIMARY_DOC")
+          if (primary_doc == "") primary_doc <- NULL
+          rsconnect::writeManifest(appDir = ".", appPrimaryDoc = primary_doc)
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.PAT || github.token }}
+          add-paths: ${{ steps.content.outputs.manifest-file }}
+          branch: update-manifest/${{ github.ref_name }}/${{ steps.content.outputs.branch-id }}
+          base: ${{ github.ref_name }}
+          commit-message: 'Update Posit Connect manifest'
+          title: 'Update Posit Connect manifest'
+          body: |
+            Regenerated `${{ steps.content.outputs.manifest-file }}` using `rsconnect::writeManifest()`.
+            Only the manifest is included; no changes are committed directly to the deployment branch.
+
+            Review before merging:
+            - R, package, Quarto, and system dependency versions on the runner may differ from development or Connect. Pin R and use renv to reduce drift.
+            - Automatic file selection and primary-document detection may differ from a manually generated manifest. Use `.rscignore` and app-primary-doc as needed; check for sensitive or missing files.
+            - Python or mixed-language content, private/local packages, custom app modes, images, and environment-management settings require additional setup and may not be preserved by regeneration.
+            - Merging can trigger a Git-backed deployment on Connect. Validate the manifest in the target environment first.
+
+            Generated by [update-manifest.yml](https://github.com/nmfs-ost/ghactions4r/blob/main/.github/workflows/update-manifest.yml).
